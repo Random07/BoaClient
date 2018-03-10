@@ -1,0 +1,25 @@
+---- create_temporary_file Matches (3 in 3 files) ----
+Boa.h (src):int create_temporary_file(short want_unlink, char *storage, int size);
+Request.c (src):        req->post_data_fd = create_temporary_file(1, NULL, 0);
+Util.c (src):int create_temporary_file(short want_unlink, char *storage, int size)
+---- post_data_fd Matches (16 in 6 files) ----
+Cgi.c (src):        /* tie post_data_fd to POST stdin */
+Cgi.c (src):            lseek(req->post_data_fd, SEEK_SET, 0);
+Cgi.c (src):            dup2(req->post_data_fd, STDIN_FILENO);
+Cgi.c (src):            close(req->post_data_fd);
+Cgi.c (src):            close(req->post_data_fd); /* child closed it too */
+Cgi.c (src):            req->post_data_fd = 0;
+Globals.h (src):    int post_data_fd;           /* fd for post data tmpfile */
+Queue.c (src):            BOA_FD_SET(req->post_data_fd, &block_write_fdset);
+Queue.c (src):            FD_CLR(req->post_data_fd, &block_write_fdset);
+Read.c (src):    bytes_written = write(req->post_data_fd,
+Request.c (src):    if (req->post_data_fd)
+Request.c (src):        close(req->post_data_fd);
+Request.c (src):        req->post_data_fd = create_temporary_file(1, NULL, 0);
+Request.c (src):        if (req->post_data_fd == 0)
+Select.c (src):                if (FD_ISSET(current->post_data_fd, &block_write_fdset))
+Select.c (src):                    BOA_FD_SET(current->post_data_fd, &block_write_fdset);
+---- STDIN_FILENO Matches (3 in 2 files) ----
+Boa.c (src):    if (dup2(devnullfd, STDIN_FILENO) == -1) {
+Boa.c (src):        DIE("can't dup2 /dev/null to STDIN_FILENO");
+Cgi.c (src):            dup2(req->post_data_fd, STDIN_FILENO);
