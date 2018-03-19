@@ -42,6 +42,21 @@ function showDiv(num)
         }
     }
 }
+
+function showSetting(num)
+{
+    for(var j=1;j<4;j++)
+    {
+        if(j==num)
+        {
+            document.getElementById("sub"+j).style.display="block";
+        }
+        else
+        {
+        document.getElementById("sub"+j).style.display="none";
+        }
+    }
+}
 </script>
 <!--Add by Xavier end-->
 </head>
@@ -79,78 +94,17 @@ function showDiv(num)
 <div id="Layer2">
   <table width="1460" height="73" border="0">
     <tr>
-      <th align="left" scope="col"><span class="STYLE2">用户信息</span></th>
+      <th align="left" scope="col"><span class="STYLE2">DialSettings</span></th>
     </tr>
   </table>
   <hr align="center" width="1460" size="1" />
-  <table width="1460" height="400" border="1">
+  <table width="1460" height="400" align="center">
     <tr>
-      <th class="STYLE1" scope="col">序列号</th>
-      <th class="STYLE1" scope="col">主机名</th>
-      <th class="STYLE1" scope="col">MAC地址</th>
-      <th class="STYLE1" scope="col">IP地址</th>
-    </tr>
-    <tr>
-      <td>|%ConnCustIndex0|</td>
-      <td>|%ConnCustDeviceName0|</td>
-      <td>|%ConnCustMAC0|</td>
-      <td>|%ConnCustIP0|</td>
-    </tr>
-    <tr>
-      <td>|%ConnCustIndex1|</td>
-      <td>|%ConnCustDeviceName1|</td>
-      <td>|%ConnCustMAC1|</td>
-      <td>|%ConnCustIP1|</td>
-    </tr>
-    <tr>
-      <td>|%ConnCustIndex2|</td>
-      <td>|%ConnCustDeviceName2|</td>
-      <td>|%ConnCustMAC2|</td>
-      <td>|%ConnCustIP2|</td>
-    </tr>
-    <tr>
-      <td>|%ConnCustIndex3|</td>
-      <td>|%ConnCustDeviceName3|</td>
-      <td>|%ConnCustMAC3|</td>
-      <td>|%ConnCustIP3|</td>
-    </tr>
-    <tr>
-      <td>|%ConnCustIndex4|</td>
-      <td>|%ConnCustDeviceName4|</td>
-      <td>|%ConnCustMAC4|</td>
-      <td>|%ConnCustIP4|</td>
-    </tr>
-    <tr>
-      <td>|%ConnCustIndex5|</td>
-      <td>|%ConnCustDeviceName5|</td>
-      <td>|%ConnCustMAC5|</td>
-      <td>|%ConnCustIP5|</td>
-    </tr>
-    <tr>
-      <td>|%ConnCustIndex6|</td>
-      <td>|%ConnCustDeviceName6|</td>
-      <td>|%ConnCustMAC6|</td>
-      <td>|%ConnCustIP6|</td>
-    </tr>
-    <tr>
-      <td>|%ConnCustIndex7|</td>
-      <td>|%ConnCustDeviceName7|</td>
-      <td>|%ConnCustMAC7|</td>
-      <td>|%ConnCustIP7|</td>
-    </tr>
-    <tr>
-      <td>|%ConnCustIndex8|</td>
-      <td>|%ConnCustDeviceName8|</td>
-      <td>|%ConnCustMAC8|</td>
-      <td>|%ConnCustIP8|</td>
-    </tr>
-    <tr>
-      <td>|%ConnCustIndex9|</td>
-      <td>|%ConnCustDeviceName9|</td>
-      <td>|%ConnCustMAC9|</td>
-      <td>|%ConnCustIP9|</td>
+<td style="text-align:right;" width="270">Mode&nbsp</td> <td><input type="radio" name="age" value="Auto">Auto
+<input type="radio" name="age" value="Manual" checked>Manual</td>
     </tr>
   </table>
+
   <table width="500" height="77" border="0" align="center">
     <tr>
       <td align="center" class="STYLE1">网络连接</td>
@@ -184,21 +138,8 @@ function showDiv(num)
 <div id="child1" style="display:none">
 <table width="200" height="99" border="0">
 <tr>
-<td align="left"><form action="/cgi-bin/basicconfig/device.cgi" method="GET" name="form11" class="STYLE1" id="form11">
-<table align="center">   
-        <tr><td align="center" colspan="2"></td></tr>   
-        <tr>   
-             <td align="right">Username</td>   
-             <td><input type="text" name="Username"></td>   
-        </tr>   
-        <tr>   
-             <td align="right">Password</td>   
-             <td><input type="password" name="Password"></td>   
-        </tr>   
-        <tr>   
-             <td><input type="submit" value="login"></td>     
-        </tr>   
-</table> 
+<td align="left"><form action="/cgi-bin/basicconfig/device_con.cgi" method="GET" name="form11" class="STYLE1" id="form11">
+<input type="submit" value="-device info">
     </form>    </td></tr>
 <tr>
 <td align="left"><form action="" method="get" name="form12" class="STYLE1" id="form12">
@@ -300,7 +241,70 @@ SD卡      </div>
   </tr>
   <tr>
     <td align="left"><form action="" method="get" name="form8" id="form8">
-      <p class="STYLE1">设置          </p>
+<!-- This is add by Xavier for show subdir begin-->
+          <div id="main1" style="color:Blue; width:100px; "onclick="showDiv(5)"  >
+设置          </div>   
+<div id="child5" style="display:none">
+<table width="200" height="99" border="0">
+<tr>
+<td align="left">
+<div id="main1" style="color:Blue; width:100px; "onclick="showSetting(1)">NetworkSettings</div>
+<div id="sub1" style="display:none">
+<table width="200" height="99" border="0">
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-DialSettings</a>
+    </form>    </td></tr>
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-SearchNetMethod</a>
+    </form>    </td></tr>
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-APN</a>
+    </form>    </td></tr>
+</table>
+</div>
+</td></tr>
+<tr>
+<td align="left">
+<div id="main1" style="color:Blue; width:100px; "onclick="showSetting(2)">WifiSettings</div>
+<div id="sub2" style="display:none">
+<table width="200" height="99" border="0">
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-BasicSettings</a>
+    </form>    </td></tr>
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-WPS</a>
+    </form>    </td></tr>
+</table>
+</div>
+</td></tr>
+<tr>
+<td align="left">
+<div id="main1" style="color:Blue; width:100px; "onclick="showSetting(3)">DeviceSettings</div>
+<div id="sub3" style="display:none">
+<table width="200" height="99" border="0">
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-AccountManagment</a>
+    </form>    </td></tr>
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-ResetDevice</a>
+    </form>    </td></tr>
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-Restart</a>
+    </form>    </td></tr>
+</table>
+</div>
+</td></tr>
+</table>
+</div>  
+<!--This is add by Xavier for show subdir end--> 
     </form>
     </td>
   </tr>

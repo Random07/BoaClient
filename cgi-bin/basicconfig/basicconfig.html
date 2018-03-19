@@ -42,6 +42,21 @@ function showDiv(num)
         }
     }
 }
+
+function showSetting(num)
+{
+    for(var j=1;j<4;j++)
+    {
+        if(j==num)
+        {
+            document.getElementById("sub"+j).style.display="block";
+        }
+        else
+        {
+        document.getElementById("sub"+j).style.display="none";
+        }
+    }
+}
 </script>
 <!--Add by Xavier end-->
 </head>
@@ -287,7 +302,70 @@ SDø®      </div>
   </tr>
   <tr>
     <td align="left"><form action="" method="get" name="form8" id="form8">
-      <p class="STYLE1">…Ë÷√          </p>
+<!-- This is add by Xavier for show subdir begin-->
+          <div id="main1" style="color:Blue; width:100px; "onclick="showDiv(5)"  >
+…Ë÷√          </div>   
+<div id="child5" style="display:none">
+<table width="200" height="99" border="0">
+<tr>
+<td align="left">
+<div id="main1" style="color:Blue; width:100px; "onclick="showSetting(1)">NetworkSettings</div>
+<div id="sub1" style="display:none">
+<table width="200" height="99" border="0">
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-DialSettings</a>
+    </form>    </td></tr>
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-SearchNetMethod</a>
+    </form>    </td></tr>
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-APN</a>
+    </form>    </td></tr>
+</table>
+</div>
+</td></tr>
+<tr>
+<td align="left">
+<div id="main1" style="color:Blue; width:100px; "onclick="showSetting(2)">WifiSettings</div>
+<div id="sub2" style="display:none">
+<table width="200" height="99" border="0">
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-BasicSettings</a>
+    </form>    </td></tr>
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-WPS</a>
+    </form>    </td></tr>
+</table>
+</div>
+</td></tr>
+<tr>
+<td align="left">
+<div id="main1" style="color:Blue; width:100px; "onclick="showSetting(3)">DeviceSettings</div>
+<div id="sub3" style="display:none">
+<table width="200" height="99" border="0">
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-AccountManagment</a>
+    </form>    </td></tr>
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-ResetDevice</a>
+    </form>    </td></tr>
+<tr>
+<td align="left"><form action="" method="get" name="form25" class="STYLE1" id="form25">
+<a href="#">-Restart</a>
+    </form>    </td></tr>
+</table>
+</div>
+</td></tr>
+</table>
+</div>  
+<!--This is add by Xavier for show subdir end--> 
     </form>
     </td>
   </tr>
