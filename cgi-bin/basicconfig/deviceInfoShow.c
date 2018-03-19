@@ -17,9 +17,9 @@ char FirmWare[30]={0};
 int i;
 
 	Readcomminforfromjava();
-	logmessageprintf("cant find correct info");
+	//logmessageprintf("cant find correct info");
 //	Socketwithjavaserver("Request|DeviceInfo",StringFromJava);
-    char StringFromJavatest[]="Confirm|DeviceInfo|SimcardNumber|IMEI|IMSI|SSID|max connect customer number| IP address|MAC address|WAN IP|SW version|firmware version|HW version";
+    char StringFromJavatest[]="Confirm|DeviceInfo|3434|3341|1343|454|5|4343|98|424|8967|342|23432";
    
 		GetindexstrfromJS(StringFromJavatest,(3),SimCard);
 		GetindexstrfromJS(StringFromJavatest,(4),IMEI);

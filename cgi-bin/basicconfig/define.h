@@ -381,7 +381,7 @@ int Readhtml(char *patch)
 
 	        	i = i+2+j;
 			Tempconfparalen = j;
-
+			
 			Convertkeytovalue(Tempconfpara,Tempconfparalen);
 
 			continue;	    
