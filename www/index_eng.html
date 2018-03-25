@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>4G MIFI Login</title>
+<style type="text/css">
+<!--
+#Layer1 {
+	margin:0 auto;
+	width:1200px;
+	height:840px;
+	z-index:1;
+}
+#Layer2 {
+	float:left;
+	width:1200px;
+	height:100px;
+	z-index:1;
+}
+#Layer3 {
+	float:left;
+	width:1200px;
+	height:740px;
+	z-index:1;
+}
+#Layer4 {
+	position:relative;
+	width:630px;
+	height:380px;
+	z-index:2;
+	left: 285px;
+	top: 175px;
+}
+.STYLE1 {font-size: 18px}
+-->
+</style>
+<script language="JavaScript" type="text/javascript">
+<!--
+function LanguageChange(sobj)
+{
+	var language=sobj.options[sobj.selectedIndex].value;
+	var path=window.location.pathname;
+	var url="/cgi-bin/languagechange.cgi?LanguageSelect=" + language+"&Path="+path;
+	window.location.href=url;
+}
+-->
+</script>
+</head>
+
+<body>
+<div id="Layer1">
+  <div id="Layer2">
+    <table width="1200" height="50" border="0" align="center">
+    <tr>
+      <th width="200" scope="col">&nbsp;</th>
+      <th width="500" scope="col">&nbsp;</th>
+      <th width="60" scope="col" align="center">&nbsp;</th>
+      <th width="60" scope="col" align="center">&nbsp;</th>
+      <th width="120" scope="col" align="center">&nbsp;</th>
+      <th width="60" scope="col" align="center">&nbsp;</th>
+      <th width="60" scope="col" align="center">&nbsp;</th>
+      <th width="80" scope="col" align="center">
+	  <table width="80" height="50" border="0" align="center">
+        <tr>
+          <th width="60" align="right" scope="col">&nbsp;</th>
+          <th width="20" align="left" valign="middle" scope="col">&nbsp;</th>
+        </tr>
+      </table>
+	  </th>
+      <th width="60" scope="col" align="center">&nbsp;</th>
+    </tr>
+  </table>
+    <table width="1200"  height="50" border="0" align="center">
+      <tr>
+        <th width="1000" scope="col" align="left"><img src="image/4G_MIFI.png" width="200" height="50" /></th>
+        <th width="100" scope="col" align="center">
+              <select name="LanguageSelect" onchange=LanguageChange(this)>
+                <option selected="selected" value="English">English</option>
+				<option value="Chinese">中文</option>
+            </select>
+	    </th>
+        <th width="100" scope="col" align="center">&nbsp;</th>
+      </tr>
+    </table>
+  </div>
+  <div id="Layer3" style="background:url(image/Login_Background.png);">
+    <div id="Layer4">
+	<form id="form1" name="form1" method="get" action="cgi-bin/login.cgi">
+	  <table width="630" height="380" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="210" height="115">&nbsp;</td>
+          <td width="210">&nbsp;</td>
+          <td width="210">&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="50" align="right" class="STYLE1"><strong>UserName:</strong></td>
+          <td align="center"><input name="Username" type="text" class="STYLE1" id="Username" value="Admin" /></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="50" align="right" class="STYLE1"><strong>PassWord:</strong></td>
+          <td align="center"><input name="Password" type="password" class="STYLE1" id="Password" /></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="50">&nbsp;</td>
+          <td align="right"><input name="Submit" type="submit" class="STYLE1" value="Login" /></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="115">&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+	  </form>
+    </div>
+  </div>
+  </div>
+</body>
+</html>
