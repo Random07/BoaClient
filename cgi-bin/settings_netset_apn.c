@@ -45,13 +45,15 @@
 int main()
 {
 	char StringFromJava[REQ_RSP_STRING_LEN];
+	char StringFromJavatest[150];
 	int i;
 
 	read_comm_infor_from_js();
 
-/*=============================================================================
-		please implement
-==============================================================================*/
+/*=============================================================================*/
+	//	Socketwithjavaserver("Request|DeviceInfo",StringFromJava);
+    char StringFromJavatest[]="Confirm|DeviceInfo|3434|3341|1343|454|5|4343|98|424|8967|342|23432";
+/*==============================================================================*/
 	
 	if(!strncmp("English",CommonParaInfor[5].value,strlen("English")))
 	{

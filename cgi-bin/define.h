@@ -124,6 +124,31 @@ CommonPara DataUsage[2]={
 #endif
 
 #ifdef SETTINGS_NETSET_APN
+typedef struct
+{
+CommonPara SETAPNNAME;
+CommonPara SETAPN;
+CommonPara SETMNC;
+CommonPara SETMCC;
+CommonPara SETAUTH;
+CommonPara SETUSERNAME;
+CommonPara SETPASSWORD;
+}SetApnPara;
+
+CommonPara Settings_Apn[7]={
+	{"SETAPNNAME",},
+	{"SETAPN",},
+	{"SETMNC",},
+	{"SETMCC",},
+	{"SETAUTH",},
+	{"SETUSERNAME",},
+	{"SETPASSWORD",},
+}
+
+SetApnPara Setings_Apn_List[]={
+	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+
+}
 #endif
 
 #ifdef SETTINGS_WIFISET_BASIC
@@ -649,6 +674,25 @@ for(i=0;i<2;i++)
 }
 
 /*****************************************************************************************
+write by Xavier
+ *****************************************************************************************/
+int write_select_option()
+{
+	int Setapnlist;
+
+	Setapnlist=sizeof(Setings_Apn_List)/sizeof(Setings_Apn_List[0]);
+	if (Setapnlist >1)
+	{
+		printf("<option selected="selected" value="%s">%s</option>\n",Setings_Apn_List[0].SETAPNNAME.value);
+	}
+	for (int i = 1; i < Setapnlist; ++i)
+	{
+		printf("<option value="%s">%s</option>\n",Setings_Apn_List[i].SETAPNNAME.value);
+	}
+
+}
+
+/*****************************************************************************************
  * FUNCTION
  *  read_html_file_into_cgi
  * DESCRIPTION
@@ -673,6 +717,7 @@ int read_html_file_into_cgi(char *patch)
 	char Tempconfpara[50];
 	int Tempconfparalen;
 	int j;
+	int k;
 
 	puts("<Content-type:text/html>\n");
 
@@ -692,6 +737,21 @@ int read_html_file_into_cgi(char *patch)
 
         for(i=0;i<Tempstrlen-1;i++)
 	   {
+	   	/**************************************/
+	   	if (('<' ==Tempstrline[i]) && ('!' == Tempstrline[i+1]))
+	   	{
+	   		for (k = 0; Tempstrline[i+k] != '>'; k++)
+	   		{
+	   			//Tempconfpara[k] = Tempstrline[i+k];
+	   		}
+	   		//Tempconfpara[k]='\0';
+	   		i = i+k;
+	   		//Tempconfparalen = k;
+	   		write_select_option();
+	   		continue;
+	   	}
+
+	   	/***************************************/
 		if(('|' == Tempstrline[i]) && ('%' == Tempstrline[i+1]))
 	    	{
 			for(j=0;Tempstrline[i+2+j] != '|';j++)
