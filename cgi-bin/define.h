@@ -123,7 +123,7 @@ CommonPara DataUsage[2]={
 #ifdef SETTINGS_NETSET_NETSEARCH
 #endif
 
-#ifdef SETTINGS_NETSET_APN
+/*#ifdef SETTINGS_NETSET_APN*/
 typedef struct
 {
 CommonPara SETAPNNAME;
@@ -143,13 +143,21 @@ CommonPara Settings_Apn[7]={
 	{"SETAUTH",},
 	{"SETUSERNAME",},
 	{"SETPASSWORD",},
-}
+};
 
-SetApnPara Setings_Apn_List[]={
+SetApnPara Setings_Apn_List[10]={
 	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
-
-}
-#endif
+	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+};
+/*#endif*/
 
 #ifdef SETTINGS_WIFISET_BASIC
 #endif
@@ -179,6 +187,8 @@ int get_index_str_from_web(char *org,char *Tag,char *out);
 int read_comm_infor_from_js();
 int send_cmd_to_js(char *SendMessage,char *OutString);
 
+
+int write_select_option();
 int convert_key_to_value(char *Tag,int Taglen);
 int read_html_file_into_cgi(char *patch);
 
@@ -654,6 +664,82 @@ for(i=0;i<2;i++)
 #endif
 
 #ifdef SETTINGS_NETSET_APN
+for(i=0;i<1;i++)
+{
+	if(!strncmp(Tag,Setings_Apn_List[0].SETAPNNAME.key,Taglen))
+	{
+		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,DataUsage[i].value);
+		printf("%s",Setings_Apn_List[0].SETAPNNAME.value);
+		break;
+	}
+
+}
+
+for(i=0;i<1;i++)
+{
+	if(!strncmp(Tag,Setings_Apn_List[0].SETAPN.key,Taglen))
+	{
+		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,DataUsage[i].value);
+		printf("%s",Setings_Apn_List[0].SETAPN.value);
+		break;
+	}
+
+}
+
+for(i=0;i<1;i++)
+{
+	if(!strncmp(Tag,Setings_Apn_List[0].SETMCC.key,Taglen))
+	{
+		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,DataUsage[i].value);
+		printf("%s",Setings_Apn_List[0].SETMCC.value);
+		break;
+	}
+
+}
+
+for(i=0;i<1;i++)
+{
+	if(!strncmp(Tag,Setings_Apn_List[0].SETMNC.key,Taglen))
+	{
+		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,DataUsage[i].value);
+		printf("%s",Setings_Apn_List[0].SETMNC.value);
+		break;
+	}
+
+}
+
+for(i=0;i<1;i++)
+{
+	if(!strncmp(Tag,Setings_Apn_List[0].SETUSERNAME.key,Taglen))
+	{
+		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,DataUsage[i].value);
+		printf("%s",Setings_Apn_List[0].SETUSERNAME.value);
+		break;
+	}
+
+}
+
+for(i=0;i<1;i++)
+{
+	if(!strncmp(Tag,Setings_Apn_List[0].SETPASSWORD.key,Taglen))
+	{
+		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Setings_Apn_List[0].SETPASSWORD.value);
+		printf("%s",Setings_Apn_List[0].SETPASSWORD.value);
+		break;
+	}
+
+}
+
+for(i=0;i<1;i++)
+{
+	if(!strncmp(Tag,Setings_Apn_List[0].SETAUTH.key,Taglen))
+	{
+		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,DataUsage[i].value);
+		printf("%s",Setings_Apn_List[0].SETAUTH.value);
+		break;
+	}
+
+}
 #endif
 
 #ifdef SETTINGS_WIFISET_BASIC
@@ -680,16 +766,26 @@ int write_select_option()
 {
 	int Setapnlist;
 
-	Setapnlist=sizeof(Setings_Apn_List)/sizeof(Setings_Apn_List[0]);
-	if (Setapnlist >1)
+	//Setapnlist=sizeof(Setings_Apn_List)/sizeof(Setings_Apn_List[0]);
+	for (int i = 0; i < 10; i++)
 	{
-		printf("<option selected="selected" value="%s">%s</option>\n",Setings_Apn_List[0].SETAPNNAME.value);
+		if (Setings_Apn_List[i].SETAPNNAME.value != NULL)
+		{
+			Setapnlist=Setapnlist+1;
+		} else{break;}
+	
 	}
-	for (int i = 1; i < Setapnlist; ++i)
-	{
-		printf("<option value="%s">%s</option>\n",Setings_Apn_List[i].SETAPNNAME.value);
-	}
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Setapnlist);
 
+	if (Setapnlist >0)
+	{
+		printf("<option selected=\"selected\" value=%s>%s</option>\n",Setings_Apn_List[0].SETAPNNAME.value,Setings_Apn_List[0].SETAPNNAME.value);
+	}
+	for (int i = 1; i < Setapnlist; i++)
+	{
+		printf("<option value=%s>%s</option>\n",Setings_Apn_List[i].SETAPNNAME.value,Setings_Apn_List[i].SETAPNNAME.value);
+	}
+	return 1;
 }
 
 /*****************************************************************************************

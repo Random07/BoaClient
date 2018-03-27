@@ -45,18 +45,99 @@
 int main()
 {
 	char StringFromJava[REQ_RSP_STRING_LEN];
-	char StringFromJavatest[150];
+	//char StringFromJavatest[150];
+	char TempTotalApn[2];
+	char TempApnName[10];
+	char TempApn[10];
+	char TempMcc[5];
+	char TempMnc[5];
+	char TempAuth[10];
+	char TempUsername[10];
+	char TempPassword[10];
+	int TotalApn;
 	int i;
+	int j;
 
 	read_comm_infor_from_js();
 
 /*=============================================================================*/
 	//	Socketwithjavaserver("Request|DeviceInfo",StringFromJava);
-    char StringFromJavatest[]="Confirm|DeviceInfo|3434|3341|1343|454|5|4343|98|424|8967|342|23432";
+    char StringFromJavatest[]="1|ApnShow||cmcc|cmcm|460|01|0|xiaojun|xiaojun1234|cmcc2|cmcm2|460|01|1|xiaojun|xiaojun1234";
+    get_index_str_from_js(StringFromJavatest,3,TempTotalApn);
+    TotalApn=(int)(TempTotalApn[0]-'0');
+    printf("this is in netset apn the totalapn is:%d,the temptotal is :%s\n",TotalApn,TempTotalApn[0] );
+    for (i = 0; i < TotalApn; i++)
+    {
+    	get_index_str_from_js(StringFromJavatest,(4+i*7),TempApnName);
+    	get_index_str_from_js(StringFromJavatest,(5+i*7),TempApn);
+    	get_index_str_from_js(StringFromJavatest,(6+i*7),TempMcc);
+    	get_index_str_from_js(StringFromJavatest,(7+i*7),TempMnc);
+    	get_index_str_from_js(StringFromJavatest,(8+i*7),TempAuth);
+    	get_index_str_from_js(StringFromJavatest,(9+i*7),TempUsername);
+    	get_index_str_from_js(StringFromJavatest,(10+i*7),TempPassword);
+
+    	for (j = 0; j < strlen(TempApnName); j++)
+    	{
+    		Setings_Apn_List[i].SETAPNNAME.value[j]=TempApnName[j];
+    	}
+    	Setings_Apn_List[i].SETAPNNAME.value[j]='\0';
+
+    	for (j = 0; j < strlen(TempApn); j++)
+    	{
+    		Setings_Apn_List[i].SETAPN.value[j]=TempApn[j];
+    	}
+    	Setings_Apn_List[i].SETAPN.value[j]='\0';
+
+    	for (j = 0; j < strlen(TempMcc); j++)
+    	{
+    		Setings_Apn_List[i].SETMCC.value[j]=TempMcc[j];
+    	}
+    	Setings_Apn_List[i].SETMCC.value[j]='\0';
+
+    	for (j = 0; j < strlen(TempMnc); j++)
+    	{
+    		Setings_Apn_List[i].SETMNC.value[j]=TempMnc[j];
+    	}
+    	Setings_Apn_List[i].SETMNC.value[j]='\0';
+
+    	for (j = 0; j < strlen(TempUsername); j++)
+    	{
+    		Setings_Apn_List[i].SETUSERNAME.value[j]=TempUsername[j];
+    	}
+    	Setings_Apn_List[i].SETUSERNAME.value[j]='\0';
+
+    	for (j = 0; j < strlen(TempPassword); j++)
+    	{
+    		Setings_Apn_List[i].SETPASSWORD.value[j]=TempPassword[j];
+    	}
+    	Setings_Apn_List[i].SETPASSWORD.value[j]='\0';
+
+    	if (!strcmp(TempAuth,"0"))
+    	{
+    		TempAuth[10]="None";
+    	} else if (!strcmp(TempAuth,"1"))
+    	{
+    		TempAuth[10]="PAP";
+    	} else if (!strcmp(TempAuth,"2"))
+    	{
+    		TempAuth[10]="CHAP";
+    	} else if (!strcmp(TempAuth,"3"))
+    	{
+    		TempAuth[10]="PAP or CHAP";
+    	}
+    	for (j = 0; j < strlen(TempAuth); j++)
+    	{
+    		Setings_Apn_List[i].SETAUTH.value[j]=TempAuth[j];
+    	}
+    	Setings_Apn_List[i].SETAUTH.value[j]='\0';
+
+
+    }
 /*==============================================================================*/
 	
 	if(!strncmp("English",CommonParaInfor[5].value,strlen("English")))
 	{
+		printf("this will goto read_html_file_into_cgi\n");
 		read_html_file_into_cgi("settings_netset_apn_eng.html");
 	}else{
 
