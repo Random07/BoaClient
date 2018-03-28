@@ -680,7 +680,6 @@ for(i=0;i<1;i++)
 	if(!strncmp(Tag,Setings_Apn_List[0].SETAPN.key,Taglen))
 	{
 		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,DataUsage[i].value);
-		//printf("the Setings_Apn_List[0].SETAPN.value is %s\n", Setings_Apn_List[0].SETAPN.value);
 		printf("%s",Setings_Apn_List[0].SETAPN.value);
 		break;
 	}
@@ -771,18 +770,13 @@ int write_select_option()
 	//Setapnlist=sizeof(Setings_Apn_List)/sizeof(Setings_Apn_List[0]);
 	Setapnlist=0;
 	for (i = 0; i < 10; i++)
-	{//printf("this is in the write_select_option,the Setapnlist is :%s",Setings_Apn_List[i].SETAPNNAME.value);
-	//printf("this is in the write_select_option,Setings_Apn_Listt is :%s",strlen(Setings_Apn_List));
+	{
 		if (Setings_Apn_List[i].SETAPNNAME.value[0] != '\0')
 		{
-		//printf("this is in the write_select_option,the Setapnlist is :%d",Setapnlist);
 			Setapnlist=Setapnlist+1;
 		} else{break;}
 	
 	}
-	//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Setapnlist);
-	//puts("this is in the write_select_option,the Setapnlist is :%d",Setapnlist);
-	//printf("this is in the write_select_option,the Setapnlist is :%d",Setapnlist);
 
 	if (Setapnlist >0)
 	{
@@ -872,9 +866,7 @@ int read_html_file_into_cgi(char *patch)
 
 	        	i = i+2+j;
 			Tempconfparalen = j;
-			//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Tempconfpara);
-			//printf("this will goto convert_key_to_value,the tempconfpara is %s,the tempconfparalen is %d",Tempconfpara,Tempconfparalen);
-
+			
 			convert_key_to_value(Tempconfpara,Tempconfparalen);
 
 			continue;	    

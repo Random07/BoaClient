@@ -41,11 +41,11 @@
 </style>
 <script language="JavaScript" type="text/javascript">
 <!--
-function LanguageChange(sobj)
+function ApnChange(sobj)
 {
-	var language=sobj.options[sobj.selectedIndex].value;
+	var apn=sobj.options[sobj.selectedIndex].value;
 	var path=window.location.pathname;
-	var url="/cgi-bin/languagechange.cgi?LanguageSelect=" + language+"&Path="+path;
+	var url="/cgi-bin/settings_netset_apn_change.cgi?ConfigFileSelect=" + apn+"&Path="+path;
 	window.location.href=url;
 }
 -->
@@ -186,7 +186,7 @@ function LanguageChange(sobj)
  	    <td width="230" align="right" class="STYLE1">Config File </td>
             <td align="center" class="STYLE2">&nbsp;</td>
             <td align="left" class="STYLE1">
-            <select name="ConfigFileSelect" onchange=LanguageChange(this)>
+            <select name="ConfigFileSelect" onchange=ApnChange(this)>
               <option selected="selected" value="English">English</option>
               <!--%apnconfig%-->
             </select></td>
