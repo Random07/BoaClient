@@ -61,11 +61,14 @@ int main()
 	read_comm_infor_from_js();
 
 /*=============================================================================*/
-	//	Socketwithjavaserver("Request|DeviceInfo",StringFromJava);
-    char StringFromJavatest[]="1|ApnShow||cmcc|cmcm|460|01|0|xiaojun|xiaojun1234|cmcc2|cmcm2|460|01|1|xiaojun|xiaojun1234";
+	for (i = 0; i < 10; i++)
+	{
+		Setings_Apn_List[i].SETAPNNAME.value[0]='\0';
+	}
+    char StringFromJavatest[]="1|ApnShow|2|cmcc|cmcm|460|01|0|xiaojun|xiaojun1234|cmcc2|cmcm2|460|01|1|xiaojun|xiaojun1234";
     get_index_str_from_js(StringFromJavatest,3,TempTotalApn);
     TotalApn=(int)(TempTotalApn[0]-'0');
-    printf("this is in netset apn the totalapn is:%d,the temptotal is :%s\n",TotalApn,TempTotalApn[0] );
+
     for (i = 0; i < TotalApn; i++)
     {
     	get_index_str_from_js(StringFromJavatest,(4+i*7),TempApnName);
@@ -84,6 +87,7 @@ int main()
 
     	for (j = 0; j < strlen(TempApn); j++)
     	{
+
     		Setings_Apn_List[i].SETAPN.value[j]=TempApn[j];
     	}
     	Setings_Apn_List[i].SETAPN.value[j]='\0';
@@ -114,30 +118,27 @@ int main()
 
     	if (!strcmp(TempAuth,"0"))
     	{
-    		TempAuth[10]="None";
+    		strcpy(TempAuth,"None");
     	} else if (!strcmp(TempAuth,"1"))
     	{
-    		TempAuth[10]="PAP";
+    		strcpy(TempAuth,"PAP");
     	} else if (!strcmp(TempAuth,"2"))
     	{
-    		TempAuth[10]="CHAP";
+    		strcpy(TempAuth,"CHAP");
     	} else if (!strcmp(TempAuth,"3"))
     	{
-    		TempAuth[10]="PAP or CHAP";
+    		strcpy(TempAuth,"PAP or CHAP");
     	}
     	for (j = 0; j < strlen(TempAuth); j++)
     	{
     		Setings_Apn_List[i].SETAUTH.value[j]=TempAuth[j];
     	}
     	Setings_Apn_List[i].SETAUTH.value[j]='\0';
-
-
     }
 /*==============================================================================*/
 	
 	if(!strncmp("English",CommonParaInfor[5].value,strlen("English")))
 	{
-		printf("this will goto read_html_file_into_cgi\n");
 		read_html_file_into_cgi("settings_netset_apn_eng.html");
 	}else{
 

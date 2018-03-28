@@ -666,7 +666,7 @@ for(i=0;i<2;i++)
 #ifdef SETTINGS_NETSET_APN
 for(i=0;i<1;i++)
 {
-	if(!strncmp(Tag,Setings_Apn_List[0].SETAPNNAME.key,Taglen))
+	if(!strcmp(Tag,Setings_Apn_List[0].SETAPNNAME.key))
 	{
 		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,DataUsage[i].value);
 		printf("%s",Setings_Apn_List[0].SETAPNNAME.value);
@@ -680,6 +680,7 @@ for(i=0;i<1;i++)
 	if(!strncmp(Tag,Setings_Apn_List[0].SETAPN.key,Taglen))
 	{
 		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,DataUsage[i].value);
+		//printf("the Setings_Apn_List[0].SETAPN.value is %s\n", Setings_Apn_List[0].SETAPN.value);
 		printf("%s",Setings_Apn_List[0].SETAPN.value);
 		break;
 	}
@@ -723,7 +724,7 @@ for(i=0;i<1;i++)
 {
 	if(!strncmp(Tag,Setings_Apn_List[0].SETPASSWORD.key,Taglen))
 	{
-		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Setings_Apn_List[0].SETPASSWORD.value);
+		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Setings_Apn_List[0].SETPASSWORD.value);
 		printf("%s",Setings_Apn_List[0].SETPASSWORD.value);
 		break;
 	}
@@ -765,25 +766,31 @@ write by Xavier
 int write_select_option()
 {
 	int Setapnlist;
+	int i;
 
 	//Setapnlist=sizeof(Setings_Apn_List)/sizeof(Setings_Apn_List[0]);
-	for (int i = 0; i < 10; i++)
-	{
-		if (Setings_Apn_List[i].SETAPNNAME.value != NULL)
+	Setapnlist=0;
+	for (i = 0; i < 10; i++)
+	{//printf("this is in the write_select_option,the Setapnlist is :%s",Setings_Apn_List[i].SETAPNNAME.value);
+	//printf("this is in the write_select_option,Setings_Apn_Listt is :%s",strlen(Setings_Apn_List));
+		if (Setings_Apn_List[i].SETAPNNAME.value[0] != '\0')
 		{
+		//printf("this is in the write_select_option,the Setapnlist is :%d",Setapnlist);
 			Setapnlist=Setapnlist+1;
 		} else{break;}
 	
 	}
-	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Setapnlist);
+	//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Setapnlist);
+	//puts("this is in the write_select_option,the Setapnlist is :%d",Setapnlist);
+	//printf("this is in the write_select_option,the Setapnlist is :%d",Setapnlist);
 
 	if (Setapnlist >0)
 	{
-		printf("<option selected=\"selected\" value=%s>%s</option>\n",Setings_Apn_List[0].SETAPNNAME.value,Setings_Apn_List[0].SETAPNNAME.value);
+		printf("<option selected=\"selected\" value=\"%s\">%s</option>\n",Setings_Apn_List[0].SETAPNNAME.value,Setings_Apn_List[0].SETAPNNAME.value);
 	}
-	for (int i = 1; i < Setapnlist; i++)
+	for (i = 1; i < Setapnlist; i++)
 	{
-		printf("<option value=%s>%s</option>\n",Setings_Apn_List[i].SETAPNNAME.value,Setings_Apn_List[i].SETAPNNAME.value);
+		printf("<option value=\"%s\">%s</option>\n",Setings_Apn_List[i].SETAPNNAME.value,Setings_Apn_List[i].SETAPNNAME.value);
 	}
 	return 1;
 }
@@ -812,6 +819,7 @@ int read_html_file_into_cgi(char *patch)
 	int i;
 	char Tempconfpara[50];
 	int Tempconfparalen;
+	char Tempoption[20];
 	int j;
 	int k;
 
@@ -824,6 +832,7 @@ int read_html_file_into_cgi(char *patch)
 	if(fp == NULL)
 	{
 		debug_message_printf("File can't be openned!!!");
+		puts("File can't be opened");
 	}else{
 		fseek(fp,0,SEEK_END);
         	Tempstrlen = ftell(fp);
@@ -834,16 +843,21 @@ int read_html_file_into_cgi(char *patch)
         for(i=0;i<Tempstrlen-1;i++)
 	   {
 	   	/**************************************/
-	   	if (('<' ==Tempstrline[i]) && ('!' == Tempstrline[i+1]))
+	   	if (('<' ==Tempstrline[i]) && ('!' == Tempstrline[i+1]) && ('%'==Tempstrline[i+4]))
 	   	{
-	   		for (k = 0; Tempstrline[i+k] != '>'; k++)
+	   		for (k = 0; Tempstrline[i+k+5] != '%'; k++)
 	   		{
-	   			//Tempconfpara[k] = Tempstrline[i+k];
+	   			Tempoption[k] = Tempstrline[i+k+5];
 	   		}
-	   		//Tempconfpara[k]='\0';
-	   		i = i+k;
-	   		//Tempconfparalen = k;
-	   		write_select_option();
+	   		Tempoption[k]='\0';
+	   		i = i+k+5+3;
+	   		//printf("this will print Tempoption%s\n",Tempoption );
+	   		if (!strncmp(Tempoption,"apnconfig",strlen("apnconfig")))
+	   		{
+	   			//puts("this will goto write_select_option");
+	   			write_select_option();
+	   		}
+	   		
 	   		continue;
 	   	}
 
@@ -858,7 +872,8 @@ int read_html_file_into_cgi(char *patch)
 
 	        	i = i+2+j;
 			Tempconfparalen = j;
-			xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Tempconfpara);
+			//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Tempconfpara);
+			//printf("this will goto convert_key_to_value,the tempconfpara is %s,the tempconfparalen is %d",Tempconfpara,Tempconfparalen);
 
 			convert_key_to_value(Tempconfpara,Tempconfparalen);
 
