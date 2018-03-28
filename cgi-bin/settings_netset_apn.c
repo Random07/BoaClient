@@ -65,6 +65,8 @@ int main()
 	{
 		Setings_Apn_List[i].SETAPNNAME.value[0]='\0';
 	}
+
+	//  send_cmd_to_js("Request|ApnShow",StringFromJava);
     char StringFromJavatest[]="1|ApnShow|2|cmcc|cmcm|460|01|0|xiaojun|xiaojun1234|cmcc2|cmcm2|460|01|1|xiaojun|xiaojun1234";
     get_index_str_from_js(StringFromJavatest,3,TempTotalApn);
     TotalApn=(int)(TempTotalApn[0]-'0');

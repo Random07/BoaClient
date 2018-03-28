@@ -176,23 +176,13 @@ function LanguageChange(sobj)
     <tr>
         <td height="550" align="center">
   <table width="900" border="0" cellspacing="0" cellpadding="0">
+
+  <form id="form1" name="form1" method="get" action="/cgi-bin/settings_netset_apn_new_submit.cgi">
+
           <tr>
-            <td width="230" align="right" class="STYLE1"> Current APN</td>
-            <td width="20" align="left" class="STYLE1">&nbsp;</td>
-            <td width="400" align="left" class="STYLE1">&nbsp;</td>
-      <td width="250" height="50" class="STYLE1">&nbsp;</td>
-          </tr>
-  <form id="form1" name="form1" method="get" action="">
-          <tr>
-      <td width="230" align="right" class="STYLE1">Config File </td>
-            <td align="center" class="STYLE2">&nbsp;</td>
-            <td align="left" class="STYLE1" ><input name="Configfile" type="text" class="STYLE1" /></td>
-            <td height="50" align="right" class="STYLE2">&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="230" align="right" class="STYLE1">Config File Name </td>
+            <td width="230" align="right" class="STYLE1">APN Name </td>
             <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left" class="STYLE1" ><input name="Configfilename" type="text" class="STYLE1" /></td>
+            <td align="left" class="STYLE1" ><input name="ApnName" type="text" class="STYLE1" /></td>
             <td height="50" align="center"></td>
           </tr>
           <tr>
@@ -216,7 +206,7 @@ function LanguageChange(sobj)
           <tr>
             <td width="230" align="right" class="STYLE1">AUTH</td>
             <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left"><select name="ConfigFileSelect" onchange=ApnChange(this)>
+            <td align="left"><select name="AuthSelect" >
               <option selected="selected" value="0">None</option>
               <option  value="1">PAP</option>
               <option  value="2">CHAP</option>
