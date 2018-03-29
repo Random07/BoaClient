@@ -48,80 +48,104 @@ int main()
     char AuthSelectFromWeb[50];
     char UsernameFromWeb[50];
     char PasswordFromWeb[50];
+    char SendString[150];
+    char SetResult[2];
     int i = 0;
     int j = 0;
     int templen=0;
 
-    web_header();
-        printf("this is a test\n");;
-        we_btail();
+
 
     req_method = getenv("REQUEST_METHOD");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,req_method);
     get_cgi_data(stdin,req_method,StringFromWeb);
 
+    strcpy(SendString,"Request|ApnAdd|");
     if(!get_index_str_from_web(StringFromWeb,"ApnName=",ApnNameFromWeb))
     {
         debug_message_printf("Can't find ApnName");
         return 0;
+    }
+    else{
+        strcat(SendString,ApnNameFromWeb);
+        strcat(SendString,"|");
     }
     if(!get_index_str_from_web(StringFromWeb,"APN=",APNFromWeb))
     {
         debug_message_printf("Can't find APN");
         return 0;
     }
+    else{
+        strcat(SendString,APNFromWeb);
+        strcat(SendString,"|");
+
+    }
     if(!get_index_str_from_web(StringFromWeb,"MNC=",MNCFromWeb))
     {
         debug_message_printf("Can't find MNC");
         return 0;
+    }
+    else{
+        strcat(SendString,MNCFromWeb);
+        strcat(SendString,"|");
     }
     if(!get_index_str_from_web(StringFromWeb,"MCC=",MCCFromWeb))
     {
         debug_message_printf("Can't find MCC");
         return 0;
     }
+    else{
+        strcat(SendString,MCCFromWeb);
+        strcat(SendString,"|");
+
+    }
     if(!get_index_str_from_web(StringFromWeb,"AuthSelect=",AuthSelectFromWeb))
     {
         debug_message_printf("Can't find AuthSelect");
         return 0;
+    }
+    else{
+        strcat(SendString,AuthSelectFromWeb);
+        strcat(SendString,"|");
+
     }
     if(!get_index_str_from_web(StringFromWeb,"Username=",UsernameFromWeb))
     {
         debug_message_printf("Can't find Username");
         return 0;
     }
+    else{
+        strcat(SendString,UsernameFromWeb);
+        strcat(SendString,"|");
+
+    }
     if(!get_index_str_from_web(StringFromWeb,"Password=",PasswordFromWeb))
     {
         debug_message_printf("Can't find Password");
         return 0;
     }
-/*
-//  send_cmd_to_js("Request|Login",StringFromJava);
-    char StringFromJavatest[]="Confirm|Login|Admin|123456";
+    else{
+        strcat(SendString,PasswordFromWeb);
+        //strcat(SendString,"|");
 
-    //get_index_str_from_js(StringFromJavatest,3,NameInDevice);
-    //get_index_str_from_js(StringFromJavatest,4,PassInDevice);
-
-//  Debug_Triple_Var_Message(%s,StringFromJava,%d,strlen(StringFromJava),%d,strlen(PassInDevice));  
-
-    if(!strncmp("Login",Language,strlen("Login")))
-    {
-//      send_cmd_to_js("Request|Setlanguage|English",StringFromJava);
-    }else{
-    
-//      send_cmd_to_js("Request|Setlanguage|Chines",StringFromJava);
     }
+
+
+//  send_cmd_to_js("Request|Login",StringFromJava);
+    char StringFromJavatest[]="1|ApnAdd";
+    get_index_str_from_js(StringFromJavatest,1,SetResult);
+
     
-    if(!strncmp(NameInDevice,NameFromWeb,strlen(NameInDevice)) && !strncmp(PassInDevice,PassFromWeb,strlen(PassInDevice)))
+    if(!strcmp("1",SetResult))
     {   
         web_header();
-        puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/homepage.cgi\">");
+        puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_netset_apn.cgi\">");
         we_btail();
     }else{
         web_header();
         puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/loginerror.cgi\">");
         we_btail();
-    }*/
+    }
     
     return 0;
 }
