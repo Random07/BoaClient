@@ -160,6 +160,14 @@ SetApnPara Setings_Apn_List[10]={
 /*#endif*/
 
 #ifdef SETTINGS_WIFISET_BASIC
+CommonPara Settings_SSID[5]={
+	{"SSIDVALUE",},
+	{"SSIDSHOW1",},
+	{"SSIDSHOW2",},
+	{"SSIDSEC",},
+	{"SSIDPASSWORD",},
+	{"SSIDCONNNUM",},
+}
 #endif
 
 #ifdef SETTINGS_WIFISET_WPS
@@ -789,6 +797,15 @@ int write_select_option()
 	return 1;
 }
 
+
+int write_ssidsecurity_select_option(){
+
+}
+
+int write_ssidconnnum_select_option(){
+	
+}
+
 /*****************************************************************************************
  * FUNCTION
  *  read_html_file_into_cgi
@@ -849,7 +866,15 @@ int read_html_file_into_cgi(char *patch)
 	   		if (!strncmp(Tempoption,"apnconfig",strlen("apnconfig")))
 	   		{
 	   			//puts("this will goto write_select_option");
-	   			write_select_option();
+	   			write_apn_select_option();
+	   		}
+	   		if (!strncmp(Tempoption,"ssidsecurity",strlen("ssidsecurity")))
+	   		{
+	   			write_ssidsecurity_select_option();
+	   		}
+	   		if (!strncmp(Tempoption,"ssidconnnum",strlen("ssidconnnum")))
+	   		{
+	   			write_ssidconnnum_select_option();
 	   		}
 	   		
 	   		continue;

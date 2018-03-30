@@ -45,13 +45,69 @@
 int main()
 {
 	char StringFromJava[REQ_RSP_STRING_LEN];
+	char TempSSID[20];
+	char TempSSIDShow1[7];
+	char TempSSIDShow2[7];
+	char TempSSIDSecurity[20];
+	char TempPassword[20];
+	char TempSSIDConnNum[3];
 	int i;
 
 	read_comm_infor_from_js();
 
-/*=============================================================================
-		please implement
-==============================================================================*/
+/*=============================================================================*/
+			//  send_cmd_to_js("Request|WIFIShow",StringFromJava);
+    char StringFromJavatest[]="1|WIFIShow|fdsfdfd|false|0|21212|5";
+
+    get_index_str_from_js(StringFromJavatest,3,TempSSID);
+    get_index_str_from_js(StringFromJavatest,4,TempSSIDShow1);
+    get_index_str_from_js(StringFromJavatest,5,TempSSIDSecurity);
+    get_index_str_from_js(StringFromJavatest,6,TempPassword);
+    get_index_str_from_js(StringFromJavatest,7,TempSSIDConnNum);
+
+    if (strncmp(TempSSIDShow1,"true",strlen("true")))
+    {
+    	strcpy(TempSSIDShow1,"checked");
+    	strcpy(TempSSIDShow2,"");
+    }
+    else{
+    	strcpy(TempSSIDShow2,"checked");
+    	strcpy(TempSSIDShow1,"");
+    }
+
+    for (j = 0; j < strlen(TempSSID); j++)
+    {
+    	Settings_SSID[0].value[j]=TempSSID[j];
+    }
+    Settings_SSID[0].value[j]='\0';
+
+    for (j = 0; j < strlen(TempSSIDShow1); j++)
+    {
+
+    	Settings_SSID[1].value[j]=TempSSIDShow1[j];
+    }
+    Settings_SSID[1].value[j]='\0';
+
+    for (j = 0; j < strlen(TempSSIDShow2); j++)
+    {
+    	Settings_SSID[2].value[j]=TempSSIDShow2[j];
+    }
+    Settings_SSID[2].value[j]='\0';
+
+    for (j = 0; j < strlen(TempSSID); j++)
+    {
+    	Settings_SSID[0].value[j]=TempSSID[j];
+    }
+    Settings_SSID[0].value[j]='\0';
+
+    for (j = 0; j < strlen(TempSSID); j++)
+    {
+    	Settings_SSID[0].value[j]=TempSSID[j];
+    }
+    Settings_SSID[0].value[j]='\0';
+
+
+/*==============================================================================*/
 	
 	if(!strncmp("English",CommonParaInfor[5].value,strlen("English")))
 	{
