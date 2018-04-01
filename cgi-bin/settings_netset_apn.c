@@ -66,20 +66,20 @@ int main()
 		Setings_Apn_List[i].SETAPNNAME.value[0]='\0';
 	}
 
-	//  send_cmd_to_js("Request|ApnShow",StringFromJava);
-    char StringFromJavatest[]="1|ApnShow|2|cmcc|cmcm|460|01|0|xiaojun|xiaojun1234|cmcc2|cmcm2|460|01|1|xiaojun|xiaojun1234";
-    get_index_str_from_js(StringFromJavatest,3,TempTotalApn);
+	  send_cmd_to_js("Request|ApnShow",StringFromJava);
+    //char StringFromJavatest[]="1|ApnShow|2|cmcc|cmcm|460|01|0|xiaojun|xiaojun1234|cmcc2|cmcm2|460|01|1|xiaojun|xiaojun1234";
+    get_index_str_from_js(StringFromJava,3,TempTotalApn);
     TotalApn=(int)(TempTotalApn[0]-'0');
 
     for (i = 0; i < TotalApn; i++)
     {
-    	get_index_str_from_js(StringFromJavatest,(4+i*7),TempApnName);
-    	get_index_str_from_js(StringFromJavatest,(5+i*7),TempApn);
-    	get_index_str_from_js(StringFromJavatest,(6+i*7),TempMcc);
-    	get_index_str_from_js(StringFromJavatest,(7+i*7),TempMnc);
-    	get_index_str_from_js(StringFromJavatest,(8+i*7),TempAuth);
-    	get_index_str_from_js(StringFromJavatest,(9+i*7),TempUsername);
-    	get_index_str_from_js(StringFromJavatest,(10+i*7),TempPassword);
+    	get_index_str_from_js(StringFromJava,(4+i*7),TempApnName);
+    	get_index_str_from_js(StringFromJava,(5+i*7),TempApn);
+    	get_index_str_from_js(StringFromJava,(6+i*7),TempMcc);
+    	get_index_str_from_js(StringFromJava,(7+i*7),TempMnc);
+    	get_index_str_from_js(StringFromJava,(8+i*7),TempAuth);
+    	get_index_str_from_js(StringFromJava,(9+i*7),TempUsername);
+    	get_index_str_from_js(StringFromJava,(10+i*7),TempPassword);
 
     	for (j = 0; j < strlen(TempApnName); j++)
     	{

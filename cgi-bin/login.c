@@ -70,11 +70,11 @@ int main()
 		return 0;
 	}
 
-//	send_cmd_to_js("Request|Login",StringFromJava);
-	char StringFromJavatest[]="Confirm|Login|Admin|123456";
+	send_cmd_to_js("Request|Login",StringFromJava);
+//	char StringFromJavatest[]="Confirm|Login|Admin|123456";
 
-	get_index_str_from_js(StringFromJavatest,3,NameInDevice);
-	get_index_str_from_js(StringFromJavatest,4,PassInDevice);
+	get_index_str_from_js(StringFromJava,3,NameInDevice);
+	get_index_str_from_js(StringFromJava,4,PassInDevice);
 
 //	Debug_Triple_Var_Message(%s,StringFromJava,%d,strlen(StringFromJava),%d,strlen(PassInDevice));	
 

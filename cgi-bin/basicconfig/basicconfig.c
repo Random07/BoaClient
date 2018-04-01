@@ -16,8 +16,8 @@ int main()
 	Readcomminforfromjava();
 
 
-//	Socketwithjavaserver("Request|Connect_Customer",StringFromJava);
-	char StringFromJavatest[]="Confirm|Connect_Customer|TotalNum|3|1|DeviceNameA|MACA|IPA|2|DeviceNameB|MACB|IPB|3|DeviceNameC|MACC|IPC";
+	Socketwithjavaserver("Request|Connect_Customer",StringFromJava);
+	//char StringFromJavatest[]="Confirm|Connect_Customer|TotalNum|3|1|DeviceNameA|MACA|IPA|2|DeviceNameB|MACB|IPB|3|DeviceNameC|MACC|IPC";
 
 	for(i=0;i<10;i++)
 	{
@@ -46,7 +46,7 @@ int main()
 		ConnCustInfor[i].IP.value[j]='\0';
 	}
 
-	GetindexstrfromJS(StringFromJavatest,4,temptotalnum);
+	GetindexstrfromJS(StringFromJava,4,temptotalnum);
 	totalnum =(int)(temptotalnum[0]-'0');
 
 	for(i=0;i<totalnum;i++)

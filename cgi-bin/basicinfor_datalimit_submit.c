@@ -53,12 +53,12 @@ int main()
 	}
 
 	sprintf(DataLimit,"%d",atoi(DataLimit)*1000000);
-	Sendstring[50]="Request|DataLimit|";
+        strcpy(Sendstring,"Request|DataLimit|");
 	strcat(Sendstring,DataLimit);
-//	send_cmd_to_js(Sendstring,StringFromJava);
+	send_cmd_to_js(Sendstring,StringFromJava);
 
-	char StringFromJavatest[]="1|DataLimit|";
-    get_index_str_from_js(StringFromJavatest,1,Result);
+	//char StringFromJavatest[]="1|DataLimit|";
+    get_index_str_from_js(StringFromJava,1,Result);
 
 
     if (!strcmp(Result,"1"))

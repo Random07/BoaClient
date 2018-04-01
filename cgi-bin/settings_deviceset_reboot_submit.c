@@ -52,11 +52,12 @@ int main()
 	read_comm_infor_from_js();
 
 /*=============================================================================*/
-Sendstring[20]="Request|ReBoot";
-//send_cmd_to_js(Sendstring,StringFromJava);
+//Sendstring[20]="Request|ReBoot";
+strcpy(Sendstring,"Request|ReBoot");
+send_cmd_to_js(Sendstring,StringFromJava);
 
-char StringFromJavatest[]="1|ReBoot|";
-get_index_str_from_js(StringFromJavatest,1,Result);
+//char Sendstring[]="1|ReBoot|";
+get_index_str_from_js(StringFromJava,1,Result);
 
 /*==============================================================================*/
 	

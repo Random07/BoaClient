@@ -81,7 +81,7 @@ function LanguageChange(sobj)
         <td width="100" scope="col" align="center">
             <select name="LanguageSelect" onchange=LanguageChange(this)>
                 <option selected="selected" value="English">English</option>
-				<option value="Chinese">中文</option>
+				<option value="Chinese">脰脨脦脛</option>
             </select>
 	    </td>
         <td width="100" scope="col" align="center"><a href="../index_eng.html" class="STYLE2">EXIT</a></td>
@@ -176,36 +176,31 @@ function LanguageChange(sobj)
 	  <tr>
         <td height="550" align="center">
 		<table width="900" border="0" cellspacing="0" cellpadding="0">
-		<form id="form1" name="form1" method="get" action="">
+		<form id="form1" name="form1" method="get" action="/cgi-bin/settings_wifiset_basic_submit.cgi">
           <tr>
             <td width="230" align="right" class="STYLE1">SSID</td>
             <td width="20" align="left" class="STYLE1">&nbsp;</td>
             <td width="400" align="left" >
-                <input name="SSID" type="text" class="STYLE1" value="4G_MIFI_4202 " />
+                <input name="SSID" type="text" class="STYLE1" value="|%SSIDVALUE| " />
             </td>
 			<td width="250" height="50" class="STYLE1">&nbsp;</td>
           </tr>
           <tr>
  		  <td width="230" align="right" class="STYLE1">Broadcast SSID</td>
             <td align="center" class="STYLE2">&nbsp;</td>
-            <td align="left" class="STYLE1" ><p>
-              <label>
-                <input name="BCSSID" type="radio" value="单选" checked="checked" />
-                Start</label>
-              <label>
-                <input type="radio" name="RadioGroup1" value="单选" />
-                Stop</label>
+            <td align="left" class="STYLE1" ><p>             
+                <input type="radio" name="BCSSID" value="1" |%SSIDSHOW1| />
+                Start             
+                <input type="radio" name="BCSSID" value="2" |%SSIDSHOW2|/>
+                Stop
             </p></td>
             <td height="50" align="right" class="STYLE2">&nbsp;</td>
           </tr>
           <tr>
             <td width="230" align="right" class="STYLE1">AUTH</td>
             <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left"><select name="AUTH" class="STYLE1">
-              <option>WPA2-PSK(AES)</option>
-              <option>CHAP</option>
-              <option>PAP</option>
-              <option>WPS</option>
+            <td align="left"><select name="SECURITY" class="STYLE1">
+              <!--%ssidsecurity%-->
             </select>
             </td>
             <td height="50" align="center">&nbsp;</td>
@@ -234,16 +229,7 @@ function LanguageChange(sobj)
             <td width="230" align="right" class="STYLE1">Max Connection </td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="left"><select name="MaxConnection" class="STYLE1">
-              <option>10</option>
-              <option>9</option>
-              <option>8</option>
-              <option>7</option>
-              <option>6</option>
-              <option>5</option>
-              <option>4</option>
-              <option>3</option>
-              <option>2</option>
-              <option>1</option>
+                <!--%ssidconnnum%-->  
             </select>
             </td>
             <td height="50" align="center">&nbsp;</td>
@@ -258,7 +244,7 @@ function LanguageChange(sobj)
             <td width="230" align="right" class="STYLE1">&nbsp;</td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="right"><input name="Submit" type="submit" class="STYLE1" value="Apply" /></td>
-            <td height="50" align="center"><input name="Submit" type="submit" class="STYLE1" value="Cancel" /></td>
+            <td height="50" align="center">&nbsp;</td>
           </tr>
 		  </form>
           <tr>

@@ -43,9 +43,17 @@
 <!--
 function LanguageChange(sobj)
 {
-	var language=sobj.options[sobj.selectedIndex].value;
+  var language=sobj.options[sobj.selectedIndex].value;
+  var path=window.location.pathname;
+  var url="/cgi-bin/languagechange.cgi?LanguageSelect=" + language+"&Path="+path;
+  window.location.href=url;
+}
+
+function ApnChange(sobj)
+{
+	var apn=sobj.options[sobj.selectedIndex].value;
 	var path=window.location.pathname;
-	var url="/cgi-bin/languagechange.cgi?LanguageSelect=" + language+"&Path="+path;
+	var url="/cgi-bin/settings_netset_apn_change.cgi?ConfigFileSelect=" + apn+"&Path="+path;
 	window.location.href=url;
 }
 -->
@@ -81,7 +89,7 @@ function LanguageChange(sobj)
         <td width="100" scope="col" align="center">
               <select name="LanguageSelect" onchange=LanguageChange(this)>
                 <option selected="selected" value="English">English</option>
-				<option value="Chinese">÷–Œƒ</option>
+				<option value="Chinese">√ñ√ê√é√Ñ</option>
             </select>
 	    </td>
         <td width="100" scope="col" align="center"><a href="../index_eng.html" class="STYLE2">EXIT</a></td>
@@ -179,59 +187,61 @@ function LanguageChange(sobj)
           <tr>
             <td width="230" align="right" class="STYLE1"> Current APN</td>
             <td width="20" align="left" class="STYLE1">&nbsp;</td>
-            <td width="400" align="left" class="STYLE1">&nbsp;</td>
+            <td width="400" align="left" class="STYLE1">|%SETAPNNAME|</td>
 	    <td width="250" height="50" class="STYLE1">&nbsp;</td>
           </tr>
-	<form id="form1" name="form1" method="get" action="">
           <tr>
  	    <td width="230" align="right" class="STYLE1">Config File </td>
             <td align="center" class="STYLE2">&nbsp;</td>
-            <td align="left" class="STYLE1" ><input name="Configfile" type="text" class="STYLE1" /></td>
+            <td align="left" class="STYLE1">
+            <select name="ConfigFileSelect" onchange=ApnChange(this)>
+              <option selected="selected" value="English">English</option>
+              <!--%apnconfig%-->
+            </select></td>
             <td height="50" align="right" class="STYLE2">&nbsp;</td>
           </tr>
           <tr>
             <td width="230" align="right" class="STYLE1">Config File Name </td>
             <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left" class="STYLE1" ><input name="Configfilename" type="text" class="STYLE1" /></td>
-            <td height="50" align="center"><input name="Submit" type="submit" class="STYLE1" value="New" /></td>
+            <td align="left" class="STYLE1" >|%SETAPNNAME|</td>
+            <td height="50" align="center"><a href="/cgi-bin/settings_netset_apn_new.cgi">New</a></td>
           </tr>
           <tr>
             <td width="230" align="right" class="STYLE1">APN</td>
             <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left" class="STYLE1"><input name="APN" type="text" class="STYLE1" /></td>
+            <td align="left" class="STYLE1">|%SETAPN|</td>
             <td height="50" align="rgiht" class="STYLE1">&nbsp;</td>
           </tr>
           <tr>
             <td width="230" align="right" class="STYLE1">MNC</td>
             <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left"><input name="MNC" type="text" class="STYLE1" /></td>
+            <td align="left">|%SETMNC|</td>
             <td height="50" align="center">&nbsp;</td>
           </tr>
            <tr>
             <td width="230" align="right" class="STYLE1">MCC</td>
             <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left"><input name="MCC" type="text" class="STYLE1" /></td>
+            <td align="left">|%SETMCC|</td>
             <td height="50" align="center">&nbsp;</td>
           </tr>
           <tr>
             <td width="230" align="right" class="STYLE1">AUTH</td>
             <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left"><input name="AUTH" type="text" class="STYLE1" /></td>
+            <td align="left">|%SETAUTH|</td>
             <td height="50" align="center">&nbsp;</td>
           </tr>
           <tr>
             <td width="230" align="right" class="STYLE1">User Name </td>
             <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left"><input name="Username" type="text" class="STYLE1" /></td>
+            <td align="left">|%SETUSERNAME|</td>
             <td height="50" align="center">&nbsp;</td>
           </tr>
           <tr>
             <td width="230" align="right" class="STYLE1">Pass Word </td>
             <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left"><input name="Password" type="password" class="STYLE1" /></td>
+            <td align="left">|%SETPASSWORD|</td>
             <td height="50" align="center">&nbsp;</td>
           </tr>
-	</form>
           <tr>
             <td width="230" align="center" class="STYLE1">&nbsp;</td>
             <td align="center" class="STYLE1">&nbsp;</td>

@@ -52,6 +52,7 @@ int main()
 	char TempPassword[20];
 	char TempSSIDConnNum[3];
 	int i;
+    int j;
 
 	read_comm_infor_from_js();
 
@@ -94,17 +95,23 @@ int main()
     }
     Settings_SSID[2].value[j]='\0';
 
-    for (j = 0; j < strlen(TempSSID); j++)
+    for (j = 0; j < strlen(TempSSIDSecurity); j++)
     {
-    	Settings_SSID[0].value[j]=TempSSID[j];
+    	Settings_SSID[3].value[j]=TempSSIDSecurity[j];
     }
-    Settings_SSID[0].value[j]='\0';
+    Settings_SSID[3].value[j]='\0';
 
-    for (j = 0; j < strlen(TempSSID); j++)
+    for (j = 0; j < strlen(TempPassword); j++)
     {
-    	Settings_SSID[0].value[j]=TempSSID[j];
+    	Settings_SSID[4].value[j]=TempPassword[j];
     }
-    Settings_SSID[0].value[j]='\0';
+    Settings_SSID[4].value[j]='\0';
+
+    for (j = 0; j < strlen(TempSSIDConnNum); j++)
+    {
+        Settings_SSID[5].value[j]=TempSSIDConnNum[j];
+    }
+    Settings_SSID[5].value[j]='\0';
 
 
 /*==============================================================================*/

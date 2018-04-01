@@ -3,7 +3,7 @@
 # compile for linux,set CC = gcc
 # compile for Android, set CC = arm-linux-androideabi-gcc -static
 
-CC = gcc
+CC = arm-linux-androideabi-gcc -static
 
 all:	login.cgi \
 	loginerror.cgi \
@@ -25,7 +25,14 @@ all:	login.cgi \
 	settings_wifiset_wps.cgi \
 	settings_deviceset_account.cgi \
 	settings_deviceset_restore.cgi \
-	settings_deviceset_reboot.cgi
+	settings_deviceset_reboot.cgi \
+    settings_deviceset_reboot_submit.cgi \
+    settings_deviceset_restore_submit.cgi \
+    settings_netset_apn_change.cgi \
+    settings_netset_apn_new.cgi \
+    settings_netset_apn_new_submit.cgi \
+    settings_wifiset_basic_submit.cgi \
+    basicinfor_datalimit_submit.cgi
 
 login.cgi:login.c
 	$(CC) -o $@ $^
@@ -88,6 +95,27 @@ settings_deviceset_restore.cgi:settings_deviceset_restore.c
 	$(CC) -o $@ $^
 
 settings_deviceset_reboot.cgi:settings_deviceset_reboot.c
+	$(CC) -o $@ $^
+
+settings_deviceset_reboot_submit.cgi:settings_deviceset_reboot_submit.c
+	$(CC) -o $@ $^
+
+settings_deviceset_restore_submit.cgi:settings_deviceset_restore_submit.c
+	$(CC) -o $@ $^
+
+settings_netset_apn_change.cgi:settings_netset_apn_change.c
+	$(CC) -o $@ $^
+
+settings_netset_apn_new.cgi:settings_netset_apn_new.c
+	$(CC) -o $@ $^
+
+settings_netset_apn_new_submit.cgi:settings_netset_apn_new_submit.c
+	$(CC) -o $@ $^
+
+settings_wifiset_basic_submit.cgi:settings_wifiset_basic_submit.c
+	$(CC) -o $@ $^
+
+basicinfor_datalimit_submit.cgi:basicinfor_datalimit_submit.c
 	$(CC) -o $@ $^
 
 clean:

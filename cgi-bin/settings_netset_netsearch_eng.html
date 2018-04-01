@@ -189,15 +189,36 @@ function LanguageChange(sobj)
             </td>
 			<td width="150" height="50" class="STYLE1">&nbsp;</td>
           </tr>
-		 <form id="form1" name="form1" method="get" action="">
+		 <form id="form1" name="form1" method="get" action="/cgi-bin/settings_netset_netsearch_submit.cgi">
           <tr>
  		  <td width="230" align="right" class="STYLE1">&nbsp;</td>
             <td align="center" class="STYLE2">&nbsp;</td>
             <td align="left" >
-			<select name="NetSearchMode" class="STYLE1">
-              <option value="4G/3G/2G" selected="selected">4G/3G/2G</option>
-              <option value="3G">3G</option>
-              <option value="2G">2G</option>
+			<select name="NetSearchMode" style="width:100px;" class="STYLE1">
+        <!--%SetNetworkMode%-->
+              <!--<option value="0">4G/3G/2G</option>
+              <option value="1">3G</option>
+              <option value="2">2G</option>
+              <option value="3">4G/3G/2G</option>
+              <option value="4">3G</option>
+              <option value="5">2G</option>
+              <option value="6">4G/3G/2G</option>
+              <option value="7">3G</option>
+              <option value="8">2G</option>
+              <option value="9">4G/3G/2G</option>
+              <option value="10">3G</option>
+              <option value="11">2G</option>
+              <option value="12">4G/3G/2G</option>
+              <option value="13">3G</option>
+              <option value="14">2G</option>
+              <option value="15">4G/3G/2G</option>
+              <option value="16">3G</option>
+              <option value="17">2G</option>
+              <option value="18">4G/3G/2G</option>
+              <option value="19">3G</option>
+              <option value="20">2G</option>
+              <option value="21">4G/3G/2G</option>
+              <option value="22">4G/3G/2G</option>-->
             </select>
             </td>
             <td height="50" align="right" class="STYLE2">&nbsp;</td>

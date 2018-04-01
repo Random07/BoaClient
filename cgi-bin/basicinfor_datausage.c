@@ -54,10 +54,10 @@ int main()
 	read_comm_infor_from_js();
 
 /*=============================================================================*/
-  //	Socketwithjavaserver("Request|DataStatic",StringFromJava);
-	char StringFromJavatest[]="Confirm|DataStatic|343400000|2000000";
-    get_index_str_from_js(StringFromJavatest,3,UsedData);
-	get_index_str_from_js(StringFromJavatest,4,LimitData);
+  	send_cmd_to_js("Request|DataStatic",StringFromJava);
+	//char StringFromJavatest[]="Confirm|DataStatic|343400000|2000000";
+    get_index_str_from_js(StringFromJava,3,UsedData);
+	get_index_str_from_js(StringFromJava,4,LimitData);
 
 
 	sprintf(UsedData,"%d",atoi(UsedData)/1000000);

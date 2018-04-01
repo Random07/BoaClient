@@ -37,7 +37,7 @@
 typedef struct
 {
 char *key;
-char value[50];
+char value[150];
 }CommonPara;
 
 
@@ -109,6 +109,29 @@ CommonPara DataUsage[2]={
 #endif
 
 #ifdef SMS_DEVICEPART
+typedef struct
+{
+CommonPara totalall;
+CommonPara id;
+CommonPara addr;
+CommonPara body;
+CommonPara time;
+CommonPara flag;
+}SmsInfo;
+SmsInfo SmsInfoList[10]={
+{{"totalall",},{"id",},{"addr",},{"body",},{"time",},{"flag",},},
+{{"totalall",},{"id",},{"addr",},{"body",},{"time",},{"flag",},},
+{{"totalall",},{"id",},{"addr",},{"body",},{"time",},{"flag",},},
+{{"totalall",},{"id",},{"addr",},{"body",},{"time",},{"flag",},},
+{{"totalall",},{"id",},{"addr",},{"body",},{"time",},{"flag",},},
+{{"totalall",},{"id",},{"addr",},{"body",},{"time",},{"flag",},},
+{{"totalall",},{"id",},{"addr",},{"body",},{"time",},{"flag",},},
+{{"totalall",},{"id",},{"addr",},{"body",},{"time",},{"flag",},},
+{{"totalall",},{"id",},{"addr",},{"body",},{"time",},{"flag",},},
+{{"totalall",},{"id",},{"addr",},{"body",},{"time",},{"flag",},},
+};
+
+
 #endif
 
 #ifdef SMS_SIMPART
@@ -120,8 +143,37 @@ CommonPara DataUsage[2]={
 #ifdef SETTINGS_NETSET_DAILUP
 #endif
 
-#ifdef SETTINGS_NETSET_NETSEARCH
-#endif
+/*#ifdef SETTINGS_NETSET_NETSEARCH*/
+CommonPara SetSearchMode[1]={
+{"SetNetworkModeValue",},
+};
+
+CommonPara SetNetworkMode[23]={
+	{"0","NETWORK_MODE_WCDMA_PREF"},
+	{"1","NETWORK_MODE_GSM_ONLY"},
+	{"2","NETWORK_MODE_WCDMA_ONLY"},
+	{"3","NETWORK_MODE_GSM_UMTS"},
+	{"4","NETWORK_MODE_CDMA"},
+	{"5","NETWORK_MODE_CDMA_NO_EVDO"},
+	{"6","NETWORK_MODE_EVDO_NO_CDMA"},
+	{"7","NETWORK_MODE_GLOBAL"},
+	{"8","NETWORK_MODE_LTE_CDMA_EVDO"},
+	{"9","NETWORK_MODE_LTE_GSM_WCDMA"},
+	{"10","NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA"},
+	{"11","NETWORK_MODE_LTE_ONLY"},
+	{"12","NETWORK_MODE_LTE_WCDMA"},
+	{"13","NETWORK_MODE_TDSCDMA_ONLY"},
+	{"14","NETWORK_MODE_TDSCDMA_WCDMA"},
+	{"15","NETWORK_MODE_LTE_TDSCDMA"},
+	{"16","NETWORK_MODE_TDSCDMA_GSM"},
+	{"17","NETWORK_MODE_LTE_TDSCDMA_GSM"},
+	{"18","NETWORK_MODE_TDSCDMA_GSM_WCDMA"},
+	{"19","NETWORK_MODE_LTE_TDSCDMA_WCDMA"},
+	{"20","NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA"},
+	{"21","NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA"},
+	{"22","NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA"},
+};
+/*#endif*/
 
 /*#ifdef SETTINGS_NETSET_APN*/
 typedef struct
@@ -159,16 +211,16 @@ SetApnPara Setings_Apn_List[10]={
 };
 /*#endif*/
 
-#ifdef SETTINGS_WIFISET_BASIC
-CommonPara Settings_SSID[5]={
+/*#ifdef SETTINGS_WIFISET_BASIC*/
+CommonPara Settings_SSID[6]={
 	{"SSIDVALUE",},
 	{"SSIDSHOW1",},
 	{"SSIDSHOW2",},
 	{"SSIDSEC",},
 	{"SSIDPASSWORD",},
 	{"SSIDCONNNUM",},
-}
-#endif
+};
+/*#endif*/
 
 #ifdef SETTINGS_WIFISET_WPS
 #endif
@@ -195,8 +247,10 @@ int get_index_str_from_web(char *org,char *Tag,char *out);
 int read_comm_infor_from_js();
 int send_cmd_to_js(char *SendMessage,char *OutString);
 
-
-int write_select_option();
+int write_networkmode_select_option();
+int write_ssidsecurity_select_option();
+int write_ssidconnnum_select_option();
+int write_apn_select_option();
 int convert_key_to_value(char *Tag,int Taglen);
 int read_html_file_into_cgi(char *patch);
 
@@ -529,6 +583,10 @@ int send_cmd_to_js(char *SendMessage,char *OutString)
 	char tempsendmessge[TEMP_STRING_LEN];
 	int str_len = 0;
 	struct sockaddr_in server_addr;
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This is in define.send_cmd_to_js");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendMessage);
+
+
 
 	for(i=0;i<strlen(SendMessage);i++)
 	{
@@ -544,8 +602,10 @@ int send_cmd_to_js(char *SendMessage,char *OutString)
 	server_addr.sin_port = htons(30000);
 	
 	connect(server_sock, (struct sockaddr*)&server_addr,sizeof(server_addr));
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"thi is in define,have complete excute connect");
 
 	write(server_sock, tempsendmessge, strlen(tempsendmessge));
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"thi is in define,have complete excute write data");
 
 	int goon=1;
 
@@ -554,6 +614,7 @@ int send_cmd_to_js(char *SendMessage,char *OutString)
 		str_len = read(server_sock, OutString, REQ_RSP_STRING_LEN);
 		if(str_len > 0)goon = 0;
 	}
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"thi is in define,have complete excute feedback the data");
 	OutString[str_len-4]='\0';
 	close(server_sock);
 
@@ -751,6 +812,22 @@ for(i=0;i<1;i++)
 #endif
 
 #ifdef SETTINGS_WIFISET_BASIC
+if (!strncmp(Tag,Settings_SSID[0].key,Taglen))
+{
+	printf("%s",Settings_SSID[0].value);
+	//break;
+}
+if (!strncmp(Tag,Settings_SSID[1].key,Taglen))
+{
+	printf("%s",Settings_SSID[1].value);
+	//break;
+}
+if (!strncmp(Tag,Settings_SSID[2].key,Taglen))
+{
+	printf("%s",Settings_SSID[2].value);
+	//break;
+}
+
 #endif
 
 #ifdef SETTINGS_WIFISET_WPS
@@ -770,7 +847,7 @@ for(i=0;i<1;i++)
 /*****************************************************************************************
 write by Xavier
  *****************************************************************************************/
-int write_select_option()
+int write_apn_select_option()
 {
 	int Setapnlist;
 	int i;
@@ -799,13 +876,184 @@ int write_select_option()
 
 
 int write_ssidsecurity_select_option(){
+	char TempSSIDSec[5];
+	strcpy(TempSSIDSec,Settings_SSID[3].value);
+	if (!strcmp(TempSSIDSec,"0"))
+	{
+		printf("<option selected=\"selected\" value=\"0\">open</option>");
+		printf("<option  value=\"1\">WPA_PSK</option>");
+		printf("<option  value=\"2\">WPA_PSK2</option>");
+	}
+	if (!strcmp(TempSSIDSec,"1"))
+	{
+		printf("<option  value=\"0\">open</option>");
+		printf("<option  selected=\"selected\" value=\"1\">WPA_PSK</option>");
+		printf("<option  value=\"2\">WPA_PSK2</option>");
+	}
+	if (!strcmp(TempSSIDSec,"2"))
+	{
+		printf("<option  value=\"0\">open</option>");
+		printf("<option  value=\"1\">WPA_PSK</option>");
+		printf("<option  selected=\"selected\" value=\"2\">WPA_PSK2</option>");
+	}
 
 }
 
 int write_ssidconnnum_select_option(){
-	
+	if (!strcmp(Settings_SSID[5].value,"1"))
+	{
+		printf("<option  selected=\"selected\" value=\"1\">1</option>");
+		printf("<option   value=\"2\">2</option>");
+		printf("<option   value=\"3\">3</option>");
+		printf("<option   value=\"4\">4</option>");
+		printf("<option   value=\"5\">5</option>");
+		printf("<option   value=\"6\">6</option>");
+		printf("<option   value=\"7\">7</option>");
+		printf("<option   value=\"8\">8</option>");
+		printf("<option   value=\"9\">9</option>");
+		printf("<option   value=\"10\">10</option>");
+	}
+	if (!strcmp(Settings_SSID[5].value,"2"))
+	{
+		printf("<option   value=\"1\">1</option>");
+		printf("<option  selected=\"selected\" value=\"2\">2</option>");
+		printf("<option   value=\"3\">3</option>");
+		printf("<option   value=\"4\">4</option>");
+		printf("<option   value=\"5\">5</option>");
+		printf("<option   value=\"6\">6</option>");
+		printf("<option   value=\"7\">7</option>");
+		printf("<option   value=\"8\">8</option>");
+		printf("<option   value=\"9\">9</option>");
+		printf("<option   value=\"10\">10</option>");
+	}
+	if (!strcmp(Settings_SSID[5].value,"3"))
+	{
+		printf("<option   value=\"1\">1</option>");
+		printf("<option   value=\"2\">2</option>");
+		printf("<option  selected=\"selected\" value=\"3\">3</option>");
+		printf("<option   value=\"4\">4</option>");
+		printf("<option   value=\"5\">5</option>");
+		printf("<option   value=\"6\">6</option>");
+		printf("<option   value=\"7\">7</option>");
+		printf("<option   value=\"8\">8</option>");
+		printf("<option   value=\"9\">9</option>");
+		printf("<option   value=\"10\">10</option>");
+	}
+	if (!strcmp(Settings_SSID[5].value,"4"))
+	{
+		printf("<option   value=\"1\">1</option>");
+		printf("<option   value=\"2\">2</option>");
+		printf("<option   value=\"3\">3</option>");
+		printf("<option  selected=\"selected\" value=\"4\">4</option>");
+		printf("<option   value=\"5\">5</option>");
+		printf("<option   value=\"6\">6</option>");
+		printf("<option   value=\"7\">7</option>");
+		printf("<option   value=\"8\">8</option>");
+		printf("<option   value=\"9\">9</option>");
+		printf("<option   value=\"10\">10</option>");
+	}
+	if (!strcmp(Settings_SSID[5].value,"5"))
+	{
+		printf("<option   value=\"1\">1</option>");
+		printf("<option   value=\"2\">2</option>");
+		printf("<option   value=\"3\">3</option>");
+		printf("<option   value=\"4\">4</option>");
+		printf("<option  selected=\"selected\" value=\"5\">5</option>");
+		printf("<option   value=\"6\">6</option>");
+		printf("<option   value=\"7\">7</option>");
+		printf("<option   value=\"8\">8</option>");
+		printf("<option   value=\"9\">9</option>");
+		printf("<option   value=\"10\">10</option>");
+	}
+	if (!strcmp(Settings_SSID[5].value,"6"))
+	{
+		printf("<option   value=\"1\">1</option>");
+		printf("<option   value=\"2\">2</option>");
+		printf("<option   value=\"3\">3</option>");
+		printf("<option   value=\"4\">4</option>");
+		printf("<option   value=\"5\">5</option>");
+		printf("<option  selected=\"selected\" value=\"6\">6</option>");
+		printf("<option   value=\"7\">7</option>");
+		printf("<option   value=\"8\">8</option>");
+		printf("<option   value=\"9\">9</option>");
+		printf("<option   value=\"10\">10</option>");
+	}
+	if (!strcmp(Settings_SSID[5].value,"7"))
+	{
+		printf("<option  value=\"1\">1</option>");
+		printf("<option   value=\"2\">2</option>");
+		printf("<option   value=\"3\">3</option>");
+		printf("<option   value=\"4\">4</option>");
+		printf("<option   value=\"5\">5</option>");
+		printf("<option   value=\"6\">6</option>");
+		printf("<option   selected=\"selected\" value=\"7\">7</option>");
+		printf("<option   value=\"8\">8</option>");
+		printf("<option   value=\"9\">9</option>");
+		printf("<option   value=\"10\">10</option>");
+	}
+	if (!strcmp(Settings_SSID[5].value,"8"))
+	{
+		printf("<option   value=\"1\">1</option>");
+		printf("<option   value=\"2\">2</option>");
+		printf("<option   value=\"3\">3</option>");
+		printf("<option   value=\"4\">4</option>");
+		printf("<option   value=\"5\">5</option>");
+		printf("<option   value=\"6\">6</option>");
+		printf("<option   value=\"7\">7</option>");
+		printf("<option  selected=\"selected\" value=\"8\">8</option>");
+		printf("<option   value=\"9\">9</option>");
+		printf("<option   value=\"10\">10</option>");
+	}
+	if (!strcmp(Settings_SSID[5].value,"9"))
+	{
+		printf("<option   value=\"1\">1</option>");
+		printf("<option   value=\"2\">2</option>");
+		printf("<option   value=\"3\">3</option>");
+		printf("<option   value=\"4\">4</option>");
+		printf("<option   value=\"5\">5</option>");
+		printf("<option   value=\"6\">6</option>");
+		printf("<option   value=\"7\">7</option>");
+		printf("<option   value=\"8\">8</option>");
+		printf("<option  selected=\"selected\"  value=\"9\">9</option>");
+		printf("<option  value=\"10\">10</option>");
+	}
+	if (!strcmp(Settings_SSID[5].value,"10"))
+	{
+		printf("<option   value=\"1\">1</option>");
+		printf("<option   value=\"2\">2</option>");
+		printf("<option   value=\"3\">3</option>");
+		printf("<option   value=\"4\">4</option>");
+		printf("<option   value=\"5\">5</option>");
+		printf("<option   value=\"6\">6</option>");
+		printf("<option   value=\"7\">7</option>");
+		printf("<option   value=\"8\">8</option>");
+		printf("<option   value=\"9\">9</option>");
+		printf("<option  selected=\"selected\" value=\"10\">10</option>");
+	}
+
+	return 1;
 }
 
+int write_networkmode_select_option(){
+	int i;
+
+	for (i = 0; i < 23;i++)
+	{
+		//printf("<option   value=\"%s\">%s</option>",SetSearchMode[0].key,SetSearchMode[0].value);
+		if (!strcmp(SetSearchMode[0].value,SetNetworkMode[i].key))
+		{
+		printf("<option   value=\"%s\"  selected=\"selected\">%s</option>\n",SetNetworkMode[i].key,SetNetworkMode[i].value);	
+		}
+		else{
+			printf("<option   value=\"%s\">%s</option>\n",SetNetworkMode[i].key,SetNetworkMode[i].value);
+		}
+	}
+	return 1;
+}
+
+int write_smsdevicepart_select_option(char *smsdevicepartnum){
+	
+}
 /*****************************************************************************************
  * FUNCTION
  *  read_html_file_into_cgi
@@ -831,8 +1079,12 @@ int read_html_file_into_cgi(char *patch)
 	char Tempconfpara[50];
 	int Tempconfparalen;
 	char Tempoption[20];
+	char Tempoptionnum[2];
+	char Tempoptionstr[18];
 	int j;
 	int k;
+	int m;
+	int n;
 
 	puts("<Content-type:text/html>\n");
 
@@ -862,6 +1114,11 @@ int read_html_file_into_cgi(char *patch)
 	   		}
 	   		Tempoption[k]='\0';
 	   		i = i+k+5+3;
+	   		/*for (m = 0; m < (strlen(Tempoption)-1); m++)
+	   		{
+	   			Tempoptionstr[m]=Tempoption[m];
+	   		}*/
+	   		strcpy(Tempoptionnum,Tempoption[k-1]);
 	   		//printf("this will print Tempoption%s\n",Tempoption );
 	   		if (!strncmp(Tempoption,"apnconfig",strlen("apnconfig")))
 	   		{
@@ -875,6 +1132,14 @@ int read_html_file_into_cgi(char *patch)
 	   		if (!strncmp(Tempoption,"ssidconnnum",strlen("ssidconnnum")))
 	   		{
 	   			write_ssidconnnum_select_option();
+	   		}
+	   		if (!strncmp(Tempoption,"SetNetworkMode",strlen("SetNetworkMode")))
+	   		{
+	   			write_networkmode_select_option();
+	   		}
+	   		if(!strncmp(Tempoption,"smsdevicepart",strlen("smsdevicepart"))){
+
+                write_smsdevicepart_select_option(Tempoptionnum);
 	   		}
 	   		
 	   		continue;

@@ -45,13 +45,35 @@
 int main()
 {
 	char StringFromJava[REQ_RSP_STRING_LEN];
+	char TempNetworkType[3];
+	char TempNetworkTypeShow[20];
 	int i;
 
 	read_comm_infor_from_js();
 
-/*=============================================================================
-		please implement
-==============================================================================*/
+/*=============================================================================*/
+	//send_cmd_to_js("Request|GetNetworkType",StringFromJava);
+    char StringFromJavatest[]="1|GetNetworkType|22";
+    get_index_str_from_js(StringFromJavatest,3,TempNetworkType);
+
+    /*for (i = 0; i < 23; i++)
+    {
+    	if (!strcmp(TempNetworkType,SetNetworkMode[i].key))
+    	{
+    		strcpy(TempNetworkTypeShow,SetNetworkMode[i].value);
+    		break;
+    	}
+    }*/
+
+    for (i = 0; i < strlen(TempNetworkType); i++)
+    {
+    	SetSearchMode[0].value[i]=TempNetworkType[i];
+    }
+    SetSearchMode[0].value[i]='\0';
+    //printf("this is a test by Xavier,the TempNetworkTypeis :%s the SetSearchMode[0].value is :%s\n", \
+     TempNetworkType,SetSearchMode[0].value);
+
+/*==============================================================================*/
 	
 	if(!strncmp("English",CommonParaInfor[5].value,strlen("English")))
 	{

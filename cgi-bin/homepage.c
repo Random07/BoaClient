@@ -84,19 +84,19 @@ int main()
 		ConnCustInfor[i].IP.value[j]='\0';
 	}
 
-//	send_cmd_to_js("Request|Connect_Customer",StringFromJava);
-	char StringFromJavatest[]="Confirm|Connect_Customer|TotalNum|3|1|DeviceNameA|MACA|IPA|2|DeviceNameB|MACB|IPB|3|DeviceNameC|MACC|IPC";
+	send_cmd_to_js("Request|Connect_Customer",StringFromJava);
+//	char StringFromJavatest[]="Confirm|Connect_Customer|TotalNum|3|1|DeviceNameA|MACA|IPA|2|DeviceNameB|MACB|IPB|3|DeviceNameC|MACC|IPC";
 //	Debug_Single_Var_Message(%s,StringFromJava);
 
-	get_index_str_from_js(StringFromJavatest,4,temptotalnum);
+	get_index_str_from_js(StringFromJava,4,temptotalnum);
 	totalnum =(int)(temptotalnum[0]-'0');
 
 	for(i=0;i<totalnum;i++)
 	{	
-		get_index_str_from_js(StringFromJavatest,(5+i*4),tempindex);
-		get_index_str_from_js(StringFromJavatest,(6+i*4),tempDeviceName);
-		get_index_str_from_js(StringFromJavatest,(7+i*4),tempMAC);
-		get_index_str_from_js(StringFromJavatest,(8+i*4),tempIP);
+		get_index_str_from_js(StringFromJava,(5+i*4),tempindex);
+		get_index_str_from_js(StringFromJava,(6+i*4),tempDeviceName);
+		get_index_str_from_js(StringFromJava,(7+i*4),tempMAC);
+		get_index_str_from_js(StringFromJava,(8+i*4),tempIP);
 
 		for(j=0;j<strlen(tempindex);j++)
 		{

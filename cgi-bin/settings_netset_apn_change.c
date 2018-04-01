@@ -66,9 +66,9 @@ int main()
     strcpy(Sendstring,"Request|ApnChange|");
     strcat(Sendstring,ApnName);
 
-    //  send_cmd_to_js(Sendstring,StringFromJava);
-    char StringFromJavatest[]="1|ApnChange";
-    get_index_str_from_js(StringFromJavatest,1,Result);
+      send_cmd_to_js(Sendstring,StringFromJava);
+    //char StringFromJavatest[]="1|ApnChange";
+    get_index_str_from_js(StringFromJava,1,Result);
 
     if (!strcmp(Result,"1"))
     {

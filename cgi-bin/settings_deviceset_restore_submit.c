@@ -47,11 +47,12 @@ int main()
 	char Result[2];
 
 /*=============================================================================*/
-Sendstring[20]="Request|ReFactory";
-//send_cmd_to_js(Sendstring,StringFromJava);
+//Sendstring[20]="Request|ReFactory";
+strcpy(Sendstring,"Request|ReFactory");
+send_cmd_to_js(Sendstring,StringFromJava);
 
-char StringFromJavatest[]="1|ReFactory|";
-get_index_str_from_js(StringFromJavatest,1,Result);
+//char StringFromJava[]="1|ReFactory|";
+get_index_str_from_js(StringFromJava,1,Result);
 
 /*==============================================================================*/
 	
