@@ -108,7 +108,7 @@ CommonPara DataUsage[2]={
 #ifdef DRIVER_DOWNLOAD
 #endif
 
-#ifdef SMS_DEVICEPART
+/*#ifdef SMS_DEVICEPART*/
 typedef struct
 {
 CommonPara totalall;
@@ -132,7 +132,7 @@ SmsInfo SmsInfoList[10]={
 };
 
 
-#endif
+/*#endif*/
 
 #ifdef SMS_SIMPART
 #endif
@@ -1051,8 +1051,17 @@ int write_networkmode_select_option(){
 	return 1;
 }
 
-int write_smsdevicepart_select_option(char *smsdevicepartnum){
-	
+int write_smsdevicepart_select_option(char smsdevicepartnum){
+	int i;
+	//char *sms=smsdevicepartnum;
+	i=(int)(smsdevicepartnum-'0');
+
+
+	//i=atoi(sms);
+	printf("<input type=\"checkbox\" name=\"checkbox\" class=\"STYLE1\" value=\"%d\" /></td>\n",i);
+    printf("<td align=\"center\" class=\"STYLE2\">%s</td>\n",SmsInfoList[i].addr.value);
+    printf("<td align=\"center\"class=\"STYLE2\">%s</td>\n",SmsInfoList[i].body.value);
+	printf(" <td height=\"50\" align=\"right\" class=\"STYLE2\">%s</td>\n",SmsInfoList[i].time.value);
 }
 /*****************************************************************************************
  * FUNCTION
@@ -1118,7 +1127,7 @@ int read_html_file_into_cgi(char *patch)
 	   		{
 	   			Tempoptionstr[m]=Tempoption[m];
 	   		}*/
-	   		strcpy(Tempoptionnum,Tempoption[k-1]);
+	   		//strcpy(Tempoptionnum[0],Tempoption[k-1]);
 	   		//printf("this will print Tempoption%s\n",Tempoption );
 	   		if (!strncmp(Tempoption,"apnconfig",strlen("apnconfig")))
 	   		{
@@ -1139,7 +1148,7 @@ int read_html_file_into_cgi(char *patch)
 	   		}
 	   		if(!strncmp(Tempoption,"smsdevicepart",strlen("smsdevicepart"))){
 
-                write_smsdevicepart_select_option(Tempoptionnum);
+                write_smsdevicepart_select_option(Tempoption[k-1]);
 	   		}
 	   		
 	   		continue;
