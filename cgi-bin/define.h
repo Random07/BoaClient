@@ -269,6 +269,8 @@ int debug_web_tail_printf();
 char wifi_pro_index_org[1024];
 char wifi_pro_index_remain[1024];
 char *wifi_pro_index_from_java_test;
+char *wifi_pro_alert_info;
+char *wifi_pro_from_java_string;
 /*===========================================================================
 
 				MACRO DEFINE
@@ -534,24 +536,24 @@ int read_comm_infor_from_js()
 	int i;
 	int j;
 
-/*	send_cmd_to_js("Request|Common",StringFromJava);
-   send_cmd_to_js("Request|GetLanguage",StringFromJaveForLangua);
+	send_cmd_to_js("Request|Common",StringFromJava);
+    send_cmd_to_js("Request|GetLanguage",StringFromJaveForLangua);
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Read commStringFromJava");
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Read StringFromJaveForLangua");
-	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJaveForLangua);*/
-	wifi_pro_index_from_java_test="1|Common|5|3|90%|LTE|ATT&T|4";
-	TempFromJavaLan="0";
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJaveForLangua);
+	//wifi_pro_index_from_java_test="1|Common|5|3|90%|LTE|ATT&T|4";
+	//TempFromJavaLan="0";
 
 
-	get_index_str_from_js(wifi_pro_index_from_java_test,5,TempBattary);
-	get_index_str_from_js(wifi_pro_index_from_java_test,6,TempNetworkType);
-	get_index_str_from_js(wifi_pro_index_from_java_test,7,TempOperatorName);
-	get_index_str_from_js(wifi_pro_index_from_java_test,8,TempSignal);
-	get_index_str_from_js(wifi_pro_index_from_java_test,3,TempMaxconn);
-	get_index_str_from_js(wifi_pro_index_from_java_test,4,TempUnreadSms);
+	get_index_str_from_js(StringFromJava,5,TempBattary);
+	get_index_str_from_js(StringFromJava,6,TempNetworkType);
+	get_index_str_from_js(StringFromJava,7,TempOperatorName);
+	get_index_str_from_js(StringFromJava,8,TempSignal);
+	get_index_str_from_js(StringFromJava,3,TempMaxconn);
+	get_index_str_from_js(StringFromJava,4,TempUnreadSms);
 
-	if(!strcmp(TempFromJavaLan,"0")){
+	if(!strcmp(StringFromJaveForLangua,"0")){
 		strcpy(TempLaguage,"English");
 	}else{
 		strcpy(TempLaguage,"Chinese");
@@ -631,7 +633,7 @@ int send_cmd_to_js(char *SendMessage,char *OutString)
 	char tempsendmessge[TEMP_STRING_LEN];
 	int str_len = 0;
 	struct sockaddr_in server_addr;
-	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This is in define.send_cmd_to_js");
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This is in send_cmd_to_js the SendMessage is:");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendMessage);
 
 
@@ -662,8 +664,10 @@ int send_cmd_to_js(char *SendMessage,char *OutString)
 		str_len = read(server_sock, OutString, REQ_RSP_STRING_LEN);
 		if(str_len > 0)goon = 0;
 	}
-	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"thi is in define,have complete excute feedback the data");
 	OutString[str_len-4]='\0';
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The feedback string is:");
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,OutString);
+
 	close(server_sock);
 
 	return 1;
@@ -1116,6 +1120,13 @@ xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].time.value);
     printf("<td align=\"center\"class=\"STYLE2\">%s</td>\n",SmsInfoList[i].body.value);
 	printf(" <td height=\"50\" align=\"right\" class=\"STYLE2\">%s</td>\n",SmsInfoList[i].time.value);
 }
+
+int write_alert_info(){
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"the wifi_pro_alert_info is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_alert_info);
+
+    printf("%s",write_alert_info );
+}
 /*****************************************************************************************
  * FUNCTION
  *  read_html_file_into_cgi
@@ -1208,6 +1219,9 @@ int read_html_file_into_cgi(char *patch)
 	   		if(!strncmp(Tempoption,"smsdevicepart",strlen("smsdevicepart"))){
 
                 write_smsdevicepart_select_option(Tempoption[k-1]);
+	   		}
+	   		if(!strncmp(Tempoption,"alertinfo",strlen("alertinfo"))){
+	   			write_alert_info();
 	   		}
 	   		
 	   		continue;

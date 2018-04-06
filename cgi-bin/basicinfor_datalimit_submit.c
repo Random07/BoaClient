@@ -73,8 +73,16 @@ int main()
 		puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/basicinfor_datalimit.cgi\">");
 		we_btail();
     }
+    else{
+    	wifi_pro_alert_info="Set fail,please retry!";
+    	read_html_file_into_cgi("alert.html");
+    	web_header();
+		puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/basicinfor_datalimit.cgi\">");
+		we_btail();
+    }
 		
 	
 	return 0;
+    
 }
 

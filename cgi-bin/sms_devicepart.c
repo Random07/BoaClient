@@ -44,7 +44,7 @@
 ==============================================================================*/
 int main()
 {
-	char StringFromJava[REQ_RSP_STRING_LEN];
+	//char StringFromJava[REQ_RSP_STRING_LEN];
 	//char TempTotalAll[4];
 	char TempSmsTotalAll[4];
 	char TempTotal[2];
@@ -100,11 +100,11 @@ int main()
 	printf("this will goto read html file5\n");
 
 }*/
-	send_cmd_to_js("Request|GetSmsContent|1",StringFromJava);
+	send_cmd_to_js("Request|GetSmsContent|1",wifi_pro_from_java_string);
 //xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in the sms_devicepart");
 //wifi_pro_index_from_java_test="1|GetSmsContent|22|2|1111|99999|kjkjfejkfekfjekfjefkejkfjekfjkejfkejfke|1991-03-03|1|222|343|fef|890|0";
-    get_index_str_from_js(wifi_pro_index_from_java_test,3,TempSmsTotalAll);
-    get_index_str_from_js(wifi_pro_index_from_java_test,4,TempTotal);
+    get_index_str_from_js(wifi_pro_from_java_string,3,TempSmsTotalAll);
+    get_index_str_from_js(wifi_pro_from_java_string,4,TempTotal);
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempSmsTotalAll);
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempTotal);
     //TotalAll =(int)(TempTotalAll[0]-'0');
@@ -112,11 +112,11 @@ int main()
     //TotalAll=ceil((TotalAll*1.0)/10);
 for (i = 0; i < Total; i++)
 {
-	get_index_str_from_js(wifi_pro_index_from_java_test,(5+i*5),TempId);
-	get_index_str_from_js(wifi_pro_index_from_java_test,(6+i*5),TempAddr);
-	get_index_str_from_js(wifi_pro_index_from_java_test,(7+i*5),TempBody);
-	get_index_str_from_js(wifi_pro_index_from_java_test,(8+i*5),TempTime);
-	get_index_str_from_js(wifi_pro_index_from_java_test,(9+i*5),TempFlag);
+	get_index_str_from_js(wifi_pro_from_java_string,(5+i*5),TempId);
+	get_index_str_from_js(wifi_pro_from_java_string,(6+i*5),TempAddr);
+	get_index_str_from_js(wifi_pro_from_java_string,(7+i*5),TempBody);
+	get_index_str_from_js(wifi_pro_from_java_string,(8+i*5),TempTime);
+	get_index_str_from_js(wifi_pro_from_java_string,(9+i*5),TempFlag);
 
 		for (j = 0; j < strlen(TempId); j++)
 	{
