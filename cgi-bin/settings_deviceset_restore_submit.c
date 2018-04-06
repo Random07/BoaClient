@@ -47,7 +47,6 @@ int main()
 	char Result[2];
 
 /*=============================================================================*/
-//Sendstring[20]="Request|ReFactory";
 strcpy(Sendstring,"Request|ReFactory");
 send_cmd_to_js(Sendstring,StringFromJava);
 

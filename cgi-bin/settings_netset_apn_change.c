@@ -55,7 +55,8 @@ int main()
 
     req_method = getenv("REQUEST_METHOD");
     get_cgi_data(stdin,req_method,StringFromWeb);
-        //debug_message_printf("Can't find Language2");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
 
     if(!get_index_str_from_web(StringFromWeb,"ConfigFileSelect=",ApnName))
     {
@@ -66,7 +67,9 @@ int main()
     strcpy(Sendstring,"Request|ApnChange|");
     strcat(Sendstring,ApnName);
 
-      send_cmd_to_js(Sendstring,StringFromJava);
+    send_cmd_to_js(Sendstring,StringFromJava);
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
     //char StringFromJavatest[]="1|ApnChange";
     get_index_str_from_js(StringFromJava,1,Result);
 

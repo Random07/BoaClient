@@ -51,8 +51,9 @@ int main()
 	int templen=0;
 
 	req_method = getenv("REQUEST_METHOD");
-	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,req_method);
 	get_cgi_data(stdin,req_method,StringFromWeb);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
 
 	if(!get_index_str_from_web(StringFromWeb,"Username=",NameFromWeb))
 	{
@@ -72,18 +73,18 @@ int main()
 
 	send_cmd_to_js("Request|Login",StringFromJava);
 //	char StringFromJavatest[]="Confirm|Login|Admin|123456";
-
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
 	get_index_str_from_js(StringFromJava,3,NameInDevice);
 	get_index_str_from_js(StringFromJava,4,PassInDevice);
 
-//	Debug_Triple_Var_Message(%s,StringFromJava,%d,strlen(StringFromJava),%d,strlen(PassInDevice));	
 
 	if(!strncmp("Login",Language,strlen("Login")))
 	{
-//		send_cmd_to_js("Request|Setlanguage|English",StringFromJava);
+		send_cmd_to_js("Request|SetLanguage|0",StringFromJava);
 	}else{
 	
-//		send_cmd_to_js("Request|Setlanguage|Chines",StringFromJava);
+		send_cmd_to_js("Request|SetLanguage|1",StringFromJava);
 	}
 	
 	if(!strncmp(NameInDevice,NameFromWeb,strlen(NameInDevice)) && !strncmp(PassInDevice,PassFromWeb,strlen(PassInDevice)))

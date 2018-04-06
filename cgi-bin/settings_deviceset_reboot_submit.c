@@ -52,7 +52,6 @@ int main()
 	read_comm_infor_from_js();
 
 /*=============================================================================*/
-//Sendstring[20]="Request|ReBoot";
 strcpy(Sendstring,"Request|ReBoot");
 send_cmd_to_js(Sendstring,StringFromJava);
 

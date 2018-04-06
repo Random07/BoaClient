@@ -62,27 +62,30 @@ int main()
 	read_comm_infor_from_js();
 
 
-//	Socketwithjavaserver("Request|DeviceInfo",StringFromJava);
-    char StringFromJavatest[]="Confirm|DeviceInfo|3434|3341|1343|454|5|4343|98|424|8967|342|23432";
+	send_cmd_to_js("Request|DeviceInfo",StringFromJava);
+    //char StringFromJavatest[]="Confirm|DeviceInfo|3434|3341|1343|454|5|4343|98|424|8967|342|23432";
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
    
-	get_index_str_from_js(StringFromJavatest,(3),SimCard);
-	get_index_str_from_js(StringFromJavatest,(4),IMEI);
-	get_index_str_from_js(StringFromJavatest,(5),IMSI);
-	get_index_str_from_js(StringFromJavatest,(6),SSID);
-	get_index_str_from_js(StringFromJavatest,(7),ConCount);
-	get_index_str_from_js(StringFromJavatest,(8),IP);
-	get_index_str_from_js(StringFromJavatest,(9),Mac);
-	get_index_str_from_js(StringFromJavatest,(10),Wan_Ip);
-	get_index_str_from_js(StringFromJavatest,(11),SoftVersion);
-	get_index_str_from_js(StringFromJavatest,(12),FirmWare);
-	get_index_str_from_js(StringFromJavatest,(13),HardVersion);
+	get_index_str_from_js(StringFromJava,(3),SimCard);
+	get_index_str_from_js(StringFromJava,(4),IMEI);
+	get_index_str_from_js(StringFromJava,(5),IMSI);
+	get_index_str_from_js(StringFromJava,(6),SSID);
+	get_index_str_from_js(StringFromJava,(7),ConCount);
+	get_index_str_from_js(StringFromJava,(8),IP);
+	get_index_str_from_js(StringFromJava,(9),Mac);
+	//get_index_str_from_js(StringFromJavatest,(10),Wan_Ip);
+	//get_index_str_from_js(StringFromJavatest,(11),SoftVersion);
+	get_index_str_from_js(StringFromJava,(10),FirmWare);
+	get_index_str_from_js(StringFromJava,(11),HardVersion);
+	strcpy(Wan_Ip,"127.0.0.1");
+	strcpy(SoftVersion,"web 1.1");
  
 	for(i=0;i<strlen(SimCard);i++){
 		DeviceInfo[0].value[i]=SimCard[i];
 
 	}
 	DeviceInfo[0].value[i]='\0';
-	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,DeviceInfo[0].value);
 
 	for(i=0;i<strlen(IMEI);i++){
 		DeviceInfo[1].value[i]=IMEI[i];

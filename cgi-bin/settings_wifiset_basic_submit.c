@@ -50,6 +50,8 @@ int main()
 
 	req_method = getenv("REQUEST_METHOD");
 	get_cgi_data(stdin,req_method,StringFromWeb);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
 
 	strcpy(Sendstring,"Request|WIFISetting|");
 	if(!get_index_str_from_web(StringFromWeb,"SSID=",SSID))
@@ -95,9 +97,12 @@ int main()
 		strcat(Sendstring,MaxConnection);
 		//strcat(Sendstring,"|");
 	}
-debug_message_printf(Sendstring);
+
+
 	send_cmd_to_js(Sendstring,StringFromJava);
 	//char StringFromJavatest[]="1|DataLimit|";
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
     get_index_str_from_js(StringFromJava,1,Result);
 
 

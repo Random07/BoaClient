@@ -56,9 +56,10 @@ int main()
 
 
 
-    req_method = getenv("REQUEST_METHOD");
-    
+    req_method = getenv("REQUEST_METHOD");   
     get_cgi_data(stdin,req_method,StringFromWeb);
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
 
     if(!get_index_str_from_web(StringFromWeb,"NetSearchMode=",TempNetworkSearchMode))
     {
@@ -68,15 +69,15 @@ int main()
     strcpy(SendString,"Request|SetNetworkType|");
     strcpy(SendString,TempNetworkSearchMode);
 
-    //  send_cmd_to_js("Request|Login",StringFromJava);
-    char StringFromJavatest[]="1|ApnAdd";
-    get_index_str_from_js(StringFromJavatest,1,SetResult);
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"the network search mode is ");
+    send_cmd_to_js("Request|Login",StringFromJava);
+    //char StringFromJavatest[]="1|ApnAdd";
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
+
+
+    get_index_str_from_js(StringFromJava,1,SetResult);
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"the SendString is ");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
-
-xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"the network search mode SetResult is ");
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJavatest);
-
 
 /*==============================================================================*/
 	

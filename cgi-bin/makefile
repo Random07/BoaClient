@@ -32,7 +32,14 @@ all:	login.cgi \
     settings_netset_apn_new.cgi \
     settings_netset_apn_new_submit.cgi \
     settings_wifiset_basic_submit.cgi \
-    basicinfor_datalimit_submit.cgi
+    basicinfor_datalimit_submit.cgi \
+    homepage_conndata_submit.cgi \
+    homepage_disconndata_submit.cgi \
+    settings_netset_netsearch_submit.cgi \
+    settings_wifiset_wps_submit.cgi \
+    sms_devicepart_delete_submit.cgi \
+    sms_devicepart_send.cgi \
+    sms_devicepart_send_show.cgi \
 
 login.cgi:login.c
 	$(CC) -o $@ $^
@@ -116,6 +123,27 @@ settings_wifiset_basic_submit.cgi:settings_wifiset_basic_submit.c
 	$(CC) -o $@ $^
 
 basicinfor_datalimit_submit.cgi:basicinfor_datalimit_submit.c
+	$(CC) -o $@ $^
+
+homepage_conndata_submit.cgi:homepage_conndata_submit.c
+	$(CC) -o $@ $^
+
+homepage_disconndata_submit.cgi:homepage_disconndata_submit.c
+	$(CC) -o $@ $^
+
+settings_netset_netsearch_submit.cgi:settings_netset_netsearch_submit.c
+	$(CC) -o $@ $^
+
+sms_devicepart_delete_submit.cgi:sms_devicepart_delete_submit.c
+	$(CC) -o $@ $^
+
+settings_wifiset_wps_submit.cgi:settings_wifiset_wps_submit.c
+	$(CC) -o $@ $^
+
+sms_devicepart_send.cgi:sms_devicepart_send.c
+	$(CC) -o $@ $^
+
+sms_devicepart_send_show.cgi:sms_devicepart_send_show.c
 	$(CC) -o $@ $^
 
 clean:

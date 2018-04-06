@@ -48,6 +48,19 @@ function LanguageChange(sobj)
 	var url="/cgi-bin/languagechange.cgi?LanguageSelect=" + language+"&Path="+path;
 	window.location.href=url;
 }
+
+function fun(){
+  obj = document.getElementsByName("smsdevicecheckbox");
+  var path=window.location.pathname;
+  check_val=[];
+  for (k in obj) {
+    if (obj[k].checked) {
+      check_val.push(obj[k].value);
+    }
+  }
+  var url="/cgi-bin/sms_devicepart_delete_submit.cgi?SmsDeviceDelete="+ check_val+"&Path="+path;
+  window.location.href=url;
+}
 -->
 </script>
 </head>
@@ -178,79 +191,102 @@ function LanguageChange(sobj)
 	<table width="900" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td width="100" align="center" class="STYLE1"><input type="submit" class="STYLE1" name="New" value="New" /></td>
-            <td width="650" align="left"><input type="submit" class="STYLE1" name="Delete" value="Delete" />
+            <td width="100" align="center" class="STYLE1"><a href="/cgi-bin/sms_devicepart_send_show.cgi">New</a></td>
+            <td width="650" align="left"><input type="button" class="STYLE1" name="SmsDeviceDelete" value="Delete" onclick="fun()" />
               <input type="submit" class="STYLE1" name="Refresh" value="Refresh" /></td>
 	    <td width="100" height="50" class="STYLE1">&nbsp;</td>
           </tr>
           <tr>
- 	    <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+ 	    <td width="50" align="center">
+        <!--%smsdevicepart0%-->
+        <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE2">15503612784</td>
             <td align="center"class="STYLE2">ADSFASDFASDFASDFADSFASDFASDFASDFASDFASFDASDFASDF</td>
-	    <td height="50" align="right" class="STYLE2">2018-03-01</td>
+	    <td height="50" align="right" class="STYLE2">2018-03-01</td>-->
           </tr>
 	 <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td width="50" align="center">
+              <!--%smsdevicepart1%-->
+            <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
           </tr>
           <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td width="50" align="center">
+              <!--%smsdevicepart2%-->
+            <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="left">&nbsp;</td>
-            <td height="50" align="rgiht" class="STYLE1">&nbsp;</td>
+            <td height="50" align="rgiht" class="STYLE1">&nbsp;</td>-->
           </tr>
           <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td width="50" align="center">
+              <!--%smsdevicepart3%-->
+              <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
           </tr>
            <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td width="50" align="center">
+              <!--%smsdevicepart4%-->
+              <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
           </tr>
           <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td width="50" align="center">
+              <!--%smsdevicepart5%-->
+              <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
           </tr>
           <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td width="50" align="center">
+              <!--%smsdevicepart6%-->
+              <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
           </tr>
           <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td width="50" align="center">
+              <!--%smsdevicepart7%-->
+             <!-- <input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
           </tr>
           <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td width="50" align="center">
+              <!--%smsdevicepart8%-->
+             <!-- <input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
           </tr>
           <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td width="50" align="center">
+              <!--%smsdevicepart9%-->
+             <!-- <input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE1">&nbsp;</td>
             <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
           </tr>
+
         </table></td>
       </tr>
-	  <tr>
-        <td height="30" align="left">&nbsp;</td>
-      </tr>
+       <tr>
+            <td height="30" align="left">&nbsp;</td>
+          </tr>
+        
 	  <tr>
         <td height="50" align="left">
 		<table width="900" height="50" border="0" cellspacing="0" cellpadding="0">
+
           <tr>
             <td width="440" align="right">&nbsp;</td>
             <td width="20" align="center">&nbsp;</td>

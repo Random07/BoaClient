@@ -56,6 +56,9 @@ int main()
 /*=============================================================================*/
   	send_cmd_to_js("Request|DataStatic",StringFromJava);
 	//char StringFromJavatest[]="Confirm|DataStatic|343400000|2000000";
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
+
     get_index_str_from_js(StringFromJava,3,UsedData);
 	get_index_str_from_js(StringFromJava,4,LimitData);
 
@@ -63,7 +66,6 @@ int main()
 	sprintf(UsedData,"%d",atoi(UsedData)/1000000);
 	for(i=0;i<strlen(UsedData);i++){
 		DataUsage[0].value[i]=UsedData[i];
-
 	}
 	DataUsage[0].value[i]='\0';
 
@@ -75,8 +77,7 @@ int main()
 	}else{
 		sprintf(LimitData,"%d",atoi(LimitData)/1000000);
 		for(i=0;i<strlen(LimitData);i++){
-		DataUsage[1].value[i]=LimitData[i];
-
+		    DataUsage[1].value[i]=LimitData[i];
 	    }
 	    DataUsage[1].value[i]='\0';
 	}

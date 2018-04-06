@@ -45,12 +45,13 @@
 int main()
 {
 	char StringFromJava[REQ_RSP_STRING_LEN];
-	char TempTotalAll[4];
+	//char TempTotalAll[4];
+	char TempSmsTotalAll[4];
 	char TempTotal[2];
 	//char Tempvalue[6]="";
 	char TempId[10];
 	char TempAddr[20];
-	char TempBody[150];
+	char TempBody[1024];
 	char TempTime[20];
 	char TempFlag[2];
 	int i;
@@ -64,9 +65,7 @@ int main()
     //send_cmd_to_js("Request|GetSmsContent|1",StringFromJava);
     //Result|GetSmsContent|totalall|total this page|id|addr|body|time|flag
 
-    
-printf("this will goto read html file4\n");
-/*for (i = 0; i < 10; i++)
+ /*for (i = 0; i < 10; i++)
 {printf("this will goto read html file6:%d\n",strlen(Tempvalue));
 	for (j = 0; j < strlen(Tempvalue); i++)
 	{printf("this will goto read html file7\n");
@@ -101,61 +100,72 @@ printf("this will goto read html file4\n");
 	printf("this will goto read html file5\n");
 
 }*/
-printf("this will goto read html file3\n");
-char StringFromJavatest[]="1|GetSmsContent|22|10|1111|99999|kjkjfejkfekfjekfjefkejkfjekfjkejfkejfke|1991-03-03|1|222|343|fef|890|0";
-    get_index_str_from_js(StringFromJavatest,3,TempTotalAll);
-    get_index_str_from_js(StringFromJavatest,4,TempTotal);
+	send_cmd_to_js("Request|GetSmsContent|1",StringFromJava);
+//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in the sms_devicepart");
+//wifi_pro_index_from_java_test="1|GetSmsContent|22|2|1111|99999|kjkjfejkfekfjekfjefkejkfjekfjkejfkejfke|1991-03-03|1|222|343|fef|890|0";
+    get_index_str_from_js(wifi_pro_index_from_java_test,3,TempSmsTotalAll);
+    get_index_str_from_js(wifi_pro_index_from_java_test,4,TempTotal);
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempSmsTotalAll);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempTotal);
     //TotalAll =(int)(TempTotalAll[0]-'0');
     Total =(int)(TempTotal[0]-'0');
     //TotalAll=ceil((TotalAll*1.0)/10);
-printf("this will goto read html file2\n");
 for (i = 0; i < Total; i++)
 {
-	get_index_str_from_js(StringFromJavatest,(5+i*5),TempId);
-	get_index_str_from_js(StringFromJavatest,(6+i*5),TempAddr);
-	get_index_str_from_js(StringFromJavatest,(7+i*5),TempBody);
-	get_index_str_from_js(StringFromJavatest,(8+i*5),TempTime);
-	get_index_str_from_js(StringFromJavatest,(9+i*5),TempFlag);
-	//get_index_str_from_js(StringFromJavatest,(5+i*5),TempId);
-	//SmsInfoList[i].totalall.value[j]='\0';
+	get_index_str_from_js(wifi_pro_index_from_java_test,(5+i*5),TempId);
+	get_index_str_from_js(wifi_pro_index_from_java_test,(6+i*5),TempAddr);
+	get_index_str_from_js(wifi_pro_index_from_java_test,(7+i*5),TempBody);
+	get_index_str_from_js(wifi_pro_index_from_java_test,(8+i*5),TempTime);
+	get_index_str_from_js(wifi_pro_index_from_java_test,(9+i*5),TempFlag);
+
 		for (j = 0; j < strlen(TempId); j++)
-	{printf("this will goto read html file2a\n");
-printf("this will goto read html file2a-1\n");
+	{
 		SmsInfoList[i].id.value[j]=TempId[j];
-		printf("this will goto read html file2a-2\n");
 	}
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SmsInfoList[i].id.value");
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].id.value);
 	SmsInfoList[i].id.value[j]='\0';
 		for (j = 0; j < strlen(TempAddr); j++)
-	{printf("this will goto read html file2b\n");
+	{
 
 		SmsInfoList[i].addr.value[j]=TempAddr[j];
 	}
 	SmsInfoList[i].addr.value[j]='\0';
 		for (j = 0; j < strlen(TempBody); j++)
-	{printf("this will goto read html file2c\n");
+	{
 
 		SmsInfoList[i].body.value[j]=TempBody[j];
 	}
 	SmsInfoList[i].body.value[j]='\0';
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SmsInfoList[i].body.value");
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].body.value);
 		for (j = 0; j < strlen(TempTime); j++)
-	{printf("this will goto read html file2d\n");
+	{
 
 		SmsInfoList[i].time.value[j]=TempTime[j];
 	}
 	SmsInfoList[i].time.value[j]='\0';
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SmsInfoList[i].time.value");
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].time.value);
 		for (j = 0; j < strlen(TempFlag); j++)
-	{printf("this will goto read html file2e\n");
+	{
 		SmsInfoList[i].flag.value[j]=TempFlag[j];
 	}
 	SmsInfoList[i].flag.value[j]='\0';
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SmsInfoList[i].flag.valuee");
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].flag.value);
 
 }
-strcpy(SmsInfoList[0].totalall.value,TempTotalAll);
-printf("this will goto read html file1\n");
+strcpy(SmsInfoList[0].totalall.value,TempSmsTotalAll);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SmsInfoList[0].totalall.value");
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[0].totalall.value);
+
 /*==============================================================================*/
 	
 	if(!strncmp("English",CommonParaInfor[5].value,strlen("English")))
-	{printf("this will goto read html file\n");
+	{
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto html file");
+
 		read_html_file_into_cgi("sms_devicepart_eng.html");
 	}else{
 

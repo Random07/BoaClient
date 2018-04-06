@@ -57,14 +57,16 @@ int main()
 	read_comm_infor_from_js();
 
 /*=============================================================================*/
-			//  send_cmd_to_js("Request|WIFIShow",StringFromJava);
-    char StringFromJavatest[]="1|WIFIShow|fdsfdfd|false|0|21212|5";
+	send_cmd_to_js("Request|WIFIShow",StringFromJava);
+    //char StringFromJavatest[]="1|WIFIShow|fdsfdfd|false|0|21212|5";
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
 
-    get_index_str_from_js(StringFromJavatest,3,TempSSID);
-    get_index_str_from_js(StringFromJavatest,4,TempSSIDShow1);
-    get_index_str_from_js(StringFromJavatest,5,TempSSIDSecurity);
-    get_index_str_from_js(StringFromJavatest,6,TempPassword);
-    get_index_str_from_js(StringFromJavatest,7,TempSSIDConnNum);
+    get_index_str_from_js(StringFromJava,3,TempSSID);
+    get_index_str_from_js(StringFromJava,4,TempSSIDShow1);
+    get_index_str_from_js(StringFromJava,5,TempSSIDSecurity);
+    get_index_str_from_js(StringFromJava,6,TempPassword);
+    get_index_str_from_js(StringFromJava,7,TempSSIDConnNum);
 
     if (strncmp(TempSSIDShow1,"true",strlen("true")))
     {

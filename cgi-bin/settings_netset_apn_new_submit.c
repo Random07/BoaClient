@@ -57,8 +57,9 @@ int main()
 
 
     req_method = getenv("REQUEST_METHOD");
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,req_method);
     get_cgi_data(stdin,req_method,StringFromWeb);
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
 
     strcpy(SendString,"Request|ApnAdd|");
     if(!get_index_str_from_web(StringFromWeb,"ApnName=",ApnNameFromWeb))
@@ -126,14 +127,14 @@ int main()
     }
     else{
         strcat(SendString,PasswordFromWeb);
-        //strcat(SendString,"|");
-
     }
 
 
-//  send_cmd_to_js("Request|Login",StringFromJava);
-    char StringFromJavatest[]="1|ApnAdd";
-    get_index_str_from_js(StringFromJavatest,1,SetResult);
+    send_cmd_to_js("Request|Login",StringFromJava);
+  //  char StringFromJavatest[]="1|ApnAdd";
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
+    get_index_str_from_js(StringFromJava,1,SetResult);
 
     
     if(!strcmp("1",SetResult))

@@ -41,13 +41,14 @@ char value[150];
 }CommonPara;
 
 
-CommonPara CommonParaInfor[6]={
+CommonPara CommonParaInfor[7]={
 {"BatteryVolume",},
 {"NetworkType",},
 {"OperatorName",},
 {"SignalStrength",},
-{"DataStatus",},
+{"Maxconn",},
 {"Lanaguage",},
+{"UnreadSms",},
 };
 
 #ifdef HOME_PAGE
@@ -257,11 +258,17 @@ int read_html_file_into_cgi(char *patch);
 int web_header();
 int we_btail();
 int xdebug_message_printf(const char * file,const char * function,int line,char * errormsg);
+int xdebug_message_printf_int(const char *file,const char *function,int line,int errormsg);
 
 int debug_message_printf(char *errormsg);
 int debug_web_header_printf();
 int debug_web_tail_printf();
 
+
+
+char wifi_pro_index_org[1024];
+char wifi_pro_index_remain[1024];
+char *wifi_pro_index_from_java_test;
 /*===========================================================================
 
 				MACRO DEFINE
@@ -306,12 +313,13 @@ int debug_web_tail_printf();
  *   NULL
  *****************************************************************************/
 int get_cgi_data(FILE* fp, char *requestmethod,char *out)
-{
+{	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in get cgi data");
+
 	char *tempstring;
 	int len;
 	int i;
 	if(!strcmp(requestmethod, "GET"))
-	{
+	{xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in get cgi data in get");
 		tempstring = getenv("QUERY_STRING");
 		i=0;
 		while(tempstring[i]!='\0')
@@ -321,7 +329,7 @@ int get_cgi_data(FILE* fp, char *requestmethod,char *out)
 		}
 		out[i]='\0';
 	}else if(!strcmp(requestmethod, "POST"))
-		{
+		{xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in get cgi data in post");
 			i=0;
 	 		len = atoi(getenv("CONTENT_LENGTH"));
 			if (len == 0)
@@ -409,25 +417,31 @@ int get_index_str_from_js(char *org,int index,char *outcome)
 {
 	int i;
 	int j;
-	char in[REQ_RSP_STRING_LEN];
-	char remain[REQ_RSP_STRING_LEN];
+	//char in[REQ_RSP_STRING_LEN];
+	//char remain[REQ_RSP_STRING_LEN];
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,org);
+
 
 	for(i=0;i<strlen(org);i++)
 	{
-		in[i]=org[i];
+		wifi_pro_index_org[i]=org[i];
 	}
-	in[i]='\0';
+	wifi_pro_index_org[i]='\0';
 	for(i=0;i<index;i++)
 	{
-		split_value_from_string('|',in,outcome,remain);
-		for(j=0;j<strlen(remain);j++)
+		split_value_from_string('|',wifi_pro_index_org,outcome,wifi_pro_index_remain);
+		for(j=0;j<strlen(wifi_pro_index_remain);j++)
 		{
-			in[j]=remain[j];
+			wifi_pro_index_org[j]=wifi_pro_index_remain[j];
 		}
-		in[j]='\0';
+		wifi_pro_index_org[j]='\0';
 	}
+	    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,outcome);
+
 	return 1;
 }
+
+
 
 /*****************************************************************************************
  * FUNCTION
@@ -508,54 +522,88 @@ int get_index_str_from_web(char *org,char *Tag,char *outcome)
 int read_comm_infor_from_js()
 {
 	char *StringFromJava;
-	char *TempString;
+	char *StringFromJaveForLangua;
+	char TempBattary[5];
+	char TempNetworkType[10];
+	char TempOperatorName[15];
+	char TempSignal[3];
+	char TempMaxconn[3];
+	char TempLaguage[10];
+	char TempUnreadSms[3];
+	char *TempFromJavaLan;
 	int i;
 	int j;
 
-//	send_cmd_to_js("Request|Common",StringFromJava);
-//	Debug_Single_Var_Message(%s,StringFromJava);
+/*	send_cmd_to_js("Request|Common",StringFromJava);
+   send_cmd_to_js("Request|GetLanguage",StringFromJaveForLangua);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Read commStringFromJava");
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Read StringFromJaveForLangua");
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJaveForLangua);*/
+	wifi_pro_index_from_java_test="1|Common|5|3|90%|LTE|ATT&T|4";
+	TempFromJavaLan="0";
 
-	TempString = "70%";
-	for(i=0;i<strlen(TempString);i++)
+
+	get_index_str_from_js(wifi_pro_index_from_java_test,5,TempBattary);
+	get_index_str_from_js(wifi_pro_index_from_java_test,6,TempNetworkType);
+	get_index_str_from_js(wifi_pro_index_from_java_test,7,TempOperatorName);
+	get_index_str_from_js(wifi_pro_index_from_java_test,8,TempSignal);
+	get_index_str_from_js(wifi_pro_index_from_java_test,3,TempMaxconn);
+	get_index_str_from_js(wifi_pro_index_from_java_test,4,TempUnreadSms);
+
+	if(!strcmp(TempFromJavaLan,"0")){
+		strcpy(TempLaguage,"English");
+	}else{
+		strcpy(TempLaguage,"Chinese");
+	}
+
+
+	for(i=0;i<strlen(TempBattary);i++)
 	{
-		CommonParaInfor[0].value[i]=TempString[i];
+		CommonParaInfor[0].value[i]=TempBattary[i];
 	}
 	CommonParaInfor[0].value[i]='\0';
 
-	TempString = "LTE";
-	for(i=0;i<strlen(TempString);i++)
+	//TempString = "LTE";
+	for(i=0;i<strlen(TempNetworkType);i++)
 	{
-		CommonParaInfor[1].value[i]=TempString[i];
+		CommonParaInfor[1].value[i]=TempNetworkType[i];
 	}
 	CommonParaInfor[1].value[i]='\0';
 
-	TempString = "CU";
-	for(i=0;i<strlen(TempString);i++)
+	//TempString = "CU";
+	for(i=0;i<strlen(TempOperatorName);i++)
 	{
-		CommonParaInfor[2].value[i]=TempString[i];
+		CommonParaInfor[2].value[i]=TempOperatorName[i];
 	}
 	CommonParaInfor[2].value[i]='\0';
 
-	TempString = "3";
-	for(i=0;i<strlen(TempString);i++)
+	//TempString = "3";
+	for(i=0;i<strlen(TempSignal);i++)
 	{
-		CommonParaInfor[3].value[i]=TempString[i];
+		CommonParaInfor[3].value[i]=TempSignal[i];
 	}
 	CommonParaInfor[3].value[i]='\0';
 
-	TempString = "DOWNLOAD";
-	for(i=0;i<strlen(TempString);i++)
+	//TempString = "DOWNLOAD";
+	for(i=0;i<strlen(TempMaxconn);i++)
 	{
-		CommonParaInfor[4].value[i]=TempString[i];
+		CommonParaInfor[4].value[i]=TempMaxconn[i];
 	}
 	CommonParaInfor[4].value[i]='\0';
 
-	TempString = "English";
-	for(i=0;i<strlen(TempString);i++)
+	//TempString = "English";
+	for(i=0;i<strlen(TempLaguage);i++)
 	{
-		CommonParaInfor[5].value[i]=TempString[i];
+		CommonParaInfor[5].value[i]=TempLaguage[i];
 	}
 	CommonParaInfor[5].value[i]='\0';
+
+	for(i=0;i<strlen(TempUnreadSms);i++)
+	{
+		CommonParaInfor[6].value[i]=TempUnreadSms[i];
+	}
+	CommonParaInfor[6].value[i]='\0';
 
 	return 1;
 }
@@ -1055,10 +1103,15 @@ int write_smsdevicepart_select_option(char smsdevicepartnum){
 	int i;
 	//char *sms=smsdevicepartnum;
 	i=(int)(smsdevicepartnum-'0');
+xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"write_smsdevicepart_select_option");
 
-
+xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].addr.value);
+xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].body.value);
+xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].time.value);
+//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,sms);
 	//i=atoi(sms);
-	printf("<input type=\"checkbox\" name=\"checkbox\" class=\"STYLE1\" value=\"%d\" /></td>\n",i);
+	//printf("<option   value=\"%d\"  selected=\"selected\"></option>\n",i);
+	printf("<input type=\"checkbox\" name=\"smsdevicecheckbox\" class=\"STYLE1\" value=\"%s\" /></td>\n",SmsInfoList[i].id.value);
     printf("<td align=\"center\" class=\"STYLE2\">%s</td>\n",SmsInfoList[i].addr.value);
     printf("<td align=\"center\"class=\"STYLE2\">%s</td>\n",SmsInfoList[i].body.value);
 	printf(" <td height=\"50\" align=\"right\" class=\"STYLE2\">%s</td>\n",SmsInfoList[i].time.value);
@@ -1096,6 +1149,7 @@ int read_html_file_into_cgi(char *patch)
 	int n;
 
 	puts("<Content-type:text/html>\n");
+	   		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in read html");
 
 	FILE *fp;
 
@@ -1115,8 +1169,11 @@ int read_html_file_into_cgi(char *patch)
         for(i=0;i<Tempstrlen-1;i++)
 	   {
 	   	/**************************************/
+	   		   		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"i=0;i<Tempstrlen-1;i++");
+
 	   	if (('<' ==Tempstrline[i]) && ('!' == Tempstrline[i+1]) && ('%'==Tempstrline[i+4]))
 	   	{
+	   		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in <!-- -->");
 	   		for (k = 0; Tempstrline[i+k+5] != '%'; k++)
 	   		{
 	   			Tempoption[k] = Tempstrline[i+k+5];
@@ -1129,6 +1186,8 @@ int read_html_file_into_cgi(char *patch)
 	   		}*/
 	   		//strcpy(Tempoptionnum[0],Tempoption[k-1]);
 	   		//printf("this will print Tempoption%s\n",Tempoption );
+	   		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Tempoption);
+	   		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Tempoption[k-1]);
 	   		if (!strncmp(Tempoption,"apnconfig",strlen("apnconfig")))
 	   		{
 	   			//puts("this will goto write_select_option");
@@ -1157,6 +1216,8 @@ int read_html_file_into_cgi(char *patch)
 	   	/***************************************/
 		if(('|' == Tempstrline[i]) && ('%' == Tempstrline[i+1]))
 	    	{
+	    			   		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in |% |");
+
 			for(j=0;Tempstrline[i+2+j] != '|';j++)
 			{
 				Tempconfpara[j] = Tempstrline[i+2+j];
@@ -1170,6 +1231,8 @@ int read_html_file_into_cgi(char *patch)
 
 			continue;	    
 		}
+			   		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this willl print html");
+
 	  	printf("%c",Tempstrline[i]);
 	   }
     	} 
@@ -1248,6 +1311,21 @@ int xdebug_message_printf(const char *file,const char *function,int line,char *e
          }
          fseek(fp,0,SEEK_END);
          fprintf(fp, "[%s|@%s,%d] :%s\n\n" , function, file, line,errormsg);
+
+         fclose(fp);
+        return 1;
+
+}
+
+int xdebug_message_printf_int(const char *file,const char *function,int line,int errormsg)
+{
+         FILE *fp = fopen("log_info.txt","a+");
+         if (fp==0){
+        printf("can't open file\n");
+        return 0;
+         }
+         fseek(fp,0,SEEK_END);
+         fprintf(fp, "[%s|@%s,%d] :%d\n\n" , function, file, line,errormsg);
 
          fclose(fp);
         return 1;

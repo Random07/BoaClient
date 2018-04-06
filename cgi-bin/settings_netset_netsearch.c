@@ -52,26 +52,19 @@ int main()
 	read_comm_infor_from_js();
 
 /*=============================================================================*/
-	//send_cmd_to_js("Request|GetNetworkType",StringFromJava);
-    char StringFromJavatest[]="1|GetNetworkType|22";
-    get_index_str_from_js(StringFromJavatest,3,TempNetworkType);
+	  send_cmd_to_js("Request|GetNetworkType",StringFromJava);
+    //char StringFromJavatest[]="1|GetNetworkType|22";
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
 
-    /*for (i = 0; i < 23; i++)
-    {
-    	if (!strcmp(TempNetworkType,SetNetworkMode[i].key))
-    	{
-    		strcpy(TempNetworkTypeShow,SetNetworkMode[i].value);
-    		break;
-    	}
-    }*/
+    get_index_str_from_js(StringFromJava,3,TempNetworkType);
 
     for (i = 0; i < strlen(TempNetworkType); i++)
     {
     	SetSearchMode[0].value[i]=TempNetworkType[i];
     }
     SetSearchMode[0].value[i]='\0';
-    //printf("this is a test by Xavier,the TempNetworkTypeis :%s the SetSearchMode[0].value is :%s\n", \
-     TempNetworkType,SetSearchMode[0].value);
+
 
 /*==============================================================================*/
 	
