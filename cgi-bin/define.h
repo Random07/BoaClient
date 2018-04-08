@@ -139,6 +139,11 @@ SmsInfo SmsInfoList[10]={
 #endif
 
 #ifdef SMS_SMSSETTINGS
+CommonPara SmsSettings[3]={
+{"SmsSettings_Time",},
+{"SmsSettings_CenterNum",},
+{"SmsSettings_Reporter",},
+};
 #endif
 
 #ifdef SETTINGS_NETSET_DAILUP
@@ -248,6 +253,7 @@ int get_index_str_from_web(char *org,char *Tag,char *out);
 int read_comm_infor_from_js();
 int send_cmd_to_js(char *SendMessage,char *OutString);
 
+int write_sms_settings(char smssettingsnum);
 int write_networkmode_select_option();
 int write_ssidsecurity_select_option();
 int write_ssidconnnum_select_option();
@@ -419,24 +425,24 @@ int get_index_str_from_js(char *org,int index,char *outcome)
 {
 	int i;
 	int j;
-	//char in[REQ_RSP_STRING_LEN];
-	//char remain[REQ_RSP_STRING_LEN];
+	char in[REQ_RSP_STRING_LEN];
+	char remain[REQ_RSP_STRING_LEN];
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,org);
 
 
 	for(i=0;i<strlen(org);i++)
 	{
-		wifi_pro_index_org[i]=org[i];
+		in[i]=org[i];
 	}
-	wifi_pro_index_org[i]='\0';
+	in[i]='\0';
 	for(i=0;i<index;i++)
 	{
-		split_value_from_string('|',wifi_pro_index_org,outcome,wifi_pro_index_remain);
-		for(j=0;j<strlen(wifi_pro_index_remain);j++)
+		split_value_from_string('|',in,outcome,remain);
+		for(j=0;j<strlen(remain);j++)
 		{
-			wifi_pro_index_org[j]=wifi_pro_index_remain[j];
+			in[j]=remain[j];
 		}
-		wifi_pro_index_org[j]='\0';
+		in[j]='\0';
 	}
 	    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,outcome);
 
@@ -536,14 +542,14 @@ int read_comm_infor_from_js()
 	int i;
 	int j;
 
-	send_cmd_to_js("Request|Common",StringFromJava);
-    send_cmd_to_js("Request|GetLanguage",StringFromJaveForLangua);
+	/*send_cmd_to_js("Request|Common",StringFromJava);
+    //send_cmd_to_js("Request|GetLanguage",StringFromJaveForLangua);
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Read commStringFromJava");
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Read StringFromJaveForLangua");
-	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJaveForLangua);
-	//wifi_pro_index_from_java_test="1|Common|5|3|90%|LTE|ATT&T|4";
-	//TempFromJavaLan="0";
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJaveForLangua);*/
+	StringFromJava="1|Common|5|3|90%|LTE|ATT&T|4";
+	StringFromJaveForLangua="0";
 
 
 	get_index_str_from_js(StringFromJava,5,TempBattary);
@@ -1127,6 +1133,27 @@ int write_alert_info(){
 
     printf("%s",write_alert_info );
 }
+
+int write_sms_settings(char smssettingsnum){
+
+	if (smssettingsnum == '0')
+	{
+		if (strcmp(SmsSettings[0].value,"12"))
+		{
+			printf("<option selected="selected" value="12">12 Hour</option>\n", );
+			printf("<option value="24">24 Hour</option>\n", );
+		}else{
+			printf("<option value="12">12 Hour</option>\n", );
+			printf("<option selected="selected" value="24">24 Hour</option>\n", );
+
+		}
+	}else if (smssettingsnum == '1')
+	{
+		printf("%s\n", SmsSettings[1].value);
+	}
+
+
+}
 /*****************************************************************************************
  * FUNCTION
  *  read_html_file_into_cgi
@@ -1222,6 +1249,10 @@ int read_html_file_into_cgi(char *patch)
 	   		}
 	   		if(!strncmp(Tempoption,"alertinfo",strlen("alertinfo"))){
 	   			write_alert_info();
+	   		}
+	   		if (!strncmp(Tempoption,"smssettings",strlen("smssettings")))
+	   		{
+	   			write_sms_settings(Tempoption[k-1]);
 	   		}
 	   		
 	   		continue;

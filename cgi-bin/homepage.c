@@ -54,8 +54,11 @@ int main()
 	char tempDeviceName[64];
 	char tempMAC[64];
 	char tempIP[64];
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto read_comm_infor_from_js1");
 
 	read_comm_infor_from_js();
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto read_comm_infor_from_js");
+
 
 	for(i=0;i<10;i++)
 	{
@@ -85,19 +88,30 @@ int main()
 	}
 
 	send_cmd_to_js("Request|Connect_Customer",StringFromJava);
-//	char StringFromJavatest[]="Confirm|Connect_Customer|TotalNum|3|1|DeviceNameA|MACA|IPA|2|DeviceNameB|MACB|IPB|3|DeviceNameC|MACC|IPC";
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
+	wifi_pro_from_java_string=StringFromJava;
+//	char StringFromJavatest[]="1|Connect_Customer|2|Devicename|mac|ip|Devicename|mac|ip";
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The wifi_pro_from_java_string is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
     
-	get_index_str_from_js(StringFromJava,4,temptotalnum);
+	get_index_str_from_js(wifi_pro_from_java_string,3,temptotalnum);
 	totalnum =(int)(temptotalnum[0]-'0');
 
 	for(i=0;i<totalnum;i++)
 	{	
-		get_index_str_from_js(StringFromJava,(5+i*4),tempindex);
-		get_index_str_from_js(StringFromJava,(6+i*4),tempDeviceName);
-		get_index_str_from_js(StringFromJava,(7+i*4),tempMAC);
-		get_index_str_from_js(StringFromJava,(8+i*4),tempIP);
+		//get_index_str_from_js(StringFromJava,(5+i*4),tempindex);
+		tempindex[0]=i;
+		/*get_index_str_from_js(StringFromJava,(4+i*3),tempDeviceName);
+		get_index_str_from_js(StringFromJava,(5+i*3),tempMAC);
+		get_index_str_from_js(StringFromJava,(6+i*3),tempIP);*/
+		    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
+
+		get_index_str_from_js(wifi_pro_from_java_string,(5+i*3),tempDeviceName);
+		    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
+
+		get_index_str_from_js(wifi_pro_from_java_string,(6+i*3),tempMAC);
+		    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
+
+		get_index_str_from_js(wifi_pro_from_java_string,(7+i*3),tempIP);
 
 		for(j=0;j<strlen(tempindex);j++)
 		{
