@@ -40,6 +40,7 @@ all:	login.cgi \
     sms_devicepart_delete_submit.cgi \
     sms_devicepart_send.cgi \
     sms_devicepart_send_show.cgi \
+    sms_settings_submit.cgi 
 
 login.cgi:login.c
 	$(CC) -o $@ $^
@@ -146,6 +147,9 @@ sms_devicepart_send.cgi:sms_devicepart_send.c
 sms_devicepart_send_show.cgi:sms_devicepart_send_show.c
 	$(CC) -o $@ $^
 
+sms_settings_submit.cgi:sms_settings_submit.c
+	$(CC) -o $@ $^
+ 
 clean:
 	rm -rf *.cgi
 

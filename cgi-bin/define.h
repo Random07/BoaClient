@@ -250,6 +250,7 @@ int split_value_from_string(char Tag,char *in,char *out,char *remain);
 int get_index_str_from_js(char *org,int index,char *outcome);
 int get_index_str_from_web(char *org,char *Tag,char *out);
 
+int get_index_str_from_js_new(char *org,int index,char *outcome);
 int read_comm_infor_from_js();
 int send_cmd_to_js(char *SendMessage,char *OutString);
 
@@ -276,7 +277,7 @@ char wifi_pro_index_org[1024];
 char wifi_pro_index_remain[1024];
 char *wifi_pro_index_from_java_test;
 char *wifi_pro_alert_info;
-char *wifi_pro_from_java_string;
+char wifi_pro_from_java_string[1024];
 /*===========================================================================
 
 				MACRO DEFINE
@@ -447,6 +448,38 @@ int get_index_str_from_js(char *org,int index,char *outcome)
 	    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,outcome);
 
 	return 1;
+}
+
+int get_index_str_from_js_new(char *org,int index,char *outcome)
+{
+        int i;
+        int j;
+        int tempindex;
+        xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,org);
+
+
+        if(org[0]=='\0' || org [0]=='|')
+            return 0;
+
+        for(i=0,j=0,tempindex=0;i<=strlen(org);i++)
+        {
+                if(tempindex == (index-1))
+                {
+                        if(org[i]=='|' || org[i]=='\0')
+                        {
+                                outcome[j]='\0';
+                                return 1;
+                        }
+                        outcome[j]=org[i];
+                        j++;
+                }else if(org[i]=='|')
+                {
+                        tempindex +=1;
+                }
+        }
+	    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,outcome);
+
+        return 1;
 }
 
 
@@ -641,8 +674,6 @@ int send_cmd_to_js(char *SendMessage,char *OutString)
 	struct sockaddr_in server_addr;
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This is in send_cmd_to_js the SendMessage is:");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendMessage);
-
-
 
 	for(i=0;i<strlen(SendMessage);i++)
 	{
@@ -1134,17 +1165,18 @@ int write_alert_info(){
     printf("%s",write_alert_info );
 }
 
+#ifdef SMS_SMSSETTINGS
 int write_sms_settings(char smssettingsnum){
 
 	if (smssettingsnum == '0')
 	{
 		if (strcmp(SmsSettings[0].value,"12"))
 		{
-			printf("<option selected="selected" value="12">12 Hour</option>\n", );
-			printf("<option value="24">24 Hour</option>\n", );
+			printf("<option selected=\"selected\" value=\"12\">12 Hour</option>\n");
+			printf("<option value=\"24\">24 Hour</option>\n");
 		}else{
-			printf("<option value="12">12 Hour</option>\n", );
-			printf("<option selected="selected" value="24">24 Hour</option>\n", );
+			printf("<option value=\"12\">12 Hour</option>\n");
+			printf("<option selected=\"selected\" value=\"24\">24 Hour</option>\n");
 
 		}
 	}else if (smssettingsnum == '1')
@@ -1154,6 +1186,7 @@ int write_sms_settings(char smssettingsnum){
 
 
 }
+#endif
 /*****************************************************************************************
  * FUNCTION
  *  read_html_file_into_cgi
@@ -1252,7 +1285,9 @@ int read_html_file_into_cgi(char *patch)
 	   		}
 	   		if (!strncmp(Tempoption,"smssettings",strlen("smssettings")))
 	   		{
+	   			#ifdef SMS_SMSSETTINGS
 	   			write_sms_settings(Tempoption[k-1]);
+	   			#endif
 	   		}
 	   		
 	   		continue;

@@ -45,24 +45,30 @@
 ==============================================================================*/
 int main()
 {
-	char StringFromJava[REQ_RSP_STRING_LEN];
+	//char StringFromJava[REQ_RSP_STRING_LEN];
 	char UsedData[20]={0};
 	char LimitData[20]={0};
 	int i;
+    extern char wifi_pro_from_java_string[1024];
+
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This is in datausage before readcomm");
 
 
 	read_comm_infor_from_js();
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This is in datausage after readcomm");
+
 
 /*=============================================================================*/
-  	send_cmd_to_js("Request|DataStatic",StringFromJava);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"follow will use StringFromJava:");
+  	//send_cmd_to_js("Request|DataStatic",StringFromJava);
+  	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"follow will use wifi_pro_from_java_string:");
+  	send_cmd_to_js("Request|DataStatic",wifi_pro_from_java_string);
+  	
 	//char StringFromJavatest[]="Confirm|DataStatic|343400000|2000000";
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
 
-    get_index_str_from_js(StringFromJava,3,UsedData);
-	get_index_str_from_js(StringFromJava,4,LimitData);
-
-
+    get_index_str_from_js(wifi_pro_from_java_string,3,UsedData);
 	sprintf(UsedData,"%d",atoi(UsedData)/1000000);
 	for(i=0;i<strlen(UsedData);i++){
 		DataUsage[0].value[i]=UsedData[i];
@@ -71,6 +77,7 @@ int main()
 
 
 	//if LimitData=-1,the value is null
+	get_index_str_from_js(wifi_pro_from_java_string,4,LimitData);
 	if (!strcmp(LimitData,"-1"))
 	{
 		DataUsage[1].value[0]='\0';

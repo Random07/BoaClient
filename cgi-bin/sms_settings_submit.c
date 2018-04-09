@@ -51,6 +51,7 @@ int main()
 	char TempSmsSettings_submit_CenterNume[15];
 	char TempSmsSettinds_submit_Reporter[3];
   char SendString[30];
+  char Result[2];
 	int i;
 
 	//read_comm_infor_from_js();
@@ -62,7 +63,7 @@ int main()
   xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
 
 
-  strcpy("Request|SetSmsSettings|")
+  strcpy(SendString,"Request|SetSmsSettings|");
   if(!get_index_str_from_web(StringFromWeb,"smssettingsoption=",TempSmsSettings_submit_Time))
   {
       debug_message_printf("Can't find TempSmsSettings_submit_Time");
@@ -92,19 +93,20 @@ int main()
   xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
   xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
 
+get_index_str_from_js(StringFromJava,1,Result);
 /*==============================================================================*/
 	
     if (!strcmp(Result,"1"))
     {
       web_header();
-    puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/basicinfor_datalimit.cgi\">");
+    puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/sms_settings.cgi\">");
     we_btail();
     }
     else{
       wifi_pro_alert_info="Set fail,please retry!";
       read_html_file_into_cgi("alert.html");
       web_header();
-    puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/basicinfor_datalimit.cgi\">");
+    puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/sms_settings.cgi\">");
     we_btail();
     }
 return 0;

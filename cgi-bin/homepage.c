@@ -44,7 +44,7 @@
 ==============================================================================*/
 int main()
 {
-	char StringFromJava[REQ_RSP_STRING_LEN];
+	//char StringFromJava[REQ_RSP_STRING_LEN];
 	int i;
 	int j;
 	char tempvalue[]="&nbsp;";
@@ -54,6 +54,9 @@ int main()
 	char tempDeviceName[64];
 	char tempMAC[64];
 	char tempIP[64];
+
+	extern char wifi_pro_from_java_string[1024];
+
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto read_comm_infor_from_js1");
 
 	read_comm_infor_from_js();
@@ -87,13 +90,16 @@ int main()
 		ConnCustInfor[i].IP.value[j]='\0';
 	}
 
-	send_cmd_to_js("Request|Connect_Customer",StringFromJava);
-	wifi_pro_from_java_string=StringFromJava;
+	send_cmd_to_js("Request|Connect_Customer",wifi_pro_from_java_string);
+	//wifi_pro_from_java_string=StringFromJava;
 //	char StringFromJavatest[]="1|Connect_Customer|2|Devicename|mac|ip|Devicename|mac|ip";
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The wifi_pro_from_java_string is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Have use the extern wifi_pro_from_java_string is:");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
     
-	get_index_str_from_js(wifi_pro_from_java_string,3,temptotalnum);
+	get_index_str_from_js_new(wifi_pro_from_java_string,3,temptotalnum);
+	    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,temptotalnum);
+
+	//get_index_str_from_js(wifi_pro_from_java_string,3,temptotalnum);
 	totalnum =(int)(temptotalnum[0]-'0');
 
 	for(i=0;i<totalnum;i++)
@@ -103,15 +109,8 @@ int main()
 		/*get_index_str_from_js(StringFromJava,(4+i*3),tempDeviceName);
 		get_index_str_from_js(StringFromJava,(5+i*3),tempMAC);
 		get_index_str_from_js(StringFromJava,(6+i*3),tempIP);*/
-		    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
+		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
 
-		get_index_str_from_js(wifi_pro_from_java_string,(5+i*3),tempDeviceName);
-		    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
-
-		get_index_str_from_js(wifi_pro_from_java_string,(6+i*3),tempMAC);
-		    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
-
-		get_index_str_from_js(wifi_pro_from_java_string,(7+i*3),tempIP);
 
 		for(j=0;j<strlen(tempindex);j++)
 		{
@@ -119,18 +118,23 @@ int main()
 		}
 		ConnCustInfor[i].index.value[j]='\0';
 
+        get_index_str_from_js_new(wifi_pro_from_java_string,(5+i*3),tempDeviceName);
+		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
 		for(j=0;j<strlen(tempDeviceName);j++)
 		{
 			ConnCustInfor[i].DeviceName.value[j]= tempDeviceName[j];
 		}
 		ConnCustInfor[i].DeviceName.value[j]='\0';
 
+        get_index_str_from_js_new(wifi_pro_from_java_string,(6+i*3),tempMAC);
+		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
 		for(j=0;j<strlen(tempMAC);j++)
 		{
 			ConnCustInfor[i].MAC.value[j]= tempMAC[j];
 		}
 		ConnCustInfor[i].MAC.value[j]='\0';
 
+		get_index_str_from_js_new(wifi_pro_from_java_string,(7+i*3),tempIP);
 		for(j=0;j<strlen(tempIP);j++)
 		{
 			ConnCustInfor[i].IP.value[j]= tempIP[j];

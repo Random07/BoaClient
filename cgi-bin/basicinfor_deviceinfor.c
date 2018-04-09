@@ -45,7 +45,7 @@
 ==============================================================================*/
 int main()
 {
-	char StringFromJava[1024];
+	//char StringFromJava[1024];
 	char SimCard[30]={0};
 	char IMEI[30]={0};
 	char IMSI[30]={0};
@@ -59,25 +59,28 @@ int main()
 	char FirmWare[30]={0};
 	int i;
 
+	extern char wifi_pro_from_java_string[1024];
+
+
 	read_comm_infor_from_js();
 
 
-	send_cmd_to_js("Request|DeviceInfo",StringFromJava);
+	send_cmd_to_js("Request|DeviceInfo",wifi_pro_from_java_string);
     //char StringFromJavatest[]="Confirm|DeviceInfo|3434|3341|1343|454|5|4343|98|424|8967|342|23432";
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
    
-	get_index_str_from_js(StringFromJava,(3),SimCard);
-	get_index_str_from_js(StringFromJava,(4),IMEI);
-	get_index_str_from_js(StringFromJava,(5),IMSI);
-	get_index_str_from_js(StringFromJava,(6),SSID);
-	get_index_str_from_js(StringFromJava,(7),ConCount);
-	get_index_str_from_js(StringFromJava,(8),IP);
-	get_index_str_from_js(StringFromJava,(9),Mac);
+	get_index_str_from_js(wifi_pro_from_java_string,(3),SimCard);
+	get_index_str_from_js(wifi_pro_from_java_string,(4),IMEI);
+	get_index_str_from_js(wifi_pro_from_java_string,(5),IMSI);
+	get_index_str_from_js(wifi_pro_from_java_string,(6),SSID);
+	get_index_str_from_js(wifi_pro_from_java_string,(7),ConCount);
+	get_index_str_from_js(wifi_pro_from_java_string,(8),IP);
+	get_index_str_from_js(wifi_pro_from_java_string,(9),Mac);
 	//get_index_str_from_js(StringFromJavatest,(10),Wan_Ip);
 	//get_index_str_from_js(StringFromJavatest,(11),SoftVersion);
-	get_index_str_from_js(StringFromJava,(10),FirmWare);
-	get_index_str_from_js(StringFromJava,(11),HardVersion);
+	get_index_str_from_js(wifi_pro_from_java_string,(10),FirmWare);
+	get_index_str_from_js(wifi_pro_from_java_string,(11),HardVersion);
 	strcpy(Wan_Ip,"127.0.0.1");
 	strcpy(SoftVersion,"web 1.1");
  

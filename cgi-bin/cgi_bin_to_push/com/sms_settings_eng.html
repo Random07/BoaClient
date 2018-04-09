@@ -181,9 +181,10 @@ function LanguageChange(sobj)
             <td width="230" align="right" class="STYLE1">Valid Duration </td>
             <td width="20" align="left" class="STYLE1">&nbsp;</td>
             <td width="500" align="left" >
-              <select name="ValidDuration" class="STYLE1">
-                <option selected="selected" value="12">12 Hour</option>
-                <option value="24">24 Hour</option>
+              <select name="smssettingsoption" class="STYLE1">
+                <!--%smssettings0%-->
+                <!--<option selected="selected" value="12">12 Hour</option>
+                <option value="24">24 Hour</option>-->
               </select>
             </td>
 	    <td width="150" height="50" class="STYLE1">&nbsp;</td>
@@ -192,7 +193,7 @@ function LanguageChange(sobj)
             <td width="230" align="right" class="STYLE1">SMS Center Number </td>
             <td align="center">&nbsp;</td>
             <td align="left">
-              <input type="text" class="STYLE1" name="SMSCenterNumber" />
+              <input type="text" class="STYLE1" name="SMSCenterNumber" value="<!--%smssettings1%-->" />
             </td>
 	    <td height="50" align="right">&nbsp;</td>
           </tr>
@@ -202,11 +203,11 @@ function LanguageChange(sobj)
             <td align="left" >
 	    <p>
               <label>
-                <input type="radio" class="STYLE1" name="DeliverReport" value="Start" />
+                <input type="radio" class="STYLE1" name="smssettingsradio" value="1" />
                 Start
 		</label>
               <label>
-                <input type="radio" class="STYLE1" name="DeliverReport" value="Stop" />
+                <input type="radio" class="STYLE1" name="smssettingsradio" value="0" />
                 Stop
 		</label>
             </p></td>
