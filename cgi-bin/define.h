@@ -109,7 +109,7 @@ CommonPara DataUsage[2]={
 #ifdef DRIVER_DOWNLOAD
 #endif
 
-/*#ifdef SMS_DEVICEPART*/
+#ifdef SMS_DEVICEPART
 typedef struct
 {
 CommonPara totalall;
@@ -133,7 +133,7 @@ SmsInfo SmsInfoList[10]={
 };
 
 
-/*#endif*/
+#endif
 
 #ifdef SMS_SIMPART
 #endif
@@ -181,9 +181,10 @@ CommonPara SetNetworkMode[23]={
 };
 /*#endif*/
 
-/*#ifdef SETTINGS_NETSET_APN*/
+#ifdef SETTINGS_NETSET_APN
 typedef struct
 {
+CommonPara SETAPNID;
 CommonPara SETAPNNAME;
 CommonPara SETAPN;
 CommonPara SETMNC;
@@ -193,7 +194,8 @@ CommonPara SETUSERNAME;
 CommonPara SETPASSWORD;
 }SetApnPara;
 
-CommonPara Settings_Apn[7]={
+CommonPara Settings_Apn[8]={
+	{"SETAPNID",},
 	{"SETAPNNAME",},
 	{"SETAPN",},
 	{"SETMNC",},
@@ -204,18 +206,18 @@ CommonPara Settings_Apn[7]={
 };
 
 SetApnPara Setings_Apn_List[10]={
-	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
-	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
-	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
-	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
-	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
-	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
-	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
-	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
-	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
-	{{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNID",},{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNID",},{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNID",},{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNID",},{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNID",},{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNID",},{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNID",},{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNID",},{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNID",},{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
+	{{"SETAPNID",},{"SETAPNNAME",},{"SETAPN",},{"SETMNC",},{"SETMCC",},{"SETAUTH",},{"SETUSERNAME",},{"SETPASSWORD",},},
 };
-/*#endif*/
+#endif
 
 /*#ifdef SETTINGS_WIFISET_BASIC*/
 CommonPara Settings_SSID[6]={
@@ -249,6 +251,7 @@ int get_cgi_data(FILE* fp, char *requestmethod,char *out);
 int split_value_from_string(char Tag,char *in,char *out,char *remain);
 int get_index_str_from_js(char *org,int index,char *outcome);
 int get_index_str_from_web(char *org,char *Tag,char *out);
+int get_index_str_from_web_new(char *org,int index,char *Tag,char *outcome);
 
 int get_index_str_from_js_new(char *org,int index,char *outcome);
 int read_comm_infor_from_js();
@@ -425,29 +428,33 @@ int split_value_from_string(char Tag,char *in,char *out,char *remain)
 int get_index_str_from_js(char *org,int index,char *outcome)
 {
 	int i;
-	int j;
-	char in[REQ_RSP_STRING_LEN];
-	char remain[REQ_RSP_STRING_LEN];
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,org);
+        int j;
+        int tempindex;
+        xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,org);
 
 
-	for(i=0;i<strlen(org);i++)
-	{
-		in[i]=org[i];
-	}
-	in[i]='\0';
-	for(i=0;i<index;i++)
-	{
-		split_value_from_string('|',in,outcome,remain);
-		for(j=0;j<strlen(remain);j++)
-		{
-			in[j]=remain[j];
-		}
-		in[j]='\0';
-	}
+        if(org[0]=='\0' || org [0]=='|')
+            return 0;
+
+        for(i=0,j=0,tempindex=0;i<=strlen(org);i++)
+        {
+                if(tempindex == (index-1))
+                {
+                        if(org[i]=='|' || org[i]=='\0')
+                        {
+                                outcome[j]='\0';
+                                return 1;
+                        }
+                        outcome[j]=org[i];
+                        j++;
+                }else if(org[i]=='|')
+                {
+                        tempindex +=1;
+                }
+        }
 	    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,outcome);
 
-	return 1;
+        return 1;
 }
 
 int get_index_str_from_js_new(char *org,int index,char *outcome)
@@ -500,6 +507,39 @@ int get_index_str_from_js_new(char *org,int index,char *outcome)
  *  1,get_index_str_from_web("Username=Admin&Password=123456","Password",char *outcome)
  *    outcome="123456"
  *****************************************************************************************/
+int get_index_str_from_web_new(char *org,int index,char *Tag,char *outcome)
+{
+        int i;
+        int j;
+        int m;
+        int tempindex;
+
+        if(org[0]=='\0' || org [0]=='&')
+                return 0;
+
+        for(i=0,j=0,tempindex=0;i<=strlen(org);i++)
+        {
+                if(tempindex == (index-1))
+                {
+                        if(org[i+strlen(Tag)]=='&' || org[i+strlen(Tag)]=='\0')
+                        {
+                                outcome[j]='\0';
+                                return 1;
+                        }
+                        outcome[j]=org[i+strlen(Tag)];
+                        j++;
+                }else if(org[i]=='&')
+                {
+                        tempindex +=1;
+                }
+        }
+
+        return 1;
+
+}
+
+
+
 int get_index_str_from_web(char *org,char *Tag,char *outcome)
 {
 	int i;
@@ -936,6 +976,7 @@ if (!strncmp(Tag,Settings_SSID[2].key,Taglen))
 /*****************************************************************************************
 write by Xavier
  *****************************************************************************************/
+#ifdef SETTINGS_NETSET_APN
 int write_apn_select_option()
 {
 	int Setapnlist;
@@ -951,17 +992,20 @@ int write_apn_select_option()
 		} else{break;}
 	
 	}
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This is in write apn select,the anplist is:");
+    xdebug_message_printf_int(__FILE__,__FUNCTION__,__LINE__,Setapnlist);
 
 	if (Setapnlist >0)
 	{
-		printf("<option selected=\"selected\" value=\"%s\">%s</option>\n",Setings_Apn_List[0].SETAPNNAME.value,Setings_Apn_List[0].SETAPNNAME.value);
+		printf("<option selected=\"selected\" value=\"%s\">%s</option>\n",Setings_Apn_List[0].SETAPNID.value,Setings_Apn_List[0].SETAPNNAME.value);
 	}
 	for (i = 1; i < Setapnlist; i++)
 	{
-		printf("<option value=\"%s\">%s</option>\n",Setings_Apn_List[i].SETAPNNAME.value,Setings_Apn_List[i].SETAPNNAME.value);
+		printf("<option value=\"%s\">%s</option>\n",Setings_Apn_List[i].SETAPNID.value,Setings_Apn_List[i].SETAPNNAME.value);
 	}
 	return 1;
 }
+#endif
 
 
 int write_ssidsecurity_select_option(){
@@ -1140,6 +1184,7 @@ int write_networkmode_select_option(){
 	return 1;
 }
 
+#ifdef SMS_DEVICEPART
 int write_smsdevicepart_select_option(char smsdevicepartnum){
 	int i;
 	//char *sms=smsdevicepartnum;
@@ -1157,6 +1202,7 @@ xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].time.value);
     printf("<td align=\"center\"class=\"STYLE2\">%s</td>\n",SmsInfoList[i].body.value);
 	printf(" <td height=\"50\" align=\"right\" class=\"STYLE2\">%s</td>\n",SmsInfoList[i].time.value);
 }
+#endif
 
 int write_alert_info(){
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"the wifi_pro_alert_info is:");
@@ -1206,7 +1252,8 @@ int write_sms_settings(char smssettingsnum){
  *****************************************************************************************/
 int read_html_file_into_cgi(char *patch)
 {
-	char Tempstrline[20*REQ_RSP_STRING_LEN]; 
+	//char Tempstrline[20*REQ_RSP_STRING_LEN]; 
+	char *Tempstrline;
 	int Tempstrlen;
 	int i;
 	char Tempconfpara[50];
@@ -1219,6 +1266,7 @@ int read_html_file_into_cgi(char *patch)
 	int m;
 	int n;
 
+    Tempstrline=(char *)malloc(20*REQ_RSP_STRING_LEN);
 	puts("<Content-type:text/html>\n");
 	   		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in read html");
 
@@ -1262,7 +1310,9 @@ int read_html_file_into_cgi(char *patch)
 	   		if (!strncmp(Tempoption,"apnconfig",strlen("apnconfig")))
 	   		{
 	   			//puts("this will goto write_select_option");
+	   			#ifdef SETTINGS_NETSET_APN
 	   			write_apn_select_option();
+	   			#endif
 	   		}
 	   		if (!strncmp(Tempoption,"ssidsecurity",strlen("ssidsecurity")))
 	   		{
@@ -1278,7 +1328,9 @@ int read_html_file_into_cgi(char *patch)
 	   		}
 	   		if(!strncmp(Tempoption,"smsdevicepart",strlen("smsdevicepart"))){
 
+                #ifdef SMS_DEVICEPART
                 write_smsdevicepart_select_option(Tempoption[k-1]);
+                #endif
 	   		}
 	   		if(!strncmp(Tempoption,"alertinfo",strlen("alertinfo"))){
 	   			write_alert_info();
@@ -1317,6 +1369,7 @@ int read_html_file_into_cgi(char *patch)
 	   }
     	} 
   fclose(fp);
+  free(Tempstrline);
   return 1;
 }
 

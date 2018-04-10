@@ -46,26 +46,26 @@ int main()
 {
 	char StringFromWeb[REQ_RSP_STRING_LEN];
     char StringFromJava[REQ_RSP_STRING_LEN];
-    char ApnName[50];
-    char Path[50];
+    char ApnId[10];
+    //char Path[50];
     char *req_method;
     char Sendstring[50];
     char Result[2];
-        //debug_message_printf("Can't find Language1");
 
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Follow will goto read the request from user:");
     req_method = getenv("REQUEST_METHOD");
     get_cgi_data(stdin,req_method,StringFromWeb);
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
 
-    if(!get_index_str_from_web(StringFromWeb,"ConfigFileSelect=",ApnName))
+    if(!get_index_str_from_web(StringFromWeb,"ConfigFileSelect=",ApnId))
     {
-        debug_message_printf("Can't find Language");
+        debug_message_printf("Can't find ApnId");
         return 0;
     }
 
     strcpy(Sendstring,"Request|ApnChange|");
-    strcat(Sendstring,ApnName);
+    strcat(Sendstring,ApnId);
 
     send_cmd_to_js(Sendstring,StringFromJava);
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
@@ -75,6 +75,12 @@ int main()
 
     if (!strcmp(Result,"1"))
     {
+        web_header();
+        puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_netset_apn.cgi\">");
+        we_btail();
+    }else{
+        wifi_pro_alert_info="Change APN fail,please retry!";
+        read_html_file_into_cgi("alert.html");
         web_header();
         puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_netset_apn.cgi\">");
         we_btail();

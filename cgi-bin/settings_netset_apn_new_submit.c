@@ -17,6 +17,9 @@
                            INCLUDE FILES
 
 ==============================================================================*/
+#define SETTINGS_NETSET_APN
+
+
 #include "define.h"
 
 
@@ -55,11 +58,12 @@ int main()
     int templen=0;
 
 
-
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This will read the request from user");
     req_method = getenv("REQUEST_METHOD");
     get_cgi_data(stdin,req_method,StringFromWeb);
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
+//get_index_str_from_web_new(char *org,int index,char *Tag,char *outcome)
 
     strcpy(SendString,"Request|ApnAdd|");
     if(!get_index_str_from_web(StringFromWeb,"ApnName=",ApnNameFromWeb))
@@ -70,6 +74,8 @@ int main()
     else{
         strcat(SendString,ApnNameFromWeb);
         strcat(SendString,"|");
+            xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+
     }
     if(!get_index_str_from_web(StringFromWeb,"APN=",APNFromWeb))
     {
@@ -79,6 +85,8 @@ int main()
     else{
         strcat(SendString,APNFromWeb);
         strcat(SendString,"|");
+                    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+
 
     }
     if(!get_index_str_from_web(StringFromWeb,"MNC=",MNCFromWeb))
@@ -89,6 +97,8 @@ int main()
     else{
         strcat(SendString,MNCFromWeb);
         strcat(SendString,"|");
+                    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+
     }
     if(!get_index_str_from_web(StringFromWeb,"MCC=",MCCFromWeb))
     {
@@ -98,6 +108,8 @@ int main()
     else{
         strcat(SendString,MCCFromWeb);
         strcat(SendString,"|");
+                    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+
 
     }
     if(!get_index_str_from_web(StringFromWeb,"AuthSelect=",AuthSelectFromWeb))
@@ -108,6 +120,8 @@ int main()
     else{
         strcat(SendString,AuthSelectFromWeb);
         strcat(SendString,"|");
+                    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+
 
     }
     if(!get_index_str_from_web(StringFromWeb,"Username=",UsernameFromWeb))
@@ -118,6 +132,8 @@ int main()
     else{
         strcat(SendString,UsernameFromWeb);
         strcat(SendString,"|");
+                    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+
 
     }
     if(!get_index_str_from_web(StringFromWeb,"Password=",PasswordFromWeb))
@@ -128,9 +144,10 @@ int main()
     else{
         strcat(SendString,PasswordFromWeb);
     }
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The SendString is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
 
-
-    send_cmd_to_js("Request|Login",StringFromJava);
+    send_cmd_to_js(SendString,StringFromJava);
   //  char StringFromJavatest[]="1|ApnAdd";
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
@@ -143,8 +160,10 @@ int main()
         puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_netset_apn.cgi\">");
         we_btail();
     }else{
+        wifi_pro_alert_info="Add APN fail,please retry!";
+        read_html_file_into_cgi("alert.html");
         web_header();
-        puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/loginerror.cgi\">");
+        puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_netset_apn.cgi\">");
         we_btail();
     }
     

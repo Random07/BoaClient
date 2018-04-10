@@ -47,7 +47,8 @@ int main()
 	//char StringFromJava[REQ_RSP_STRING_LEN];
 	//char StringFromJavatest[150];
 	char TempTotalApn[2];
-	char TempApnName[10];
+    char TempApnId[10];
+	char TempApnName[30];
 	char TempApn[10];
 	char TempMcc[5];
 	char TempMnc[5];
@@ -57,7 +58,9 @@ int main()
 	int TotalApn;
 	int i;
 	int j;
+    extern char wifi_pro_from_java_string[1024];
 
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in apn module,will goto readcomminfo");
 	read_comm_infor_from_js();
 
 /*=============================================================================*/
@@ -69,26 +72,35 @@ int main()
 	send_cmd_to_js("Request|ApnShow",wifi_pro_from_java_string);
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The wifi_pro_from_java_string is:");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
+    //Result|ApnShow|total|apn_id|apnname|apn|mcc|mnc|Security type|admin|password
     //char StringFromJavatest[]="1|ApnShow|2|cmcc|cmcm|460|01|0|xiaojun|xiaojun1234|cmcc2|cmcm2|460|01|1|xiaojun|xiaojun1234";
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto get_index_str_from_js");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempTotalApn);
+
     get_index_str_from_js(wifi_pro_from_java_string,3,TempTotalApn);
     TotalApn=(int)(TempTotalApn[0]-'0');
 
     for (i = 0; i < TotalApn; i++)
-    {
-    	get_index_str_from_js(wifi_pro_from_java_string,(4+i*7),TempApnName);
-    	get_index_str_from_js(wifi_pro_from_java_string,(5+i*7),TempApn);
-    	get_index_str_from_js(wifi_pro_from_java_string,(6+i*7),TempMcc);
-    	get_index_str_from_js(wifi_pro_from_java_string,(7+i*7),TempMnc);
-    	get_index_str_from_js(wifi_pro_from_java_string,(8+i*7),TempAuth);
-    	get_index_str_from_js(wifi_pro_from_java_string,(9+i*7),TempUsername);
-    	get_index_str_from_js(wifi_pro_from_java_string,(10+i*7),TempPassword);
+    {   
+        xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto get_index_str_from_js");
+        get_index_str_from_js(wifi_pro_from_java_string,(4+i*8),TempApnId);
+        for (j = 0; j < strlen(TempApnId); j++)
+        {
+            Setings_Apn_List[i].SETAPNID.value[j]=TempApnId[j];
+        }
+        Setings_Apn_List[i].SETAPNID.value[j]='\0';
+        xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Setings_Apn_List[i].SETAPNID.value);
 
+
+        get_index_str_from_js(wifi_pro_from_java_string,(5+i*8),TempApnName);
     	for (j = 0; j < strlen(TempApnName); j++)
     	{
     		Setings_Apn_List[i].SETAPNNAME.value[j]=TempApnName[j];
     	}
     	Setings_Apn_List[i].SETAPNNAME.value[j]='\0';
+        xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,Setings_Apn_List[i].SETAPNNAME.value);
 
+        get_index_str_from_js(wifi_pro_from_java_string,(6+i*8),TempApn);
     	for (j = 0; j < strlen(TempApn); j++)
     	{
 
@@ -96,30 +108,35 @@ int main()
     	}
     	Setings_Apn_List[i].SETAPN.value[j]='\0';
 
+        get_index_str_from_js(wifi_pro_from_java_string,(7+i*8),TempMcc);
     	for (j = 0; j < strlen(TempMcc); j++)
     	{
     		Setings_Apn_List[i].SETMCC.value[j]=TempMcc[j];
     	}
     	Setings_Apn_List[i].SETMCC.value[j]='\0';
 
+        get_index_str_from_js(wifi_pro_from_java_string,(8+i*8),TempMnc);
     	for (j = 0; j < strlen(TempMnc); j++)
     	{
     		Setings_Apn_List[i].SETMNC.value[j]=TempMnc[j];
     	}
     	Setings_Apn_List[i].SETMNC.value[j]='\0';
 
+        get_index_str_from_js(wifi_pro_from_java_string,(10+i*8),TempUsername);
     	for (j = 0; j < strlen(TempUsername); j++)
     	{
     		Setings_Apn_List[i].SETUSERNAME.value[j]=TempUsername[j];
     	}
     	Setings_Apn_List[i].SETUSERNAME.value[j]='\0';
 
+        get_index_str_from_js(wifi_pro_from_java_string,(11+i*8),TempPassword);
     	for (j = 0; j < strlen(TempPassword); j++)
     	{
     		Setings_Apn_List[i].SETPASSWORD.value[j]=TempPassword[j];
     	}
     	Setings_Apn_List[i].SETPASSWORD.value[j]='\0';
 
+        get_index_str_from_js(wifi_pro_from_java_string,(9+i*8),TempAuth);
     	if (!strcmp(TempAuth,"0"))
     	{
     		strcpy(TempAuth,"None");
@@ -143,7 +160,8 @@ int main()
 	
 	if(!strncmp("English",CommonParaInfor[5].value,strlen("English")))
 	{
-		read_html_file_into_cgi("settings_netset_apn_eng.html");
+		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto read html");
+        read_html_file_into_cgi("settings_netset_apn_eng.html");
 	}else{
 
 		read_html_file_into_cgi("settings_netset_apn.html");
