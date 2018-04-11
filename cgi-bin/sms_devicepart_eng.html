@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>4G MIFI </title>
 <style type="text/css">
 <!--
@@ -59,6 +59,18 @@ function fun(){
     }
   }
   var url="/cgi-bin/sms_devicepart_delete_submit.cgi?SmsDeviceDelete="+ check_val+"&Path="+path;
+  window.location.href=url;
+}
+
+function jumpPage(robj){
+   var page_id=robj.value;
+   var url="/cgi-bin/sms_devicepart.cgi?Page=" + page_id;
+   window.location.href=url;
+}
+
+function showSms(mobj){
+  var label_id=mobj.id;
+  var url="/cgi-bin/sms_signal.cgi?smsSignal=" + label_id;
   window.location.href=url;
 }
 -->
@@ -189,6 +201,9 @@ function fun(){
 	  <tr>
         <td height="550" align="center">
 	<table width="900" border="0" cellspacing="0" cellpadding="0">
+    
+            <tr><!--%pagessmsdevicepart%--></tr>
+
           <tr>
             <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td width="100" align="center" class="STYLE1"><a href="/cgi-bin/sms_devicepart_send_show.cgi">New</a></td>
@@ -198,7 +213,7 @@ function fun(){
           </tr>
           <tr>
  	    <td width="50" align="center">
-        <!--%smsdevicepart0%-->
+                <!--%smsdevicepart0%-->
         <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td align="center" class="STYLE2">15503612784</td>
             <td align="center"class="STYLE2">ADSFASDFASDFASDFADSFASDFASDFASDFASDFASFDASDFASDF</td>
@@ -276,6 +291,7 @@ function fun(){
             <td align="left">&nbsp;</td>
             <td height="50" align="center">&nbsp;</td>-->
           </tr>
+
 
         </table></td>
       </tr>

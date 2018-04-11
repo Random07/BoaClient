@@ -44,7 +44,7 @@
 ==============================================================================*/
 int main()
 {
-	char StringFromJava[REQ_RSP_STRING_LEN];
+	//char StringFromJava[REQ_RSP_STRING_LEN];
 	char TempSSID[20];
 	char TempSSIDShow1[7];
 	char TempSSIDShow2[7];
@@ -53,22 +53,20 @@ int main()
 	char TempSSIDConnNum[3];
 	int i;
     int j;
+    extern char wifi_pro_from_java_string[1024];
 
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This will goto read comminfo:");
 	read_comm_infor_from_js();
 
 /*=============================================================================*/
-	send_cmd_to_js("Request|WIFIShow",StringFromJava);
+	send_cmd_to_js("Request|WIFIShow",wifi_pro_from_java_string);
     //char StringFromJavatest[]="1|WIFIShow|fdsfdfd|false|0|21212|5";
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
-    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The wifi_pro_from_java_string is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
 
-    get_index_str_from_js(StringFromJava,3,TempSSID);
-    get_index_str_from_js(StringFromJava,4,TempSSIDShow1);
-    get_index_str_from_js(StringFromJava,5,TempSSIDSecurity);
-    get_index_str_from_js(StringFromJava,6,TempPassword);
-    get_index_str_from_js(StringFromJava,7,TempSSIDConnNum);
 
-    if (strncmp(TempSSIDShow1,"true",strlen("true")))
+    get_index_str_from_js(wifi_pro_from_java_string,4,TempSSIDShow1);
+    if (!strncmp(TempSSIDShow1,"true",strlen("true")))
     {
     	strcpy(TempSSIDShow1,"checked");
     	strcpy(TempSSIDShow2,"");
@@ -78,6 +76,7 @@ int main()
     	strcpy(TempSSIDShow1,"");
     }
 
+    get_index_str_from_js(wifi_pro_from_java_string,3,TempSSID);
     for (j = 0; j < strlen(TempSSID); j++)
     {
     	Settings_SSID[0].value[j]=TempSSID[j];
@@ -97,24 +96,28 @@ int main()
     }
     Settings_SSID[2].value[j]='\0';
 
+    get_index_str_from_js(wifi_pro_from_java_string,5,TempSSIDSecurity);
     for (j = 0; j < strlen(TempSSIDSecurity); j++)
     {
     	Settings_SSID[3].value[j]=TempSSIDSecurity[j];
     }
     Settings_SSID[3].value[j]='\0';
 
+    get_index_str_from_js(wifi_pro_from_java_string,6,TempPassword);
     for (j = 0; j < strlen(TempPassword); j++)
     {
     	Settings_SSID[4].value[j]=TempPassword[j];
     }
     Settings_SSID[4].value[j]='\0';
 
+    get_index_str_from_js(wifi_pro_from_java_string,7,TempSSIDConnNum);
     for (j = 0; j < strlen(TempSSIDConnNum); j++)
     {
         Settings_SSID[5].value[j]=TempSSIDConnNum[j];
     }
     Settings_SSID[5].value[j]='\0';
 
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Follow will read html");
 
 /*==============================================================================*/
 	

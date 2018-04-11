@@ -46,19 +46,26 @@ int main()
 {
 	//char StringFromJava[REQ_RSP_STRING_LEN];
 	//char TempTotalAll[4];
+	char *req_method;
+	char StringFromWeb[50];
+
 	char TempSmsTotalAll[4];
 	char TempTotal[2];
 	//char Tempvalue[6]="";
 	char TempId[10];
 	char TempAddr[20];
-	char TempBody[1024];
+	//char TempBody[512];
 	char TempTime[20];
 	char TempFlag[2];
+	char TempPage[4];
+	char SendString[30];
 	int i;
 	int j;
 	int TotalAll;
 	int Total;
 	extern char wifi_pro_from_java_string[1024];
+	extern char TempBody[1024];
+	//TempBody=(char [])malloc(10*REQ_RSP_STRING_LEN);
 
 	read_comm_infor_from_js();
 
@@ -101,7 +108,39 @@ int main()
 	printf("this will goto read html file5\n");
 
 }*/
-	send_cmd_to_js("Request|GetSmsContent|1",wifi_pro_from_java_string);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The goto req is:");
+
+    req_method = getenv("REQUEST_METHOD");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The goto req is2:");
+
+	i = get_cgi_data(stdin,req_method,StringFromWeb);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
+    strcpy(SendString,"Request|GetSmsContent|");
+    if (i)
+    {
+    	if(get_index_str_from_web(StringFromWeb,"Page=",TempPage))
+	    {
+		    strcat(SendString,TempPage);
+		    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+
+	    }
+	    else{
+	    	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SendString1");
+
+	    	strcat(SendString,"1");
+	    }
+    }else{
+    	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SendString2");
+
+    	strcat(SendString,"1");
+    }
+
+
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+
+    //strcat("Request|GetSmsContent|1",TempPage);
+	send_cmd_to_js(SendString,wifi_pro_from_java_string);
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
 
 //xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in the sms_devicepart");

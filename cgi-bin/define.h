@@ -276,11 +276,12 @@ int debug_web_tail_printf();
 
 
 
-char wifi_pro_index_org[1024];
-char wifi_pro_index_remain[1024];
-char *wifi_pro_index_from_java_test;
+char wifi_pro_from_java_string_comm[512];
+//char wifi_pro_index_remain[1024];
+//char *wifi_pro_index_from_java_test;
 char *wifi_pro_alert_info;
 char wifi_pro_from_java_string[1024];
+char TempBody[1024];
 /*===========================================================================
 
 				MACRO DEFINE
@@ -332,7 +333,17 @@ int get_cgi_data(FILE* fp, char *requestmethod,char *out)
 	int i;
 	if(!strcmp(requestmethod, "GET"))
 	{xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in get cgi data in get");
+		//debug_message_printf("Can't find Page");
+
 		tempstring = getenv("QUERY_STRING");
+			xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,tempstring);
+		if (tempstring == NULL)
+		{
+			xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__," is null");
+
+			return 0;
+		}
+
 		i=0;
 		while(tempstring[i]!='\0')
 		{
@@ -363,6 +374,8 @@ int get_cgi_data(FILE* fp, char *requestmethod,char *out)
 				i++;
 			}
 		}
+			xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,out);
+
 	return 1;
 }
 
@@ -602,50 +615,47 @@ int get_index_str_from_web(char *org,char *Tag,char *outcome)
  *****************************************************************************************/
 int read_comm_infor_from_js()
 {
-	char *StringFromJava;
-	char *StringFromJaveForLangua;
-	char TempBattary[5];
+	//char *StringFromJava;
+	//char *StringFromJaveForLangua;
+	char TempBattary[6];
 	char TempNetworkType[10];
 	char TempOperatorName[15];
 	char TempSignal[3];
 	char TempMaxconn[3];
 	char TempLaguage[10];
 	char TempUnreadSms[3];
-	char *TempFromJavaLan;
+	//char TempFromJavaLan[12];
 	int i;
 	int j;
 
-	/*send_cmd_to_js("Request|Common",StringFromJava);
+	send_cmd_to_js("Request|Common",wifi_pro_from_java_string_comm);
     //send_cmd_to_js("Request|GetLanguage",StringFromJaveForLangua);
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Read commStringFromJava");
-	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
-	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Read StringFromJaveForLangua");
-	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJaveForLangua);*/
-	StringFromJava="1|Common|5|3|90%|LTE|ATT&T|4";
-	StringFromJaveForLangua="0";
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string_comm);
+	//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Read StringFromJaveForLangua");
+	//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJaveForLangua);
+	//Result|Common|MaxconnectedCustomer|unreadsms|Battery|networkType|SPN|RSRP|Language
+	//StringFromJava="1|Common|5|3|90%|LTE|ATT&T|4";
+	//StringFromJaveForLangua="0";
 
 
-	get_index_str_from_js(StringFromJava,5,TempBattary);
-	get_index_str_from_js(StringFromJava,6,TempNetworkType);
-	get_index_str_from_js(StringFromJava,7,TempOperatorName);
-	get_index_str_from_js(StringFromJava,8,TempSignal);
-	get_index_str_from_js(StringFromJava,3,TempMaxconn);
-	get_index_str_from_js(StringFromJava,4,TempUnreadSms);
-
-	if(!strcmp(StringFromJaveForLangua,"0")){
+	get_index_str_from_js(wifi_pro_from_java_string_comm,9,TempLaguage);
+	if(!strcmp(TempLaguage,"0")){
 		strcpy(TempLaguage,"English");
 	}else{
 		strcpy(TempLaguage,"Chinese");
 	}
 
-
+	get_index_str_from_js(wifi_pro_from_java_string_comm,5,TempBattary);
 	for(i=0;i<strlen(TempBattary);i++)
 	{
 		CommonParaInfor[0].value[i]=TempBattary[i];
 	}
-	CommonParaInfor[0].value[i]='\0';
+	CommonParaInfor[0].value[i]='%';
+	CommonParaInfor[0].value[i+1]='\0';
 
 	//TempString = "LTE";
+	get_index_str_from_js(wifi_pro_from_java_string_comm,6,TempNetworkType);
 	for(i=0;i<strlen(TempNetworkType);i++)
 	{
 		CommonParaInfor[1].value[i]=TempNetworkType[i];
@@ -653,6 +663,7 @@ int read_comm_infor_from_js()
 	CommonParaInfor[1].value[i]='\0';
 
 	//TempString = "CU";
+	get_index_str_from_js(wifi_pro_from_java_string_comm,7,TempOperatorName);
 	for(i=0;i<strlen(TempOperatorName);i++)
 	{
 		CommonParaInfor[2].value[i]=TempOperatorName[i];
@@ -660,6 +671,7 @@ int read_comm_infor_from_js()
 	CommonParaInfor[2].value[i]='\0';
 
 	//TempString = "3";
+	get_index_str_from_js(wifi_pro_from_java_string_comm,8,TempSignal);
 	for(i=0;i<strlen(TempSignal);i++)
 	{
 		CommonParaInfor[3].value[i]=TempSignal[i];
@@ -667,6 +679,7 @@ int read_comm_infor_from_js()
 	CommonParaInfor[3].value[i]='\0';
 
 	//TempString = "DOWNLOAD";
+	get_index_str_from_js(wifi_pro_from_java_string_comm,3,TempMaxconn);
 	for(i=0;i<strlen(TempMaxconn);i++)
 	{
 		CommonParaInfor[4].value[i]=TempMaxconn[i];
@@ -680,6 +693,7 @@ int read_comm_infor_from_js()
 	}
 	CommonParaInfor[5].value[i]='\0';
 
+	get_index_str_from_js(wifi_pro_from_java_string_comm,4,TempUnreadSms);
 	for(i=0;i<strlen(TempUnreadSms);i++)
 	{
 		CommonParaInfor[6].value[i]=TempUnreadSms[i];
@@ -771,7 +785,7 @@ int convert_key_to_value(char *Tag,int Taglen)
 {
 	int i;
 
-	for(i=0;i<6;i++)
+	for(i=0;i<7;i++)
 	{
 		if(!strncmp(Tag,CommonParaInfor[i].key,Taglen))
 		{
@@ -847,9 +861,25 @@ for(i=0;i<2;i++)
 #endif
 
 #ifdef SMS_DEVICEPART
+if (!strncmp(Tag,SmsInfoList[0].addr.key,Taglen))
+{
+	printf("%s",SmsInfoList[0].addr.value);
+}
+
+if (!strncmp(Tag,SmsInfoList[0].body.key,Taglen))
+{
+	printf("%s",SmsInfoList[0].body.value);
+}
+
+if (!strncmp(Tag,SmsInfoList[0].time.key,Taglen))
+{
+	printf("%s",SmsInfoList[0].time.value);
+}
+
 #endif
 
 #ifdef SMS_SIMPART
+
 #endif
 
 #ifdef SMS_SMSSETTINGS
@@ -1199,7 +1229,7 @@ xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].time.value);
 	//printf("<option   value=\"%d\"  selected=\"selected\"></option>\n",i);
 	printf("<input type=\"checkbox\" name=\"smsdevicecheckbox\" class=\"STYLE1\" value=\"%s\" /></td>\n",SmsInfoList[i].id.value);
     printf("<td align=\"center\" class=\"STYLE2\">%s</td>\n",SmsInfoList[i].addr.value);
-    printf("<td align=\"center\"class=\"STYLE2\">%s</td>\n",SmsInfoList[i].body.value);
+    printf("<td align=\"center\"class=\"STYLE2\"><label id=\"%s\" name=\"smsSignal\" onclick=\"showSms(this)\">%s</label></td>\n",SmsInfoList[i].id.value,SmsInfoList[i].body.value);
 	printf(" <td height=\"50\" align=\"right\" class=\"STYLE2\">%s</td>\n",SmsInfoList[i].time.value);
 }
 #endif
@@ -1231,6 +1261,28 @@ int write_sms_settings(char smssettingsnum){
 	}
 
 
+}
+#endif
+
+#ifdef SMS_DEVICEPART
+int write_smsdevicepart_pages(){
+	char TempTotal[4];
+	int Total;
+	int i;
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in write_smsdevicepart_pages");
+
+	strcpy(TempTotal,SmsInfoList[0].totalall.value);
+	Total=atoi(TempTotal)/10 +2;
+	if(Total <= 2){
+		return 0;
+	}
+xdebug_message_printf_int(__FILE__,__FUNCTION__,__LINE__,Total);
+	for (i = 1; i < Total; i++)
+	{
+		printf("<input type=\"button\" value=\"%d\" name=\"Page\" onclick=\"jumpPage(this)\"/>\n", i);
+	}
+	//SmsInfoList[0].totalall.value;
+	return 1;
 }
 #endif
 /*****************************************************************************************
@@ -1340,6 +1392,12 @@ int read_html_file_into_cgi(char *patch)
 	   			#ifdef SMS_SMSSETTINGS
 	   			write_sms_settings(Tempoption[k-1]);
 	   			#endif
+	   		}
+	   		if (!strncmp(Tempoption,"pagessmsdevicepart",strlen("pagessmsdevicepart")))
+	   		{
+	   			#ifdef SMS_DEVICEPART
+                write_smsdevicepart_pages();
+                #endif
 	   		}
 	   		
 	   		continue;
