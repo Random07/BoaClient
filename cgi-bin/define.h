@@ -134,7 +134,14 @@ SmsInfo SmsInfoList[10]={
 
 
 #endif
+#ifdef SMS_SIGNAL
+CommonPara SmsSignal[3]={
+{"addr",},
+{"body",},
+{"time",},
+};
 
+#endif
 #ifdef SMS_SIMPART
 #endif
 
@@ -269,6 +276,8 @@ int web_header();
 int we_btail();
 int xdebug_message_printf(const char * file,const char * function,int line,char * errormsg);
 int xdebug_message_printf_int(const char *file,const char *function,int line,int errormsg);
+int xdebug_message_printf_char(const char *file,const char *function,int line,char errormsg);
+
 
 int debug_message_printf(char *errormsg);
 int debug_web_header_printf();
@@ -282,6 +291,7 @@ char wifi_pro_from_java_string_comm[512];
 char *wifi_pro_alert_info;
 char wifi_pro_from_java_string[1024];
 char TempBody[1024];
+char TempTime[20];
 /*===========================================================================
 
 				MACRO DEFINE
@@ -456,6 +466,8 @@ int get_index_str_from_js(char *org,int index,char *outcome)
                         if(org[i]=='|' || org[i]=='\0')
                         {
                                 outcome[j]='\0';
+                                xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,outcome);
+
                                 return 1;
                         }
                         outcome[j]=org[i];
@@ -656,6 +668,32 @@ int read_comm_infor_from_js()
 
 	//TempString = "LTE";
 	get_index_str_from_js(wifi_pro_from_java_string_comm,6,TempNetworkType);
+	switch(atoi(TempNetworkType)){
+		case 1:
+		case 2:
+		case 4:
+		case 7:
+		case 11:
+		strcpy(TempNetworkType,"2G");
+		break;
+		case 3:
+		case 5:
+		case 6:
+		case 8:
+		case 9:
+		case 10:
+		case 15:
+		case 14:
+		case 12:
+		strcpy(TempNetworkType,"3G");
+		break;
+		case 13:
+		strcpy(TempNetworkType,"4G");
+		break;
+		case 0:
+		strcpy(TempNetworkType,"UNKown");
+		break;
+	}
 	for(i=0;i<strlen(TempNetworkType);i++)
 	{
 		CommonParaInfor[1].value[i]=TempNetworkType[i];
@@ -861,21 +899,33 @@ for(i=0;i<2;i++)
 #endif
 
 #ifdef SMS_DEVICEPART
-if (!strncmp(Tag,SmsInfoList[0].addr.key,Taglen))
+
+
+#endif
+
+#ifdef SMS_SIGNAL
+			xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SMS_DEVICEPART");
+
+if (!strncmp(Tag,SmsSignal[0].key,Taglen))
 {
-	printf("%s",SmsInfoList[0].addr.value);
+				xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsSignal[0].value);
+
+	printf("%s",SmsSignal[0].value);
 }
 
-if (!strncmp(Tag,SmsInfoList[0].body.key,Taglen))
+if (!strncmp(Tag,SmsSignal[1].key,Taglen))
 {
-	printf("%s",SmsInfoList[0].body.value);
+				xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempBody);
+
+	printf("%s",TempBody);
 }
 
-if (!strncmp(Tag,SmsInfoList[0].time.key,Taglen))
+if (!strncmp(Tag,SmsSignal[2].key,Taglen))
 {
-	printf("%s",SmsInfoList[0].time.value);
-}
+				xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsSignal[2].value);
 
+	printf("%s",SmsSignal[2].value);
+}
 #endif
 
 #ifdef SMS_SIMPART
@@ -1220,6 +1270,7 @@ int write_smsdevicepart_select_option(char smsdevicepartnum){
 	//char *sms=smsdevicepartnum;
 	i=(int)(smsdevicepartnum-'0');
 xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"write_smsdevicepart_select_option");
+xdebug_message_printf_int(__FILE__,__FUNCTION__,__LINE__,i);
 
 xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].addr.value);
 xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SmsInfoList[i].body.value);
@@ -1273,7 +1324,7 @@ int write_smsdevicepart_pages(){
 
 	strcpy(TempTotal,SmsInfoList[0].totalall.value);
 	Total=atoi(TempTotal)/10 +2;
-	if(Total <= 2){
+	if(atoi(TempTotal) <= 10){
 		return 0;
 	}
 xdebug_message_printf_int(__FILE__,__FUNCTION__,__LINE__,Total);
@@ -1421,7 +1472,7 @@ int read_html_file_into_cgi(char *patch)
 
 			continue;	    
 		}
-			   		//xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this willl print html");
+			   		//xdebug_message_printf_char(__FILE__,__FUNCTION__,__LINE__,Tempstrline[i]);
 
 	  	printf("%c",Tempstrline[i]);
 	   }
@@ -1494,6 +1545,21 @@ int we_btail()
 *  NULL
 ******************************************************************************************/
 int xdebug_message_printf(const char *file,const char *function,int line,char *errormsg)
+{
+         FILE *fp = fopen("log_info.txt","a+");
+         if (fp==0){
+        printf("can't open file\n");
+        return 0;
+         }
+         fseek(fp,0,SEEK_END);
+         fprintf(fp, "[%s|@%s,%d] :%s\n\n" , function, file, line,errormsg);
+
+         fclose(fp);
+        return 1;
+
+}
+
+int xdebug_message_printf_char(const char *file,const char *function,int line,char errormsg)
 {
          FILE *fp = fopen("log_info.txt","a+");
          if (fp==0){

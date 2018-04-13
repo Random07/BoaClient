@@ -46,19 +46,25 @@ int main()
 {
 	//char StringFromJava[REQ_RSP_STRING_LEN];
 	//char TempTotalAll[4];
+	char *req_method;
+	char StringFromWeb[50];
+
 	char TempSmsTotalAll[4];
 	char TempTotal[2];
 	//char Tempvalue[6]="";
 	char TempId[10];
 	char TempAddr[20];
-	char TempBody[1024];
+	//char TempBody[512];
 	char TempTime[20];
 	char TempFlag[2];
+	char TempPage[4];
+	char SendString[30];
 	int i;
 	int j;
 	int TotalAll;
 	int Total;
 	extern char wifi_pro_from_java_string[1024];
+	extern char TempBody[1024];
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto read comminfo");
 
 
@@ -103,8 +109,41 @@ int main()
 	printf("this will goto read html file5\n");
 
 }*/
-	send_cmd_to_js("Request|GetSIMSms|1",wifi_pro_from_java_string);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The goto req is:");
+
+    req_method = getenv("REQUEST_METHOD");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The goto req is2:");
+
+	i = get_cgi_data(stdin,req_method,StringFromWeb);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
+    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
+    strcpy(SendString,"Request|GetSIMSms|");
+    if (i)
+    {
+    	if(get_index_str_from_web(StringFromWeb,"Page=",TempPage))
+	    {
+		    strcat(SendString,TempPage);
+		    xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+
+	    }
+	    else{
+	    	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SendString1");
+
+	    	strcat(SendString,"1");
+	    }
+    }else{
+    	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SendString2");
+
+    	strcat(SendString,"1");
+    }
+
+
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+
+    //strcat("Request|GetSmsContent|1",TempPage);
+	send_cmd_to_js(SendString,wifi_pro_from_java_string);
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
+
 
 //xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in the sms_devicepart");
 //wifi_pro_index_from_java_test="1|GetSmsContent|22|2|1111|99999|kjkjfejkfekfjekfjefkejkfjekfjkejfkejfke|1991-03-03|1|222|343|fef|890|0";

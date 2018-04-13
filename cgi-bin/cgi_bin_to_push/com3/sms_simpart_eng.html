@@ -61,6 +61,18 @@ function fun(){
   var url="/cgi-bin/sms_devicepart_delete_submit.cgi?SmsDeviceDelete="+ check_val+"&Path="+path;
   window.location.href=url;
 }
+
+function jumpPage(robj){
+   var page_id=robj.value;
+   var url="/cgi-bin/sms_simpart.cgi?Page=" + page_id;
+   window.location.href=url;
+}
+
+function showSms(mobj){
+  var label_id=mobj.id;
+  var url="/cgi-bin/sms_signal.cgi?smsSignal=" + label_id;
+  window.location.href=url;
+}
 -->
 </script>
 </head>
@@ -72,9 +84,9 @@ function fun(){
     <tr>
       <td width="200" scope="col"><img src="../image/4G_MIFI.png" width="200" height="50" /></td>
       <td width="500" scope="col">&nbsp;</td>
-      <td width="60" scope="col" align="center" class="STYLE2">100%</td>
-      <td width="60" align="center" scope="col" class="STYLE2">LTE</td>
-      <td width="120" align="center" scope="col" class="STYLE2">CMCC</td>
+      <td width="60" scope="col" align="center" class="STYLE2">|%BatteryVolume|</td>
+      <td width="60" align="center" class="STYLE2" scope="col">|%NetworkType|</td>
+      <td width="120" align="center" class="STYLE2" scope="col">|%OperatorName|</td>
       <td width="60" scope="col" align="center"><img src="../image/SignalStreght_4.png" width="60" height="50" /></td>
       <td width="60" scope="col" align="center"><img src="../image/DataStatus_UPDOWNLOAD.png" width="60" height="50" /></td>
       <td width="80" scope="col" align="center">
@@ -131,12 +143,12 @@ function fun(){
             <td class="STYLE1">SMS</td>
           </tr>
           <tr>
-            <td height="50" bgcolor="#6c6c6c">&nbsp;</td>
-            <td bgcolor="#6c6c6c" class="STYLE1 STYLE4">SMS In Device </td>
+            <td height="50" bgcolor="#e0e0e0" >&nbsp;</td>
+            <td class="STYLE1" bgcolor="#e0e0e0" ><a href="/cgi-bin/sms_devicepart.cgi">SMS In Device</a></td>
           </tr>
           <tr>
-            <td height="50" bgcolor="#e0e0e0">&nbsp;</td>
-            <td class="STYLE1" bgcolor="#e0e0e0"><a href="/cgi-bin/sms_simpart.cgi">SMS In SIM</a></td>
+            <td height="50" bgcolor="#6c6c6c">&nbsp;</td>
+            <td bgcolor="#6c6c6c" class="STYLE1 STYLE4">SMS In SIM</td>
           </tr>
 		  <tr>
             <td height="50" bgcolor="#e0e0e0">&nbsp;</td>
@@ -181,53 +193,112 @@ function fun(){
   <div id="Layer4">
     <table width="900" height="800" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="80" align="left" class="STYLE3">SMS In Device</td>
+        <td height="80" align="left" class="STYLE3">SMS In SIM</td>
       </tr>
-	  <tr>
+    <tr>
         <td height="20" align="left"><img src="../image/RightLine.png" width="900" height="20" /></td>
       </tr>
-	  <tr>
+    <tr>
         <td height="550" align="center">
-  <form action="/cgi-bin/sms_devicepart_send.cgi"  method="get">
-	<table width="900" border="0" cellspacing="0" cellpadding="0">
-          <!--<tr>
-            <td width="50" align="center">&nbsp;</td>
-            <td width="100" align="center" class="STYLE1">&nbsp;</td>
-            <td width="650" align="left">&nbsp;</td>
-	          <td width="100" height="50" class="STYLE1">&nbsp;</td>
-          </tr>-->
+  <table width="900" border="0" cellspacing="0" cellpadding="0">
+    <tr><!--%pagessmsdevicepart%--></tr>
           <tr>
- 	          <td width="50" align="center">
-            &nbsp;</td>
-            <td align="right" class="STYLE2">Receiver: </td>
-            <td align="left"><input type="text" name="smsReceiver"></td>
-	          <td height="50" align="right" class="STYLE2"></td>
+            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td width="100" align="center" class="STYLE1"><a href="/cgi-bin/sms_devicepart_send_show.cgi">New</a></td>
+            <td width="650" align="left"><input type="button" class="STYLE1" name="SmsDeviceDelete" value="Delete" onclick="fun()" />
+              <input type="submit" class="STYLE1" name="Refresh" value="Refresh" /></td>
+      <td width="100" height="50" class="STYLE1">&nbsp;</td>
           </tr>
-	        <tr height="150">
-            <td width="50" align="center">
-            &nbsp;</td>
-            <td align="right" class="STYLE1">Content: </td>
-            <td align="left" ><input type="textarea" name="smsContent" height="100"cols="50" rows="10"></td>
-            <td height="50" align="center">&nbsp;</td>
+          <tr>
+      <td width="50" align="center">
+        <!--%smsdevicepart0%-->
+        <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td align="center" class="STYLE2">15503612784</td>
+            <td align="center"class="STYLE2">ADSFASDFASDFASDFADSFASDFASDFASDFASDFASFDASDFASDF</td>
+      <td height="50" align="right" class="STYLE2">2018-03-01</td>-->
           </tr>
-          <tr height="150">
+   <tr>
             <td width="50" align="center">
-            &nbsp;</td>
-            <td align="right" class="STYLE1"><input type="submit" class="STYLE1" name="SmsDeviceSend" value="Send" </td>
-            <td align="left" >&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
+              <!--%smsdevicepart1%-->
+            <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
+          </tr>
+          <tr>
+            <td width="50" align="center">
+              <!--%smsdevicepart2%-->
+            <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="rgiht" class="STYLE1">&nbsp;</td>-->
+          </tr>
+          <tr>
+            <td width="50" align="center">
+              <!--%smsdevicepart3%-->
+              <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
+          </tr>
+           <tr>
+            <td width="50" align="center">
+              <!--%smsdevicepart4%-->
+              <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
+          </tr>
+          <tr>
+            <td width="50" align="center">
+              <!--%smsdevicepart5%-->
+              <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
+          </tr>
+          <tr>
+            <td width="50" align="center">
+              <!--%smsdevicepart6%-->
+              <!--<input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
+          </tr>
+          <tr>
+            <td width="50" align="center">
+              <!--%smsdevicepart7%-->
+             <!-- <input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
+          </tr>
+          <tr>
+            <td width="50" align="center">
+              <!--%smsdevicepart8%-->
+             <!-- <input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
+          </tr>
+          <tr>
+            <td width="50" align="center">
+              <!--%smsdevicepart9%-->
+             <!-- <input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>-->
           </tr>
 
-
-        </table></form></td>
+        </table></td>
       </tr>
        <tr>
             <td height="30" align="left">&nbsp;</td>
           </tr>
         
-	  <tr>
+    <tr>
         <td height="50" align="left">
-		<table width="900" height="50" border="0" cellspacing="0" cellpadding="0">
+    <table width="900" height="50" border="0" cellspacing="0" cellpadding="0">
 
           <tr>
             <td width="440" align="right">&nbsp;</td>
@@ -236,7 +307,7 @@ function fun(){
           </tr>
         </table></td>
       </tr>
-	  <tr>
+    <tr>
         <td height="70" align="left">&nbsp;</td>
       </tr>
     </table>

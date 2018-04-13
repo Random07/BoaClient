@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>4G MIFI </title>
 <style type="text/css">
 <!--
@@ -48,6 +48,31 @@ function LanguageChange(sobj)
 	var url="/cgi-bin/languagechange.cgi?LanguageSelect=" + language+"&Path="+path;
 	window.location.href=url;
 }
+
+function fun(){
+  obj = document.getElementsByName("smsdevicecheckbox");
+  var path=window.location.pathname;
+  check_val=[];
+  for (k in obj) {
+    if (obj[k].checked) {
+      check_val.push(obj[k].value);
+    }
+  }
+  var url="/cgi-bin/sms_devicepart_delete_submit.cgi?SmsDeviceDelete="+ check_val+"&Path="+path;
+  window.location.href=url;
+}
+
+function jumpPage(robj){
+   var page_id=robj.value;
+   var url="/cgi-bin/sms_devicepart.cgi?Page=" + page_id;
+   window.location.href=url;
+}
+
+function showSms(mobj){
+  var label_id=mobj.id;
+  var url="/cgi-bin/sms_signal.cgi?smsSignal=" + label_id;
+  window.location.href=url;
+}
 -->
 </script>
 </head>
@@ -59,9 +84,9 @@ function LanguageChange(sobj)
     <tr>
       <td width="200" scope="col"><img src="../image/4G_MIFI.png" width="200" height="50" /></td>
       <td width="500" scope="col">&nbsp;</td>
-      <td width="60" scope="col" align="center" class="STYLE2">100%</td>
-      <td width="60" align="center" scope="col" class="STYLE2">LTE</td>
-      <td width="120" align="center" scope="col" class="STYLE2">CMCC</td>
+      <td width="60" scope="col" align="center" class="STYLE2">|%BatteryVolume|</td>
+      <td width="60" align="center" class="STYLE2" scope="col">|%NetworkType|</td>
+      <td width="120" align="center" class="STYLE2" scope="col">|%OperatorName|</td>
       <td width="60" scope="col" align="center"><img src="../image/SignalStreght_4.png" width="60" height="50" /></td>
       <td width="60" scope="col" align="center"><img src="../image/DataStatus_UPDOWNLOAD.png" width="60" height="50" /></td>
       <td width="80" scope="col" align="center">
@@ -81,7 +106,7 @@ function LanguageChange(sobj)
         <td width="100" scope="col" align="center">
               <select name="LanguageSelect" onchange=LanguageChange(this)>
                 <option selected="selected" value="English">English</option>
-				<option value="Chinese">中文</option>
+				<option value="Chinese">脰脨脦脛</option>
             </select>
 	    </td>
         <td width="100" scope="col" align="center"><a href="../index_eng.html" class="STYLE2">EXIT</a></td>
@@ -118,12 +143,12 @@ function LanguageChange(sobj)
             <td class="STYLE1">SMS</td>
           </tr>
           <tr>
-            <td height="50" bgcolor="#e0e0e0" >&nbsp;</td>
-            <td class="STYLE1" bgcolor="#e0e0e0" ><a href="/cgi-bin/sms_devicepart.cgi">SMS In Device</a></td>
+            <td height="50" bgcolor="#6c6c6c">&nbsp;</td>
+            <td bgcolor="#6c6c6c" class="STYLE1 STYLE4">SMS In Device </td>
           </tr>
           <tr>
-            <td height="50" bgcolor="#6c6c6c">&nbsp;</td>
-            <td bgcolor="#6c6c6c" class="STYLE1 STYLE4">SMS In SIM</td>
+            <td height="50" bgcolor="#e0e0e0">&nbsp;</td>
+            <td class="STYLE1" bgcolor="#e0e0e0"><a href="/cgi-bin/sms_simpart.cgi">SMS In SIM</a></td>
           </tr>
 		  <tr>
             <td height="50" bgcolor="#e0e0e0">&nbsp;</td>
@@ -166,92 +191,40 @@ function LanguageChange(sobj)
     </table>
   </div>
   <div id="Layer4">
-    <table width="900" height="800" border="0" cellspacing="0" cellpadding="0">
+    <table width="900" height="100" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="80" align="left" class="STYLE3">SMS In SIM Card</td>
+        <td height="10" align="left" class="STYLE3">SMS In Device</td>
       </tr>
-	  <tr>
+    <tr>
         <td height="20" align="left"><img src="../image/RightLine.png" width="900" height="20" /></td>
       </tr>
-	  <tr>
-        <td height="550" align="center">
-	<table width="900" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td width="100" align="center"><input type="submit" class="STYLE1" name="New" value="New" /></td>
-            <td width="650" align="left"><input type="submit" class="STYLE1" name="Delete" value="Delete" />
-              <input type="submit" class="STYLE1" name="Refresh" value="Refresh" />
-            </td>
-	    <td width="100" height="50" class="STYLE1">&nbsp;</td>
-          </tr>
-          <tr>
- 	  <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td align="center" class="STYLE2">15503612784</td>
-            <td align="center"class="STYLE2">ADSFASDFASDFASDFADSFASDFASDFASDFASDFASFDASDFASDF</td>
-	    <td height="50" align="right" class="STYLE2">2018-03-01</td>
-          </tr>
-          <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
-            <td align="center" class="STYLE1">&nbsp;</td>
-            <td align="left">&nbsp;</td>
-            <td height="50" align="center">&nbsp;</td>
-          </tr>
-        </table></td>
+      <!--<table width="900" border="0" cellspacing="0" cellpadding="0">
+        <tr><td align="left">addr|</td></tr>
+                <tr><td align="left"></td></tr>
+        <tr><td align="left">
+        </td></tr>
+
+        <tr><td align="center">body|</td></tr>
+                <tr><td align="left"></td></tr>
+        <tr><td align="left"></td></tr>
+
+        <tr><td align="right">time|</td></tr>
+        
+      </table>-->
+      </table></td>
       </tr>
-	  <tr>
-        <td height="30" align="left">&nbsp;</td>
-      </tr>
+       <tr>
+         <td height="30" align="left"><label>From:|%addr| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |%time|</label>
+            <form id="form1" name="form1" method="post" action="">
+              <textarea name="textarea" cols="70" rows="15">|%body|</textarea>
+            </form>
+            <p>&nbsp; </p></td>
+          </tr>
+        
 	  <tr>
         <td height="50" align="left">
 		<table width="900" height="50" border="0" cellspacing="0" cellpadding="0">
+
           <tr>
             <td width="440" align="right">&nbsp;</td>
             <td width="20" align="center">&nbsp;</td>

@@ -75,7 +75,7 @@ int main()
 	i = get_cgi_data(stdin,req_method,StringFromWeb);
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromWeb);
-    strcpy(SendString,"Request|GetOneSmsAndClean|");
+    strcpy(SendString,"Request|GetOneSIMSms|");
     if (i)
     {
     	if(get_index_str_from_web(StringFromWeb,"smsSignal=",TempId))

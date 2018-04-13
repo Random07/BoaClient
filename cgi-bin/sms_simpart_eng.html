@@ -61,6 +61,18 @@ function fun(){
   var url="/cgi-bin/sms_devicepart_delete_submit.cgi?SmsDeviceDelete="+ check_val+"&Path="+path;
   window.location.href=url;
 }
+
+function jumpPage(robj){
+   var page_id=robj.value;
+   var url="/cgi-bin/sms_simpart.cgi?Page=" + page_id;
+   window.location.href=url;
+}
+
+function showSms(mobj){
+  var label_id=mobj.id;
+  var url="/cgi-bin/sms_signal.cgi?smsSignal=" + label_id;
+  window.location.href=url;
+}
 -->
 </script>
 </head>
@@ -72,9 +84,9 @@ function fun(){
     <tr>
       <td width="200" scope="col"><img src="../image/4G_MIFI.png" width="200" height="50" /></td>
       <td width="500" scope="col">&nbsp;</td>
-      <td width="60" scope="col" align="center" class="STYLE2">100%</td>
-      <td width="60" align="center" scope="col" class="STYLE2">LTE</td>
-      <td width="120" align="center" scope="col" class="STYLE2">CMCC</td>
+      <td width="60" scope="col" align="center" class="STYLE2">|%BatteryVolume|</td>
+      <td width="60" align="center" class="STYLE2" scope="col">|%NetworkType|</td>
+      <td width="120" align="center" class="STYLE2" scope="col">|%OperatorName|</td>
       <td width="60" scope="col" align="center"><img src="../image/SignalStreght_4.png" width="60" height="50" /></td>
       <td width="60" scope="col" align="center"><img src="../image/DataStatus_UPDOWNLOAD.png" width="60" height="50" /></td>
       <td width="80" scope="col" align="center">
@@ -181,7 +193,7 @@ function fun(){
   <div id="Layer4">
     <table width="900" height="800" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="80" align="left" class="STYLE3">SMS In Device</td>
+        <td height="80" align="left" class="STYLE3">SMS In SIM</td>
       </tr>
     <tr>
         <td height="20" align="left"><img src="../image/RightLine.png" width="900" height="20" /></td>
@@ -189,6 +201,7 @@ function fun(){
     <tr>
         <td height="550" align="center">
   <table width="900" border="0" cellspacing="0" cellpadding="0">
+    <tr><!--%pagessmsdevicepart%--></tr>
           <tr>
             <td width="50" align="center"><input type="checkbox" name="checkbox" class="STYLE1" value="checkbox" /></td>
             <td width="100" align="center" class="STYLE1"><a href="/cgi-bin/sms_devicepart_send_show.cgi">New</a></td>

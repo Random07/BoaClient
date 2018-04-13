@@ -84,9 +84,9 @@ function showSms(mobj){
     <tr>
       <td width="200" scope="col"><img src="../image/4G_MIFI.png" width="200" height="50" /></td>
       <td width="500" scope="col">&nbsp;</td>
-      <td width="60" scope="col" align="center" class="STYLE2">100%</td>
-      <td width="60" align="center" scope="col" class="STYLE2">LTE</td>
-      <td width="120" align="center" scope="col" class="STYLE2">CMCC</td>
+      <td width="60" scope="col" align="center" class="STYLE2">|%BatteryVolume|</td>
+      <td width="60" align="center" class="STYLE2" scope="col">|%NetworkType|</td>
+      <td width="120" align="center" class="STYLE2" scope="col">|%OperatorName|</td>
       <td width="60" scope="col" align="center"><img src="../image/SignalStreght_4.png" width="60" height="50" /></td>
       <td width="60" scope="col" align="center"><img src="../image/DataStatus_UPDOWNLOAD.png" width="60" height="50" /></td>
       <td width="80" scope="col" align="center">
@@ -198,23 +198,27 @@ function showSms(mobj){
     <tr>
         <td height="20" align="left"><img src="../image/RightLine.png" width="900" height="20" /></td>
       </tr>
-      <table width="900" border="0" cellspacing="0" cellpadding="0">
-        <tr><td align="left">|%addr|</td></tr>
+      <!--<table width="900" border="0" cellspacing="0" cellpadding="0">
+        <tr><td align="left">addr|</td></tr>
                 <tr><td align="left"></td></tr>
         <tr><td align="left">
         </td></tr>
 
-        <tr><td align="center">|%body|</td></tr>
+        <tr><td align="center">body|</td></tr>
                 <tr><td align="left"></td></tr>
         <tr><td align="left"></td></tr>
 
-        <tr><td align="right">|%time|</td></tr>
+        <tr><td align="right">time|</td></tr>
         
-      </table>
+      </table>-->
       </table></td>
       </tr>
        <tr>
-            <td height="30" align="left">&nbsp;</td>
+         <td height="30" align="left"><label>From:|%addr| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |%time|</label>
+            <form id="form1" name="form1" method="post" action="">
+              <textarea name="textarea" cols="70" rows="15">|%body|</textarea>
+            </form>
+            <p>&nbsp; </p></td>
           </tr>
         
 	  <tr>
