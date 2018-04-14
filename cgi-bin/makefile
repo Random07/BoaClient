@@ -42,7 +42,9 @@ all:	login.cgi \
     sms_devicepart_send_show.cgi \
     sms_settings_submit.cgi \
     sms_signal.cgi \
-    sms_sim_signal.cgi
+    sms_sim_signal.cgi \
+    settings_deviceset_accountpass_submit.cgi \
+    settings_deviceset_account_submit.cgi
 
 login.cgi:login.c
 	$(CC) -o $@ $^
@@ -157,7 +159,13 @@ sms_signal.cgi:sms_signal.c
 
 sms_sim_signal.cgi:sms_sim_signal.c
 	$(CC) -o $@ $^
- 
+
+settings_deviceset_accountpass_submit.cgi:settings_deviceset_accountpass_submit.c
+	$(CC) -o $@ $^
+
+settings_deviceset_account_submit.cgi:settings_deviceset_account_submit.c
+	$(CC) -o $@ $^
+	 
 clean:
 	rm -rf *.cgi
 

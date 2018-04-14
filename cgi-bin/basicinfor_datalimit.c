@@ -46,7 +46,9 @@ int main()
 {
 	char StringFromJava[REQ_RSP_STRING_LEN];
 
+	time_out();
 	read_comm_infor_from_js();
+
 
 /*=============================================================================
 		please implement

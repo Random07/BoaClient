@@ -62,7 +62,7 @@ int main()
 	extern char wifi_pro_from_java_string[1024];
 	extern char TempBody[1024];
 	extern char TempTime[20];
-
+    time_out();
 	read_comm_infor_from_js();
 
 /*=============================================================================*/

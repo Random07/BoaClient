@@ -18,6 +18,7 @@
 
 ==============================================================================*/
 #include "define.h"
+#include <time.h>
 
 
 /*=============================================================================
@@ -49,6 +50,10 @@ int main()
 	int i = 0;
 	int j = 0;
 	int templen=0;
+    
+
+    time_out();
+	/*-----------------------------------------------------------------*/
 
 	req_method = getenv("REQUEST_METHOD");
 	get_cgi_data(stdin,req_method,StringFromWeb);
@@ -77,6 +82,11 @@ int main()
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
 	get_index_str_from_js(StringFromJava,3,NameInDevice);
 	get_index_str_from_js(StringFromJava,4,PassInDevice);
+	//strcpy(wifi_pro_password,PassInDevice);
+	//strcpy(wifi_pro_username,NameInDevice);
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The setupin username and password:");
+   // xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_username);
+   // xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_password);
 
 
 	if(!strncmp("Login",Language,strlen("Login")))

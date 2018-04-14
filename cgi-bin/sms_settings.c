@@ -50,7 +50,8 @@ int main()
 	char TempSmsSettinds_Reporter[3];
 	int i;
 
-	read_comm_infor_from_js();
+    time_out();	
+  read_comm_infor_from_js();
 
 /*=============================================================================*/
 	send_cmd_to_js("Request|GetSmsSettings",StringFromJava);

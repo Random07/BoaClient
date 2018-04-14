@@ -46,12 +46,20 @@ int main()
 {
 	char StringFromJava[REQ_RSP_STRING_LEN];
 	int i;
+	extern char wifi_pro_password[50];
+	extern char wifi_pro_username[50];
+    time_out();
 
 	read_comm_infor_from_js();
 
-/*=============================================================================
-		please implement
-==============================================================================*/
+/*=============================================================================*/
+
+
+send_cmd_to_js("Request|Login",StringFromJava);
+get_index_str_from_js(StringFromJava,3,wifi_pro_username);
+wifi_pro_username[strlen(wifi_pro_username)] = '\0';
+
+/*==============================================================================*/
 	
 	if(!strncmp("English",CommonParaInfor[5].value,strlen("English")))
 	{

@@ -61,7 +61,7 @@ int main()
 
 	extern char wifi_pro_from_java_string[1024];
 
-
+    time_out();
 	read_comm_infor_from_js();
 
 

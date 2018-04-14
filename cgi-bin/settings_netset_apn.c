@@ -59,7 +59,7 @@ int main()
 	int i;
 	int j;
     extern char wifi_pro_from_java_string[1024];
-
+    time_out();
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this is in apn module,will goto readcomminfo");
 	read_comm_infor_from_js();
 

@@ -48,6 +48,7 @@ int main()
 	char TempNetworkType[3];
 	char TempNetworkTypeShow[20];
 	int i;
+    time_out();
 
 	read_comm_infor_from_js();
 

@@ -45,14 +45,15 @@
 int main()
 {
 	char *req_method;
-  char StringFromWeb[REQ_RSP_STRING_LEN];
-  char StringFromJava[REQ_RSP_STRING_LEN];
+  char StringFromWeb[512];
+  //char StringFromJava[REQ_RSP_STRING_LEN];
 	char TempSmsSettings_submit_Time[3];
-	char TempSmsSettings_submit_CenterNume[15];
-	char TempSmsSettinds_submit_Reporter[3];
+	char TempSmsSettings_submit_CenterNume[25];
+	//char TempSmsSettinds_submit_Reporter[3];
   char SendString[30];
   char Result[2];
 	int i;
+  extern char wifi_pro_from_java_string[1024];
 
 	//read_comm_infor_from_js();
 
@@ -69,31 +70,37 @@ int main()
       debug_message_printf("Can't find TempSmsSettings_submit_Time");
       return 0;
   }else{
+      xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromWeb is:");
+
     strcat(SendString,TempSmsSettings_submit_Time);
     strcat(SendString,"|");
   }
-  if(!get_index_str_from_web(StringFromWeb,"smssettingsoption=",TempSmsSettings_submit_CenterNume))
+  if(!get_index_str_from_web(StringFromWeb,"SMSCenterNumber=",TempSmsSettings_submit_CenterNume))
   {
       debug_message_printf("Can't find TempSmsSettings_submit_CenterNume");
       return 0;
   }else{
+      xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The TempSmsSettings_submit_CenterNume is:");
+
     strcat(SendString,TempSmsSettings_submit_CenterNume);
     strcat(SendString,"|");
   }
-  if(!get_index_str_from_web(StringFromWeb,"smssettingsoption=",TempSmsSettinds_submit_Reporter))
+  /*if(!get_index_str_from_web(StringFromWeb,"smssettingsoption=",TempSmsSettinds_submit_Reporter))
   {
       debug_message_printf("Can't find TempSmsSettinds_submit_Reporter");
       return 0;
   }else{
     strcat(SendString,TempSmsSettinds_submit_Reporter);
     //strcat(SendString,TempSmsSettinds_submit_Reporter);
-  }
-
-  send_cmd_to_js(SendString,StringFromJava);
+  }*/
+  strcat(SendString,TempSmsSettings_submit_Time);
+  xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The SendString is:");
+  xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+  send_cmd_to_js(SendString,wifi_pro_from_java_string);
   xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
-  xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
+  xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_from_java_string);
 
-get_index_str_from_js(StringFromJava,1,Result);
+get_index_str_from_js(wifi_pro_from_java_string,1,Result);
 /*==============================================================================*/
 	
     if (!strcmp(Result,"1"))

@@ -53,7 +53,7 @@ int main()
 
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This is in datausage before readcomm");
 
-
+    time_out();
 	read_comm_infor_from_js();
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"This is in datausage after readcomm");
 

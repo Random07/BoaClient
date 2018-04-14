@@ -57,7 +57,7 @@ int main()
 	int TotalApn;
 	int i;
 	int j;
-
+    time_out();
 	read_comm_infor_from_js();
 
 /*=============================================================================*/

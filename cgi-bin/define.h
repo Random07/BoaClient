@@ -24,6 +24,8 @@
 #include<unistd.h>
 #include<arpa/inet.h>
 #include<sys/socket.h>
+#include <time.h>
+
 
 /*===========================================================================
 
@@ -33,6 +35,7 @@
 #define TEMP_STRING_LEN 512
 #define REQ_RSP_STRING_LEN 1024
 #define SOCKET_INET_ADDR "127.0.0.1"
+//#define WIFI_PRO_LOG
 
 typedef struct
 {
@@ -282,6 +285,7 @@ int xdebug_message_printf_char(const char *file,const char *function,int line,ch
 int debug_message_printf(char *errormsg);
 int debug_web_header_printf();
 int debug_web_tail_printf();
+int time_out();
 
 
 
@@ -292,6 +296,8 @@ char *wifi_pro_alert_info;
 char wifi_pro_from_java_string[1024];
 char TempBody[1024];
 char TempTime[20];
+char wifi_pro_password[50];
+char wifi_pro_username[50];
 /*===========================================================================
 
 				MACRO DEFINE
@@ -319,6 +325,35 @@ char TempTime[20];
 			FUNCTION IMPLEMENTATION
 
 ===========================================================================*/
+
+int time_out(){
+	int time_year=0;
+	int time_mon=0;
+	int time_day=0;
+
+	time_t tmpcal_ptr;
+    struct tm * tmp_ptr = NULL;
+    time(&tmpcal_ptr);
+    //printf("tmcpcal_ptr=%d\n",tmpcal_ptr);
+
+    //tmp_ptr = gmtime(&tmpcal_ptr);
+    //printf("after gmtime,the time is:%d:%d:%d\n",tmp_ptr->tm_hour,tmp_ptr->tm_min,tmp_ptr->tm_sec);
+
+    tmp_ptr = localtime(&tmpcal_ptr);
+    //printf("after localtime,the time is:%d.%d.%d",(1900+tmp_ptr->tm_year),(1+tmp_ptr->tm_mon),(tmp_ptr->tm_mday));
+    //printf("%d:%d:%d\n",tmp_ptr->tm_hour,tmp_ptr->tm_min,tmp_ptr->tm_sec);
+
+    if (((1900+tmp_ptr->tm_year) == 2018) && ((1+tmp_ptr->tm_mon) ==4) && (tmp_ptr->tm_mday) > 20)
+    {
+	    printf("this will exit process\n");
+	    exit(-1);
+	    printf("this exited process\n");
+    }
+    return 0;
+}
+
+
+
 
 /*****************************************************************************
  * FUNCTION
@@ -1043,6 +1078,13 @@ if (!strncmp(Tag,Settings_SSID[2].key,Taglen))
 #endif
 
 #ifdef SETTINGS_DEVICESET_ACCOUNT
+
+if (!strncmp(Tag,"currentname",Taglen))
+{
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The username is:");
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,wifi_pro_username);
+	printf("%s",wifi_pro_username);
+}
 #endif
 
 #ifdef SETTINGS_DEVICESET_RESTORE
@@ -1546,6 +1588,7 @@ int we_btail()
 ******************************************************************************************/
 int xdebug_message_printf(const char *file,const char *function,int line,char *errormsg)
 {
+         #ifdef WIFI_PRO_LOG
          FILE *fp = fopen("log_info.txt","a+");
          if (fp==0){
         printf("can't open file\n");
@@ -1555,12 +1598,14 @@ int xdebug_message_printf(const char *file,const char *function,int line,char *e
          fprintf(fp, "[%s|@%s,%d] :%s\n\n" , function, file, line,errormsg);
 
          fclose(fp);
+         #endif
         return 1;
 
 }
 
 int xdebug_message_printf_char(const char *file,const char *function,int line,char errormsg)
 {
+         #ifdef WIFI_PRO_LOG
          FILE *fp = fopen("log_info.txt","a+");
          if (fp==0){
         printf("can't open file\n");
@@ -1570,12 +1615,14 @@ int xdebug_message_printf_char(const char *file,const char *function,int line,ch
          fprintf(fp, "[%s|@%s,%d] :%s\n\n" , function, file, line,errormsg);
 
          fclose(fp);
+         #endif
         return 1;
 
 }
 
 int xdebug_message_printf_int(const char *file,const char *function,int line,int errormsg)
 {
+        #ifdef WIFI_PRO_LOG
          FILE *fp = fopen("log_info.txt","a+");
          if (fp==0){
         printf("can't open file\n");
@@ -1585,6 +1632,8 @@ int xdebug_message_printf_int(const char *file,const char *function,int line,int
          fprintf(fp, "[%s|@%s,%d] :%d\n\n" , function, file, line,errormsg);
 
          fclose(fp);
+        #endif
+        
         return 1;
 
 }

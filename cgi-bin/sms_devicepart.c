@@ -66,7 +66,7 @@ int main()
 	extern char wifi_pro_from_java_string[1024];
 	extern char TempBody[1024];
 	//TempBody=(char [])malloc(10*REQ_RSP_STRING_LEN);
-
+    time_out();
 	read_comm_infor_from_js();
 
 /*=============================================================================*/

@@ -67,6 +67,7 @@ int main()
 	extern char TempBody[1024];
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto read comminfo");
 
+    time_out();
 
 	read_comm_infor_from_js();
 
@@ -151,7 +152,8 @@ int main()
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempSmsTotalAll);
 	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempTotal);
     //TotalAll =(int)(TempTotalAll[0]-'0');
-    Total =(int)(TempTotal[0]-'0');
+    //Total =(int)(TempTotal[0]-'0');
+    Total =atoi(TempTotal);
     //TotalAll=ceil((TotalAll*1.0)/10);
 for (i = 0; i < Total; i++)
 {
