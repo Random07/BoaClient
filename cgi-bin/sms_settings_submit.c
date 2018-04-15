@@ -49,10 +49,12 @@ int main()
   //char StringFromJava[REQ_RSP_STRING_LEN];
 	char TempSmsSettings_submit_Time[3];
 	char TempSmsSettings_submit_CenterNume[25];
-	//char TempSmsSettinds_submit_Reporter[3];
+	char TempSmsSettinds_submit_Reporter[3];
   char SendString[30];
   char Result[2];
+  char TempNum[25];
 	int i;
+  int j;
   extern char wifi_pro_from_java_string[1024];
 
 	//read_comm_infor_from_js();
@@ -81,18 +83,34 @@ int main()
       return 0;
   }else{
       xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The TempSmsSettings_submit_CenterNume is:");
+            xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempSmsSettings_submit_CenterNume);
+            xdebug_message_printf_int(__FILE__,__FUNCTION__,__LINE__,strlen(TempSmsSettings_submit_CenterNume));
+
+    if (strlen(TempSmsSettings_submit_CenterNume) ==11)
+    {
+      strcpy(TempNum,"+86");
+      strcat(TempNum,TempSmsSettings_submit_CenterNume);
+      xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempSmsSettings_submit_CenterNume);
+
+    }else if (strlen(TempSmsSettings_submit_CenterNume) >= 13)
+    {
+      
+    }
+    {
+      /* code */
+    }
 
     strcat(SendString,TempSmsSettings_submit_CenterNume);
     strcat(SendString,"|");
   }
-  /*if(!get_index_str_from_web(StringFromWeb,"smssettingsoption=",TempSmsSettinds_submit_Reporter))
+  if(!get_index_str_from_web(StringFromWeb,"smssettingsoption=",TempSmsSettinds_submit_Reporter))
   {
       debug_message_printf("Can't find TempSmsSettinds_submit_Reporter");
       return 0;
   }else{
     strcat(SendString,TempSmsSettinds_submit_Reporter);
     //strcat(SendString,TempSmsSettinds_submit_Reporter);
-  }*/
+  }
   strcat(SendString,TempSmsSettings_submit_Time);
   xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The SendString is:");
   xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);

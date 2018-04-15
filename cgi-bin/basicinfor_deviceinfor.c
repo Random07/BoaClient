@@ -81,7 +81,7 @@ int main()
 	//get_index_str_from_js(StringFromJavatest,(11),SoftVersion);
 	get_index_str_from_js(wifi_pro_from_java_string,(10),FirmWare);
 	get_index_str_from_js(wifi_pro_from_java_string,(11),HardVersion);
-	strcpy(Wan_Ip,"127.0.0.1");
+	strcpy(Wan_Ip,"192.168.43.1");
 	strcpy(SoftVersion,"web 1.1");
  
 	for(i=0;i<strlen(SimCard);i++){

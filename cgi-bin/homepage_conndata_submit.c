@@ -63,7 +63,7 @@ int main()
         we_btail();
     }else{
         web_header();
-        puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/loginerror.cgi\">");
+        puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/homepage.cgi\">");
         we_btail();
     }
 

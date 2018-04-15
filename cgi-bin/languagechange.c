@@ -44,6 +44,10 @@ int main()
 	char Language[50];
 	char Path[50];
 	char *req_method;
+	char SetResult[3];
+	extern char wifi_pro_from_java_string[1024];
+
+
 
 	req_method = getenv("REQUEST_METHOD");
 	get_cgi_data(stdin,req_method,StringFromWeb);
@@ -79,13 +83,13 @@ int main()
 
 	if(!strncmp("English",Language,strlen("English")))
 	{
-//		send_cmd_to_js("Request|Setlanguage|English",StringFromJava);
+	//	send_cmd_to_js("Request|SetLanguage|0",wifi_pro_from_java_string);
 	}else{
 	
-//		send_cmd_to_js("Request|Setlanguage|Chines",StringFromJava);
+	//	send_cmd_to_js("Request|Setlanguage|1",wifi_pro_from_java_string);
 	}
-
-//	if(strcmp("OK",StringFromJava)) return 0;
+   // get_index_str_from_js(wifi_pro_from_java_string,1,SetResult);
+	//if(strcmp("1",SetResult)) return 0;
 
 	if(!strcmp("/cgi-bin/homepage.cgi",Path))
 	{
