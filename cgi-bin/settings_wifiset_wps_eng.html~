@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>4G MIFI </title>
+<style type="text/css">
+<!--
+#Layer1 {
+	margin:0 auto;
+	width:1200px;
+	height:910px;
+	z-index:1;
+}
+#Layer2 {
+	float:left;
+	width:1200px;
+	height:100px;
+	z-index:1;
+}
+#Layer3 {
+	float:left;
+	width:300px;
+	height:800px;
+	z-index:1;
+}
+#Layer4 {
+	float:right;
+	width:900px;
+	height:800px;
+	z-index:1;
+}
+.STYLE1 {
+	font-size: 18px;
+	font-weight: bold;
+}
+.STYLE2 {font-family: Arial, Helvetica, sans-serif}
+.STYLE3 {font-size: 36px}
+.STYLE4 {color: #FFFFFF}
+.table tr  td{ border:1px #ff000 solid}
+-->
+</style>
+<script language="JavaScript" type="text/javascript">
+<!--
+function LanguageChange(sobj)
+{
+	var language=sobj.options[sobj.selectedIndex].value;
+	var path=window.location.pathname;
+	var url="/cgi-bin/languagechange.cgi?LanguageSelect=" + language+"&Path="+path;
+	window.location.href=url;
+}
+-->
+</script>
+</head>
+
+<body>
+<div id="Layer1">
+  <div id="Layer2">
+    <table width="1200" height="50" border="0" align="center">
+    <tr>
+      <td width="200" scope="col"><img src="../image/4G_MIFI.png" width="200" height="50" /></td>
+      <td width="500" scope="col">&nbsp;</td>
+      <td width="60" scope="col" align="center" class="STYLE2">|%BatteryVolume|</td>
+      <td width="60" align="center" class="STYLE2" scope="col">|%NetworkType|</td>
+      <td width="120" align="center" class="STYLE2" scope="col">|%OperatorName|</td>
+      <td width="60" scope="col" align="center"><img src="../image/SignalStreght_|%SignalStrength|.png" width="60" height="50" /></td>
+      <td width="60" scope="col" align="center"><img src="../image/DataStatus_|%DataActivity|.png" width="60" height="50" /></td>
+      <td width="80" scope="col" align="center">
+	  <table width="80" height="50" border="0" align="center">
+        <tr>
+          <td width="60" align="right" scope="col"><img src="../image/MessageBox.png" width="40" height="50" /></td>
+          <td width="20" align="left" valign="middle" class="STYLE2" scope="col">|%UnreadSms|</td>
+        </tr>
+      </table>
+	  </td>
+      <td width="60" scope="col" align="center"><img src="../image/|%Maxconn|.png" width="40" height="50" /></td>
+    </tr>
+  </table>
+  <table width="1200"  height="50" border="0" align="center">
+      <tr>
+        <td width="1000" scope="col">&nbsp;</td>
+        <td width="100" scope="col" align="center">
+              <select name="LanguageSelect" onchange=LanguageChange(this)>
+                <option selected="selected" value="English">English</option>
+				<option value="Chinese">ÖÐÎÄ</option>
+            </select>
+	    </td>
+        <td width="100" scope="col" align="center"><a href="../index_eng.html" class="STYLE2">EXIT</a></td>
+      </tr>
+    </table>	
+  </div>
+  <img src="../image/TopLine.png" width="1200" height="10" />
+  <div id="Layer3">
+    <table width="270" height="800" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <th height="30" scope="col"><img src="../image/LeftLine.png" width="270" height="30" /></th>
+      </tr>
+      <tr>
+        <td height="770">
+		<table width="270" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="50" height="50">&nbsp;</td>
+            <td width="220" class="STYLE1"><a href="/cgi-bin/homepage.cgi">Home Page</a></td>
+          </tr>
+          <tr>
+            <td height="50">&nbsp;</td>
+            <td class="STYLE1"><a href="/cgi-bin/basicinfor_deviceinfor.cgi">Basic Information</a></td>
+          </tr>
+          <tr>
+            <td height="50">&nbsp;</td>
+            <td class="STYLE1"><a href="/cgi-bin/sdcard_sdcard.cgi">SD Card</a></td>
+          </tr>
+          <tr>
+            <td height="50" >&nbsp;</td>
+            <td class="STYLE1"><a href="/cgi-bin/driverdownload.cgi">Driver Download</a></td>
+          </tr>
+          <tr>
+            <td height="50">&nbsp;</td>
+            <td class="STYLE1"><a href="/cgi-bin/sms_devicepart.cgi">SMS</a></td>
+          </tr>
+          <tr>
+            <td height="50">&nbsp;</td>
+            <td class="STYLE1">Settings</td>
+          </tr>
+          <tr>
+            <td height="50" >&nbsp;</td>
+            <td class="STYLE1"><a href="/cgi-bin/settings_netset_dailup.cgi">Network Settings</a></td>
+          </tr>
+		  <tr>
+            <td height="50" bgcolor="#6c6c6c">&nbsp;</td>
+            <td bgcolor="#6c6c6c" class="STYLE1 STYLE4">WiFi Settings</td>
+          </tr>
+		  <tr>
+            <td height="50" bgcolor="#f3f3f3">&nbsp;</td>
+            <td class="STYLE1" bgcolor="#f3f3f3">&gt;<a href="/cgi-bin/settings_wifiset_basic.cgi">Basic Setting</a></td>
+          </tr>
+		  <tr>
+            <td height="50" bgcolor="#a3d1d1">&nbsp;</td>
+            <td class="STYLE1 STYLE4" bgcolor="#a3d1d1">&gt;WPS</td>
+          </tr>
+		  <tr>
+            <td height="50">&nbsp;</td>
+            <td class="STYLE1"><a href="/cgi-bin/settings_deviceset_account.cgi">Device Settings</a></td>
+          </tr>
+		  <tr>
+            <td height="50">&nbsp;</td>
+            <td class="STYLE1">&nbsp;</td>
+          </tr>
+		  <tr>
+            <td height="50">&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+		  <tr>
+            <td height="50">&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+		  <tr>
+            <td height="50">&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+		  <tr>
+            <td height="20">&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+    </table>
+  </div>
+  <div id="Layer4">
+    <table width="900" height="800" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td height="80" align="left" class="STYLE3">WPS</td>
+      </tr>
+	  <tr>
+        <td height="20" align="left"><img src="../image/RightLine.png" width="900" height="20" /></td>
+      </tr>
+	  <tr>
+        <td height="550" align="center">
+		<table width="900" border="0" cellspacing="0" cellpadding="0">
+		<form id="form1" name="form1" method="get" action="/cgi-bin/settings_wifiset_wps.cgi">
+          <tr>
+            <td width="230" align="right" class="STYLE1">WPS</td>
+            <td width="20" align="left" class="STYLE1">&nbsp;</td>
+            <td width="400" align="left"><input type="radio" name="wpsbutton" class="STYLE1" value="1" />
+              PIN 
+                <input name="pintext" type="text" class="STYLE1" /></td>
+			<td width="250" height="50" class="STYLE1">&nbsp;</td>
+          </tr>
+          <tr>
+ 		  <td width="230" align="right" class="STYLE1">&nbsp;</td>
+            <td align="center" class="STYLE2">&nbsp;</td>
+            <td align="left" >
+              <input type="radio" class="STYLE1"  name="wpsbutton" value="0" />
+              PBC</td>
+            <td height="50" align="right" class="STYLE2">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="230" align="right" class="STYLE1">&nbsp;</td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="right"><input name="Submit" type="submit" class="STYLE1" value="Apply" /></td>
+            <td height="50" align="center">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="230" align="right" class="STYLE1">&nbsp;</td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left" class="STYLE1">&nbsp;</td>
+            <td height="50" align="rgiht" class="STYLE1">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="230" align="right" class="STYLE1">&nbsp;</td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left" class="STYLE1">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>
+          </tr>
+           <tr>
+            <td width="230" align="right" class="STYLE1">&nbsp;</td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left" class="STYLE1">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="230" align="right" class="STYLE1">&nbsp;</td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="230" align="right" class="STYLE1">&nbsp;</td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="230" align="right" class="STYLE1">&nbsp;</td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="right">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>
+          </tr>
+		  </form>
+          <tr>
+            <td width="230" align="center" class="STYLE1">&nbsp;</td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="230" align="center" class="STYLE1">&nbsp;</td>
+            <td align="center" class="STYLE1">&nbsp;</td>
+            <td align="left">&nbsp;</td>
+            <td height="50" align="center">&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+	  <tr>
+        <td height="30" align="left">&nbsp;</td>
+      </tr>
+	  <tr>
+        <td height="50" align="left">
+		<table width="900" height="50" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="440" align="right">&nbsp;</td>
+            <td width="20" align="center">&nbsp;</td>
+            <td width="440" align="left">&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+	  <tr>
+        <td height="70" align="left">&nbsp;</td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

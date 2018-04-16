@@ -59,20 +59,20 @@ function LanguageChange(sobj)
     <tr>
       <td width="200" scope="col"><img src="../image/4G_MIFI.png" width="200" height="50" /></td>
       <td width="500" scope="col">&nbsp;</td>
-      <td width="60" scope="col" align="center" class="STYLE2">|%BatteryVolume|</td>
+            <td width="60" scope="col" align="center" class="STYLE2">|%BatteryVolume|</td>
       <td width="60" align="center" class="STYLE2" scope="col">|%NetworkType|</td>
       <td width="120" align="center" class="STYLE2" scope="col">|%OperatorName|</td>
-      <td width="60" scope="col" align="center"><img src="../image/SignalStreght_4.png" width="60" height="50" /></td>
-      <td width="60" scope="col" align="center"><img src="../image/DataStatus_UPDOWNLOAD.png" width="60" height="50" /></td>
+      <td width="60" scope="col" align="center"><img src="../image/SignalStreght_|%SignalStrength|.png" width="60" height="50" /></td>
+      <td width="60" scope="col" align="center"><img src="../image/DataStatus_|%DataActivity|.png" width="60" height="50" /></td>
       <td width="80" scope="col" align="center">
 	  <table width="80" height="50" border="0" align="center">
         <tr>
           <td width="60" align="right" scope="col"><img src="../image/MessageBox.png" width="40" height="50" /></td>
-          <td width="20" align="left" valign="middle" class="STYLE2" scope="col">3</td>
+          <td width="20" align="left" valign="middle" class="STYLE2" scope="col">|%UnreadSms|</td>
         </tr>
       </table>
 	  </td>
-      <td width="60" scope="col" align="center"><img src="../image/Unknown.png" width="40" height="50" /></td>
+      <td width="60" scope="col" align="center"><img src="../image/|%Maxconn|.png" width="40" height="50" /></td>
     </tr>
   </table>
   <table width="1200"  height="50" border="0" align="center">
@@ -80,8 +80,8 @@ function LanguageChange(sobj)
         <td width="1000" scope="col">&nbsp;</td>
         <td width="100" scope="col" align="center">
               <select name="LanguageSelect" onchange=LanguageChange(this)>
-                <option selected="selected" value="English">English</option>
-				<option value="Chinese">ÖÐÎÄ</option>
+                <option <!--%Lanaguage1%--> value="English">English</option>
+		<option <!--%Lanaguage2%-->value="Chinese">ä¸­æ–‡</option>
             </select>
 	    </td>
         <td width="100" scope="col" align="center"><a href="../index_eng.html" class="STYLE2">EXIT</a></td>
@@ -204,7 +204,7 @@ function LanguageChange(sobj)
           <tr>
             <td height="50" align="right" class="STYLE1"><strong>Data Limit:</strong></td>
             <td align="center"><input name="DataLimit" type="text" class="STYLE1" id="DataLimit" value="" /></td>
-            <td>M</td>
+            <td>MB</td>
             <td height="50" align="center">&nbsp;</td>
           </tr>
            <tr>

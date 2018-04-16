@@ -48,6 +48,7 @@ int main()
 	extern char wifi_pro_from_java_string[1024];
 
 
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this beforeget StringFromWeb");
 
 	req_method = getenv("REQUEST_METHOD");
 	get_cgi_data(stdin,req_method,StringFromWeb);
@@ -83,16 +84,21 @@ int main()
 
 	if(!strncmp("English",Language,strlen("English")))
 	{
-	//	send_cmd_to_js("Request|SetLanguage|0",wifi_pro_from_java_string);
+		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"the user choose English");
+		send_cmd_to_js("Request|SetLanguage|0",wifi_pro_from_java_string);
 	}else{
+		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"the user choose Chinese");
 	
-	//	send_cmd_to_js("Request|Setlanguage|1",wifi_pro_from_java_string);
+		send_cmd_to_js("Request|SetLanguage|1",wifi_pro_from_java_string);
 	}
-   // get_index_str_from_js(wifi_pro_from_java_string,1,SetResult);
-	//if(strcmp("1",SetResult)) return 0;
+    get_index_str_from_js(wifi_pro_from_java_string,1,SetResult);
+	if(strcmp("1",SetResult)) return 0;
+	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"Setlanguage success");
 
 	if(!strcmp("/cgi-bin/homepage.cgi",Path))
 	{
+		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto homepage");
+
 		web_header();
 		puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/homepage.cgi\">");
 		we_btail();
@@ -216,5 +222,20 @@ int main()
 		puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_deviceset_reboot.cgi\">");
 		we_btail();
 	}
+
+	if(!strcmp("/cgi-bin/settings_netset_apn_new.cgi",Path))
+	{
+		web_header();
+		puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_netset_apn_new.cgi\">");
+		we_btail();
+	}
+
+	if(!strcmp("/cgi-bin/sms_signal.cgi",Path))
+	{
+		web_header();
+		puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/sms_signal.cgi\">");
+		we_btail();
+	}
+
 	return 0;
 }

@@ -70,8 +70,15 @@ int main()
 		return 0;
 	}
 	else{
-		strcat(Sendstring,BCSSID);
+		if (strcmp(BCSSID,"1"))
+		{
+			strcat(Sendstring,"false");
 		strcat(Sendstring,"|");
+		}else{
+			strcat(Sendstring,"true");
+		strcat(Sendstring,"|");
+		}
+		
 	}
 	if(!get_index_str_from_web(StringFromWeb,"SECURITY=",SECURITY))
 	{

@@ -35,7 +35,7 @@
 #define TEMP_STRING_LEN 512
 #define REQ_RSP_STRING_LEN 1024
 #define SOCKET_INET_ADDR "127.0.0.1"
-//#define WIFI_PRO_LOG
+#define WIFI_PRO_LOG
 
 typedef struct
 {
@@ -44,7 +44,7 @@ char value[150];
 }CommonPara;
 
 
-CommonPara CommonParaInfor[7]={
+CommonPara CommonParaInfor[8]={
 {"BatteryVolume",},
 {"NetworkType",},
 {"OperatorName",},
@@ -52,6 +52,7 @@ CommonPara CommonParaInfor[7]={
 {"Maxconn",},
 {"Lanaguage",},
 {"UnreadSms",},
+{"DataActivity",},
 };
 
 #ifdef HOME_PAGE
@@ -267,6 +268,7 @@ int get_index_str_from_js_new(char *org,int index,char *outcome);
 int read_comm_infor_from_js();
 int send_cmd_to_js(char *SendMessage,char *OutString);
 
+int write_language_select_option(char langNum);
 int write_sms_settings(char smssettingsnum);
 int write_networkmode_select_option();
 int write_ssidsecurity_select_option();
@@ -671,6 +673,7 @@ int read_comm_infor_from_js()
 	char TempMaxconn[3];
 	char TempLaguage[10];
 	char TempUnreadSms[3];
+	char TempDataActivity[25];
 	//char TempFromJavaLan[12];
 	int i;
 	int j;
@@ -772,6 +775,13 @@ int read_comm_infor_from_js()
 		CommonParaInfor[6].value[i]=TempUnreadSms[i];
 	}
 	CommonParaInfor[6].value[i]='\0';
+
+	get_index_str_from_js(wifi_pro_from_java_string_comm,10,TempDataActivity);
+	for(i=0;i<strlen(TempDataActivity);i++)
+	{
+		CommonParaInfor[7].value[i]=TempDataActivity[i];
+	}
+	CommonParaInfor[7].value[i]='\0';
 
 	return 1;
 }
@@ -1166,7 +1176,6 @@ int write_ssidconnnum_select_option(){
 		printf("<option   value=\"7\">7</option>");
 		printf("<option   value=\"8\">8</option>");
 		printf("<option   value=\"9\">9</option>");
-		printf("<option   value=\"10\">10</option>");
 	}
 	if (!strcmp(Settings_SSID[5].value,"2"))
 	{
@@ -1179,7 +1188,6 @@ int write_ssidconnnum_select_option(){
 		printf("<option   value=\"7\">7</option>");
 		printf("<option   value=\"8\">8</option>");
 		printf("<option   value=\"9\">9</option>");
-		printf("<option   value=\"10\">10</option>");
 	}
 	if (!strcmp(Settings_SSID[5].value,"3"))
 	{
@@ -1192,7 +1200,6 @@ int write_ssidconnnum_select_option(){
 		printf("<option   value=\"7\">7</option>");
 		printf("<option   value=\"8\">8</option>");
 		printf("<option   value=\"9\">9</option>");
-		printf("<option   value=\"10\">10</option>");
 	}
 	if (!strcmp(Settings_SSID[5].value,"4"))
 	{
@@ -1205,7 +1212,6 @@ int write_ssidconnnum_select_option(){
 		printf("<option   value=\"7\">7</option>");
 		printf("<option   value=\"8\">8</option>");
 		printf("<option   value=\"9\">9</option>");
-		printf("<option   value=\"10\">10</option>");
 	}
 	if (!strcmp(Settings_SSID[5].value,"5"))
 	{
@@ -1218,7 +1224,6 @@ int write_ssidconnnum_select_option(){
 		printf("<option   value=\"7\">7</option>");
 		printf("<option   value=\"8\">8</option>");
 		printf("<option   value=\"9\">9</option>");
-		printf("<option   value=\"10\">10</option>");
 	}
 	if (!strcmp(Settings_SSID[5].value,"6"))
 	{
@@ -1231,7 +1236,6 @@ int write_ssidconnnum_select_option(){
 		printf("<option   value=\"7\">7</option>");
 		printf("<option   value=\"8\">8</option>");
 		printf("<option   value=\"9\">9</option>");
-		printf("<option   value=\"10\">10</option>");
 	}
 	if (!strcmp(Settings_SSID[5].value,"7"))
 	{
@@ -1244,7 +1248,6 @@ int write_ssidconnnum_select_option(){
 		printf("<option   selected=\"selected\" value=\"7\">7</option>");
 		printf("<option   value=\"8\">8</option>");
 		printf("<option   value=\"9\">9</option>");
-		printf("<option   value=\"10\">10</option>");
 	}
 	if (!strcmp(Settings_SSID[5].value,"8"))
 	{
@@ -1257,7 +1260,6 @@ int write_ssidconnnum_select_option(){
 		printf("<option   value=\"7\">7</option>");
 		printf("<option  selected=\"selected\" value=\"8\">8</option>");
 		printf("<option   value=\"9\">9</option>");
-		printf("<option   value=\"10\">10</option>");
 	}
 	if (!strcmp(Settings_SSID[5].value,"9"))
 	{
@@ -1270,9 +1272,8 @@ int write_ssidconnnum_select_option(){
 		printf("<option   value=\"7\">7</option>");
 		printf("<option   value=\"8\">8</option>");
 		printf("<option  selected=\"selected\"  value=\"9\">9</option>");
-		printf("<option  value=\"10\">10</option>");
 	}
-	if (!strcmp(Settings_SSID[5].value,"10"))
+	/*if (!strcmp(Settings_SSID[5].value,"10"))
 	{
 		printf("<option   value=\"1\">1</option>");
 		printf("<option   value=\"2\">2</option>");
@@ -1284,7 +1285,7 @@ int write_ssidconnnum_select_option(){
 		printf("<option   value=\"8\">8</option>");
 		printf("<option   value=\"9\">9</option>");
 		printf("<option  selected=\"selected\" value=\"10\">10</option>");
-	}
+	}*/
 
 	return 1;
 }
@@ -1378,6 +1379,22 @@ xdebug_message_printf_int(__FILE__,__FUNCTION__,__LINE__,Total);
 	return 1;
 }
 #endif
+
+int write_language_select_option(char langNum){
+
+		if (!strncmp("English",CommonParaInfor[5].value,strlen("English")))
+		{
+			if (langNum == '1'){
+				printf("selected=\"selected\"");
+			}
+		}else{
+			if (langNum == '2'){
+				printf("selected=\"selected\"");
+			}
+
+		}
+
+}
 /*****************************************************************************************
  * FUNCTION
  *  read_html_file_into_cgi
@@ -1491,6 +1508,10 @@ int read_html_file_into_cgi(char *patch)
 	   			#ifdef SMS_DEVICEPART
                 write_smsdevicepart_pages();
                 #endif
+	   		}
+	   		if (!strncmp(Tempoption,"Lanaguage",strlen("Lanaguage")))
+	   		{
+	   			write_language_select_option(Tempoption[k-1]);
 	   		}
 	   		
 	   		continue;

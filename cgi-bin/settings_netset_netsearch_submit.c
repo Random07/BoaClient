@@ -69,7 +69,7 @@ int main()
     strcpy(SendString,"Request|SetNetworkType|");
     strcpy(SendString,TempNetworkSearchMode);
 
-    send_cmd_to_js("Request|Login",StringFromJava);
+    send_cmd_to_js(SendString,StringFromJava);
     //char StringFromJavatest[]="1|ApnAdd";
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The StringFromJava is:");
     xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,StringFromJava);
@@ -88,7 +88,7 @@ int main()
         we_btail();
     }else{
         web_header();
-        puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/loginerror.cgi\">");
+        puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_netset_netsearch.cgi\">");
         we_btail();
     }
 return 0;

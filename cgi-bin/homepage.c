@@ -148,8 +148,11 @@ int main()
 	
 	if(!strncmp("English",CommonParaInfor[5].value,strlen("English")))
 	{
+		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto homepage_eng");
+
 		read_html_file_into_cgi("homepage_eng.html");
 	}else{
+		xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"this will goto homepage.html");
 
 		read_html_file_into_cgi("homepage.html");
 	}
