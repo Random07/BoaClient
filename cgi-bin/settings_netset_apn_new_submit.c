@@ -160,8 +160,8 @@ int main()
         puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_netset_apn.cgi\">");
         we_btail();
     }else{
-        wifi_pro_alert_info="Add APN fail,please retry!";
-        read_html_file_into_cgi("alert.html");
+        //wifi_pro_alert_info="Add APN fail,please retry!";
+        //read_html_file_into_cgi("alert.html");
         web_header();
         puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_netset_apn.cgi\">");
         we_btail();

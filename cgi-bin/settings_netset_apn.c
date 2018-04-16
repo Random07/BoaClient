@@ -150,6 +150,9 @@ int main()
     	{
     		strcpy(TempAuth,"PAP or CHAP");
     	}
+        else{
+            strcpy(TempAuth,"");
+        }
     	for (j = 0; j < strlen(TempAuth); j++)
     	{
     		Setings_Apn_List[i].SETAUTH.value[j]=TempAuth[j];

@@ -50,21 +50,30 @@ int main()
 	int i;
 
 	read_comm_infor_from_js();
+    	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SendString2");
 
 /*=============================================================================*/
+	wifi_pro_alert_info="Add APN fail,please retry!";
+        read_html_file_into_cgi("alert.html");
+web_header();
+		puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_deviceset_reboot.cgi\">");
+		we_btail();
+    	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SendString3");
+
 strcpy(Sendstring,"Request|ReBoot");
 send_cmd_to_js(Sendstring,StringFromJava);
 
 //char Sendstring[]="1|ReBoot|";
-get_index_str_from_js(StringFromJava,1,Result);
+//get_index_str_from_js(StringFromJava,1,Result);
 
 /*==============================================================================*/
-	
-	if(!strcmp(Result,"1"))
-	{
-		web_header();
+    	xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"SendString4");
+
+	wifi_pro_alert_info="Add APN fail,please retry!";
+        read_html_file_into_cgi("alert.html");
+	web_header();
 		puts("<meta http-equiv=\"Refresh\" content=\"0;URL=/cgi-bin/settings_deviceset_reboot.cgi\">");
 		we_btail();
-	}
+
 return 0;
 }

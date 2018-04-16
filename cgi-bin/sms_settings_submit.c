@@ -89,29 +89,48 @@ int main()
     if (strlen(TempSmsSettings_submit_CenterNume) ==11)
     {
       strcpy(TempNum,"+86");
+            xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempNum);
+
       strcat(TempNum,TempSmsSettings_submit_CenterNume);
-      xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempSmsSettings_submit_CenterNume);
-
-    }else if (strlen(TempSmsSettings_submit_CenterNume) >= 13)
-    {
-      
-    }
-    {
-      /* code */
-    }
-
-    strcat(SendString,TempSmsSettings_submit_CenterNume);
+      xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,TempNum);
+      strcat(SendString,TempNum);
     strcat(SendString,"|");
+
+    }else if (strlen(TempSmsSettings_submit_CenterNume) == 16)
+    {
+      for (i = 3 ,j=0; i < strlen(TempSmsSettings_submit_CenterNume); i++,j++)
+      {
+
+        TempNum[j]=TempSmsSettings_submit_CenterNume[i];
+
+
+        /*if (TempSmsSettings_submit_CenterNume[i]='8' && TempSmsSettings_submit_CenterNume[i+1]='6')
+        {
+          TempNum[]
+        }*/
+      }
+      TempNum[j]='\0';
+      strcat(SendString,TempNum);
+    strcat(SendString,"|");
+    }
+    else{
+      strcat(SendString,TempSmsSettings_submit_CenterNume);
+    strcat(SendString,"|");
+    }
+
+    
   }
   if(!get_index_str_from_web(StringFromWeb,"smssettingsoption=",TempSmsSettinds_submit_Reporter))
   {
       debug_message_printf("Can't find TempSmsSettinds_submit_Reporter");
       return 0;
   }else{
-    strcat(SendString,TempSmsSettinds_submit_Reporter);
+    strcat(SendString,"12");
     //strcat(SendString,TempSmsSettinds_submit_Reporter);
   }
-  strcat(SendString,TempSmsSettings_submit_Time);
+   xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The SendString is:");
+  xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
+  //strcat(SendString,TempSmsSettings_submit_Time);
   xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,"The SendString is:");
   xdebug_message_printf(__FILE__,__FUNCTION__,__LINE__,SendString);
   send_cmd_to_js(SendString,wifi_pro_from_java_string);
